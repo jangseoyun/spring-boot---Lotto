@@ -1,0 +1,165 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: 'SBAggroB';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroB.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'LeferiPoint-WhiteObliqueA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-WhiteObliqueA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* -------사이트 전체 적용------- */
+body, div, ul, li, dl, dt, ol, h1, h2, h3, h4, h5, 
+h6, input, fieldset, legend, p, select, table, th, 
+td, tr, textarea, button, form {
+    margin: 0; padding: 0;
+    font-family: 'LeferiPoint-WhiteObliqueA';
+}
+
+/* clearfix */
+.clearfix{*zoom:1;}
+.clearfix:before, .clearfix:after {display: block; content: ""; line-height: 0;}
+.clearfix:after {clear: both;}
+
+
+/*-------------- header-------------- */
+#header {
+    height: 350px;
+    padding: 10px 10px 10px 10px;
+    background-image: url(../img/main.png);
+    background-size: cover;
+    background-position: bottom;
+    border-radius: 0px 0px 35px 35px;
+    position: relative;
+}   
+
+#header-content-wrap{
+    width: 1130px;
+    margin: 0px auto;
+}
+
+#logo {
+    height: 45px;
+    margin-bottom: 100px;
+    font-family: 'SBAggroB';
+}
+
+#logo>a{
+    color: #ffffff;
+    text-decoration: none;
+}
+/*---------------------------------------*/
+
+#last-week-num {
+    height: 150px;
+    width: 700px;
+    background-image: url(../img/lotto.png);
+    background-position: top;
+    background-size: cover;
+    border-radius: 10px;
+    position: relative; left: 200px; top: 130px;
+    box-shadow: 5px 10px 10px #deddde;
+}
+
+#last-week-ball{
+    padding: 10px
+}
+
+#last-week-ball>div {
+    width: 55px;
+    height: 55px;
+    display: inline-block;
+    border-radius: 50%;
+    background-color: #ffffff;
+    font-size: 40px;
+    text-align: center;
+    margin-right: 20px;
+}
+
+/* --------------contents---------------- */
+#contents {
+    padding: 90px 50px 50px 50px;
+    width: 1130px;
+    margin: 0px auto;
+}
+
+/*---------------content-top---------*/
+
+#content-top{
+    height: 500px;
+}
+
+#content-top-left {
+    width: 500px;
+    height: 500px;
+    float: left;
+    text-align: center;
+    padding: 40px 20px 40px 20px;
+}
+
+#content-top-left>button{
+    width: 350px;
+}
+
+
+#content-top-right {
+    width: 500px;
+    height: 500px;
+    float: right;
+}
+
+.in-block{
+    display: inline-block;
+}
+
+#price-num{
+    text-align: center;
+   margin: 20px;
+}
+
+#price-num>input{
+    width: 350px;
+    text-align: center;
+}
+
+#radio-box{
+    text-align: center;
+    margin: 20px;
+}
+
+
+/*---------------- fotter-------------- */
+#footer {
+    height: 45px;
+    padding: 10px 10px 10px 10px;
+    color: #2d1c58;
+    text-align: center;
+}
+
+
+/* 폰트 색상,크기 */
+
+.txt-bold-25-white {
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 25px;
+    text-align: center;
+    padding: 15px;
+}
+
+.txt-bold-25-black {
+    color: #000000;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+
+.test {
+    border: #000000 solid 1px;
+}
