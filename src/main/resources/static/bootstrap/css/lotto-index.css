@@ -93,37 +93,15 @@ td, tr, textarea, button, form {
 
 #content-top{
     height: 500px;
+    margin: 100px 0px;
 }
 
-#content-top-left {
-    width: 500px;
-    height: 500px;
-    float: left;
-    text-align: center;
-    padding: 40px 20px 40px 20px;
-}
-
-#content-top-left>button{
-    width: 350px;
-}
-
-
-#content-top-right {
-    width: 500px;
-    height: 500px;
-    float: right;
-}
-
-.in-block{
-    display: inline-block;
-}
-
-#price-num{
+#buying{
     text-align: center;
    margin: 20px;
 }
 
-#price-num>input{
+#buying>input{
     width: 350px;
     text-align: center;
 }

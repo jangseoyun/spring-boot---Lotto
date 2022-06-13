@@ -13,11 +13,12 @@
     <!-- 자바스크립트 -->
     <script type="text/javascript" th:src="@{/bootstrap/js/jquery-1.12.4.js}"></script>
     <script type="text/javascript" th:src="@{/bootstrap/js/bootstrap.js}"></script>
+    <script type="text/javascript" th:src="@{/bootstrap/js/lottoScript.js}"></script>
 </head>
 
 <body>
     <div id="all-wrap">
-
+        <!--header 공통 빼기-->
         <div id="header">
 
             <div id="header-content-wrap">
@@ -41,42 +42,38 @@
             </div>
 
         </div>
+        <!--header 공통 빼기-->
 
-        <div id="contents" class="test clearfix">
+        <div id="contents" class="clearfix">
             <div id="content-top">
-                <div id="content-top-left" class="in-block test">
-                    <form id="radio-box" class="txt-bold-25-black">
+
+                    <form action="/requestBall" method="get" id="radio-box" class="txt-bold-25-black">
                         <span>
-                            <input type="radio" id="" name="set" value="">
-                            <label>전체자동</label>
+                            <input type="radio" id="allAuto" name="type" value="allAuto">
+                            <label for="allAuto">전체자동</label>
                         </span>
                         <span>
-                            <input type="radio" id="" name="set" value="">
-                            <label>일부수동</label> 
+                            <input type="radio" id="selectNum" name="type" value="selectNum">
+                            <label for="selectNum">일부수동</label>
                         </span>
                         <span>
-                            <input type="radio" id="" name="set" value=""> 
-                            <label>전체수동</label>
+                            <input type="radio" id="allSelect" name="type" value="allSelect">
+                            <label for="allSelect">전체수동</label>
                         </span>
                         <!-- 전체 수동인 경우 생성 -->
                         <!-- <input type="number" name="" value="" placeholder="수동 입력 번호"> -->
+
+                        <div id="buying">
+                            <p class="txt-bold-25-black">구입하실 금액을 입력해주세요</p>
+                            <input type="number" name="buying" value="" placeholder="금액입력 후 Enter !">
+                        </div>
+
+                        <button type="submit" class="btn btn-warning btn-lg">GO!</button>
+
                     </form>
 
-                    <div id="price-num">
-                        <p class="txt-bold-25-black">구입하실 금액을 입력해주세요</p>
-                        <input type="number" name="" value="" placeholder="금액입력 후 Enter !">
-                    </div>
-
-                    <button type="button" class="btn btn-warning btn-lg">GO!</button>
-                </div>
-
-                <div id="content-top-right" class="in-block test">
-                    <p>번호 생성</p>
-                    <div>
-
-                    </div>
-                </div>
             </div>
+
 
         </div>
 

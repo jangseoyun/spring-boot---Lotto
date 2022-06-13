@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th = "http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title>로또 추첨기</title>
+  <!-- 메타데이터 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- CSS -->
+  <link th:href ="@{bootstrap/css/bootstrap.css}" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" th:href="@{bootstrap/css/lotto-index.css}">
+
+  <!-- 자바스크립트 -->
+  <script type="text/javascript" th:src="@{/bootstrap/js/jquery-1.12.4.js}"></script>
+  <script type="text/javascript" th:src="@{/bootstrap/js/bootstrap.js}"></script>
+  <script type="text/javascript" th:src="@{/bootstrap/js/lottoScript.js}"></script>
+</head>
+
+<body>
+  <div id="all-wrap">
+    <!--header 공통 빼기-->
+    <div id="header">
+
+      <div id="header-content-wrap">
+        <h1 id="logo">
+          <a href="">LoTTery.</a>
+        </h1>
+
+        <div id="last-week-num">
+          <div class="txt-bold-25-white">지난 주 당첨 번호</div>
+          <div id="last-week-ball">
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+            <div>5</div>
+            <div>6</div>
+            <span class="txt-bold-25-white">+</span>
+            <div>7</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!--header 공통 빼기-->
+
+    <div id="contents" class="clearfix">
+
+      <div th:with="condition=${warning}">
+        <h2 th:if="${warning} != null">천원 단위로 입력해주세요</h2>
+        <span th:unless="${warning} != null">Something else</span>
+      </div>
+
+      <h2>n개를 구입했습니다</h2>
+
+      <div>
+        <h2>n방법 추첨 번호</h2>
+        <!--리스트 페이징-->
+        <div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</body>
+
+</html>
