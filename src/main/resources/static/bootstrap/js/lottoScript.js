@@ -12,3 +12,14 @@ function getLottoNum(){
     console.log('getLottoNum 성공');
 }
 
+$('#selectNum').on('click', function (){
+    console.log('반자동 클릭');
+
+})
+
+$('#allSelect').on('click', function (){
+    console.log('전체수동 클릭');
+
+})
+
+

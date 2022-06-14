@@ -1,17 +1,25 @@
 package lotto.practice.random.service;
 
-import lotto.practice.random.domain.Pay;
+import lotto.practice.random.domain.Machine;
+import lotto.practice.random.repository.InputVo;
 import lotto.practice.random.repository.LottoMemoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 @Service
 public class LottoService {
 
     //필드
-    private final static int PRICE = 1000; //lotto 금액
     private final LottoMemoRepository lottoMemoRepository;
-    private Pay pay;
+    private InputVo inputVo;
+    Map<String, Object> resultBall = new HashMap<>();
+    //domain
+    private Machine machine;
+
 
     //생성자
     @Autowired
@@ -20,25 +28,19 @@ public class LottoService {
     }
 
     //메소드
-    //번호 추출 타입
-    public String buyNum(String type){
+    //2-1. 추출한 번호 map에 넣기
+    public int ResultBall(InputVo inputVo){
 
         System.out.println("service buyNum 접속");
-        System.out.println("type = " + type);
+        System.out.println("inputVo = " + inputVo);
 
-        String result = pay.getTypeOut(type);
-        System.out.println("Service buyNum : "+result);
+        //비즈니스 로직 domain에 요청하여 응답 -> map
+        //구입한 갯수
+        int buyNum = machine.buyNum(inputVo.getBuying());
+        resultBall.put("buyNum",buyNum);
+        //
 
-        return "";
+        return 0;
     }
-
-    //랜덤 번호 추출
-    /*public String giveRandomNum(Pay pay){
-        if(pay.get == 0 || buying/PRICE != 0){
-            return "❗️1,000원 단위로 입력해주세요❗️";
-        }else{
-            return (buying/PRICE)+"개를 구입했습니다 :-) ";
-        }
-    }*/
 
 }

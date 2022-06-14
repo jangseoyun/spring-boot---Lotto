@@ -1,39 +1,37 @@
-package lotto.practice.random.domain;
+package lotto.practice.random.repository;
 
-import java.security.PrivateKey;
+import java.util.Objects;
 
-public class Pay {
+public class InputVo {
+
+    //사용자가 요청한 타입, 구입금액
 
     //필드
-    private int buying;
-    private int buyNum;
-
     private String type;
+    private int buying;
 
-
-    //getter, setter
-    public int getBuying() {
-        return buying;
-    }
-
-    public void setBuying(int buying) {
+    //생성자
+    public InputVo(){}
+    public InputVo(String type, int buying) {
+        this.type = type;
         this.buying = buying;
     }
 
-    public int getBuyNum() {
-        return buyNum;
-    }
-
-    public void setBuyNum(int buyNum) {
-        this.buyNum = buyNum;
-    }
-
+    //getter, setter
     public String getType() {
         return type;
     }
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public int getBuying() {
+        return buying;
+    }
+
+    public void setBuying(int buying) {
+        this.buying = buying;
     }
 
     //일반 메소드
@@ -57,4 +55,11 @@ public class Pay {
         return typeOut;
     }
 
+    @Override
+    public String toString() {
+        return "InputVo{" +
+                "type='" + type + '\'' +
+                ", buying=" + buying +
+                '}';
+    }
 }
