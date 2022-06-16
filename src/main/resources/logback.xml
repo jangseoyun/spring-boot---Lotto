@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <!-- 로그파일 저장 경로 -->
+
+    <!-- CONSOLE -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>
+                [%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} : %30logger{5} - %msg%n
+            </Pattern>
+        </layout>
+    </appender>
+    <!-- // CONSOLE -->
+
+    <root level="warn">
+        <appender-ref ref="CONSOLE" />
+    </root>
+    <!--//구간 설정-->
+    <logger name="lotto.practice.random.service" level="debug" additivity="false">
+        <appender-ref ref="CONSOLE" />
+    </logger>
+
+
+</configuration>

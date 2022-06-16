@@ -1,16 +1,16 @@
 package lotto.practice.random.service;
 
+import lombok.extern.slf4j.Slf4j;
 import lotto.practice.random.domain.Machine;
-import lotto.practice.random.repository.InputVo;
+import lotto.practice.random.vo.InputVo;
 import lotto.practice.random.repository.LottoMemoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 @Service
+@Slf4j //log 인터페이스
 public class LottoService {
 
     //필드
@@ -18,7 +18,9 @@ public class LottoService {
     private InputVo inputVo;
     Map<String, Object> resultBall = new HashMap<>();
     //domain
-    private Machine machine;
+    private Machine machine = new Machine();
+
+    List<HashSet<Integer>> allAutoResult = new ArrayList<>();
 
 
     //생성자
@@ -29,18 +31,38 @@ public class LottoService {
 
     //메소드
     //2-1. 추출한 번호 map에 넣기
-    public int ResultBall(InputVo inputVo){
+    public Map<String, Object> ResultBall(InputVo inputVo){
 
-        System.out.println("service buyNum 접속");
-        System.out.println("inputVo = " + inputVo);
+        log.info("service buyNum 접속");
+        log.debug("inputVo = " + inputVo);
 
         //비즈니스 로직 domain에 요청하여 응답 -> map
         //구입한 갯수
-        int buyNum = machine.buyNum(inputVo.getBuying());
-        resultBall.put("buyNum",buyNum);
-        //
+        int buyNumResult = machine.buyNum(inputVo.getBuying());
+        log.debug("buynum: "+buyNumResult);
+        resultBall.put("buyNum",buyNumResult);
 
-        return 0;
+        //타입에 따른 6개의 추출 번호
+        if(inputVo.getType().equals("allAuto")){
+            //전체 자동
+            machine.allAutoNumSix(buyNumResult);
+            log.debug("allAuto");
+            log.debug("machine.allAutoNumSix(buyNumResult)");
+
+        }else if(inputVo.getType().equals("selectNum")){
+            //반자동
+            log.debug("selectNum");
+            machine.selectNumSix(inputVo.getNumInput(),buyNumResult);
+
+        }else if(inputVo.getType().equals("allSelect")){
+            //전체 수동
+            log.debug("allSelect");
+            machine.allSelectNumSix(inputVo.getNumInput(),buyNumResult);
+        }
+
+        //보너스 번호
+
+        return resultBall;
     }
 
 }
