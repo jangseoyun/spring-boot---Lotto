@@ -12,6 +12,10 @@ show databases;
 # 테이블 확인
 show tables;
 
+# 테이블명 변경
+rename table winningInfo to winning_info,
+            ballStorage to ball_storage;
+
 #---- users ----------------------------------------
 # users table 확인
 select *
