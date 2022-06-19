@@ -9,10 +9,9 @@ import lombok.extern.slf4j.Slf4j;
 import javax.persistence.*;
 import java.util.Date;
 
-
+@Slf4j // log
 @Getter
 @Setter
-@Slf4j
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "users")//entity+table
