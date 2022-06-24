@@ -41,20 +41,4 @@ public class Lotto {
     @Column(name="first_accumamnt")
     private long firstAccumamnt;    //1등 총액
 
-
-       /* "totSellamnt": 103727042000,
-                "returnValue": "success",
-                "drwNoDate": "2022-03-26",**
-
-                "drwtNo6": 44,**
-                "drwtNo4": 31,**
-                "firstPrzwnerCo": 11,
-                "drwtNo5": 41,**
-                "bnusNo": 33,**
-
-                "drwNo": 1008,**
-                "drwtNo2": 11,**
-                "drwtNo3": 30,**
-                "drwtNo1": 9*/
-
 }
