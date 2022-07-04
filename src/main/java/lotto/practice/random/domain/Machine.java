@@ -7,12 +7,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 
-import static lotto.practice.random.controller.LottoController.PRICE;
+import static lotto.practice.random.controller.MainController.PRICE;
 
 @Slf4j
 public class Machine {
 
-    private Ball ball;
     Random randomNum = new Random();
     //lottoNumVo 담는 List ==> HashSet<Integer> lottoNumVo
     List<HashSet<Integer>> lottoList = new ArrayList<>();

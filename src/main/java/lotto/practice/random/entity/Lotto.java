@@ -1,11 +1,14 @@
 package lotto.practice.random.entity;
 
 import lombok.*;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 @Getter
+@Setter
+@Slf4j
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Entity
@@ -20,34 +23,36 @@ public class Lotto {
     @Column(name = "lotto_no")
     private Long no;
 
+
     @Column(name = "six_ball")
     private String sixBall;
 
     /*번호 추출*/
     @Column(name = "ball_01")
-    private int ball01;
+    private int drwtNo1;
 
     @Column(name = "ball_02")
-    private int ball02;
+    private int drwtNo2;
 
     @Column(name = "ball_03")
-    private int ball03;
+    private int drwtNo3;
 
     @Column(name = "ball_04")
-    private int ball04;
+    private int drwtNo4;
 
     @Column(name = "ball_05")
-    private int ball05;
+    private int drwtNo5;
 
     @Column(name = "ball_06")
-    private int ball06;
+    private int drwtNo6;
 
     @Column(name = "ball_bonus")
-    private int ball_bonus;
-    /*번호 추출*/
+    private int bnusNo;
 
+    /*번호 추출*/
+    @Temporal(TemporalType.DATE)
     @Column(name = "lotto_date")
-    private LocalDateTime lottoDate; //추첨일
+    private Date drwNoDate; //추첨일
 
     @Column(name="tot_sellamnt")
     private Long totSellamnt;       //누적 상금
@@ -63,5 +68,78 @@ public class Lotto {
 
     @Column(name = "drw_no")
     private Long drwNo; //로또 회차
+
+    /**
+     * 생성 메서드
+     */
+
+    /*    {"totSellamnt":3681782000
+            ,"returnValue":"success"
+            ,"drwNoDate":"2002-12-07"
+            ,"firstWinamnt":0
+            ,"drwtNo6":40
+            ,"drwtNo4":33
+            ,"firstPrzwnerCo":0
+            ,"drwtNo5":37
+            ,"bnusNo":16
+            ,"firstAccumamnt":863604600
+            ,"drwNo":1
+            ,"drwtNo2":23
+            ,"drwtNo3":29
+            ,"drwtNo1":10}*/
+
+    public static Lotto createLotto(Lotto lotto){
+        Lotto entity = new Lotto();
+        entity.setTotSellamnt(lotto.getTotSellamnt());
+        entity.setFirstPrzwnerCo(lotto.getFirstPrzwnerCo());
+        entity.setFirstWinamnt(lotto.getFirstWinamnt());
+        entity.setFirstAccumamnt(lotto.getFirstAccumamnt());
+
+        entity.setDrwtNo1(lotto.getDrwtNo1());
+        entity.setDrwtNo2(lotto.getDrwtNo2());
+        entity.setDrwtNo3(lotto.getDrwtNo3());
+        entity.setDrwtNo4(lotto.getDrwtNo4());
+        entity.setDrwtNo5(lotto.getDrwtNo5());
+        entity.setDrwtNo6(lotto.getDrwtNo6());
+
+        entity.setSixBall(
+                lotto.getDrwtNo1()+","
+                +lotto.getDrwtNo2()+","
+                +lotto.getDrwtNo3()+","
+                +lotto.getDrwtNo4()+","
+                +lotto.getDrwtNo5()+","
+                +lotto.getDrwtNo6()
+        );
+
+        entity.setBnusNo(lotto.getBnusNo());
+        entity.setDrwNo(lotto.getDrwNo());
+        entity.setNo(lotto.getNo());
+        entity.setDrwNoDate(lotto.getDrwNoDate());
+
+        log.info("entity: "+entity);
+
+        return entity;
+    }
+
+    @Override
+    public String toString() {
+        return "Lotto{" +
+                "no=" + no +
+                ", sixBall=" + drwtNo1+","+drwtNo2+","+drwtNo3+","+drwtNo4+","+drwtNo5+","+drwtNo6+
+                ", drwtNo1=" + drwtNo1 +
+                ", drwtNo2=" + drwtNo2 +
+                ", drwtNo3=" + drwtNo3 +
+                ", drwtNo4=" + drwtNo4 +
+                ", drwtNo5=" + drwtNo5 +
+                ", drwtNo6=" + drwtNo6 +
+                ", bnusNo=" + bnusNo +
+                ", drwNoDate=" + drwNoDate +
+                ", totSellamnt=" + totSellamnt +
+                ", firstWinamnt=" + firstWinamnt +
+                ", firstPrzwnerCo=" + firstPrzwnerCo +
+                ", firstAccumamnt=" + firstAccumamnt +
+                ", drwNo=" + drwNo +
+                '}';
+    }
 
 }

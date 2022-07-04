@@ -1,17 +1,15 @@
 package lotto.practice.random.controller;
 
 import lombok.RequiredArgsConstructor;
-import lotto.practice.random.vo.InputVo;
 import lotto.practice.random.service.LottoService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import lotto.practice.random.vo.InputVo;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
-@Controller
+//@Controller
 @RequiredArgsConstructor
-public class LottoController {
+public class MainController {
 
     //필드
     //final class? => 보안상의 이유로 사용.

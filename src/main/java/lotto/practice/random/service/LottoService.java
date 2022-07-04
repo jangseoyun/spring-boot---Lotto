@@ -3,7 +3,6 @@ package lotto.practice.random.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lotto.practice.random.domain.Machine;
-import lotto.practice.random.repository.LottoRepository;
 import lotto.practice.random.vo.InputVo;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +14,6 @@ import java.util.*;
 public class LottoService {
 
     //필드
-    private final LottoRepository lottoRepository;
     private InputVo inputVo;
     Map<String, Object> resultBall = new HashMap<>();
     //domain
