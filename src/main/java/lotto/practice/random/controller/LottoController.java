@@ -18,15 +18,12 @@ public class LottoController {
     public final static int PRICE = 1000; //lotto 금액
     private final LottoService lottoService;
 
-    //생성자
-    //@Autowired
-
     //메소드
     //메인화면
     @GetMapping("/index")
     public String main(){
         System.out.println("컨트롤러 메인 접속");
-        return "lotto-index";
+        return "/index/lotto-index";
     }
 
     @GetMapping("/requestBall")

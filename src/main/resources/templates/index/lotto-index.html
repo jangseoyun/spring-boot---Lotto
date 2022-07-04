@@ -7,8 +7,8 @@
     <!-- 메타데이터 -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- CSS -->
-    <link th:href ="@{bootstrap/css/bootstrap.css}" rel="stylesheet" type="text/css">
     <link rel="stylesheet" th:href="@{bootstrap/css/lotto-index.css}">
+    <link th:href ="@{bootstrap/css/bootstrap.css}" rel="stylesheet" type="text/css">
 
     <!-- 자바스크립트 -->
     <script type="text/javascript" th:src="@{/bootstrap/js/jquery-1.12.4.js}"></script>
@@ -28,6 +28,7 @@
 
                 <div id="last-week-num">
                     <div class="txt-bold-25-white">지난 주 당첨 번호</div>
+                    <!--for문으로 돌리기-->
                     <div id="last-week-ball">
                         <div>1</div>
                         <div>2</div>
@@ -38,6 +39,7 @@
                         <span class="txt-bold-25-white">+</span>
                         <div>7</div>
                     </div>
+                    <!--for문으로 돌리기-->
                 </div>
             </div>
 
@@ -79,11 +81,8 @@
 
         </div>
 
-        <div id="footer" >
-            <p>
-                copyright (c)2022. 장서윤. All right reserved
-            </p> 
-        </div>
+        <!--footer-->
+        <div th:replace="fragments/footer :: footer" />
 
     </div>
 

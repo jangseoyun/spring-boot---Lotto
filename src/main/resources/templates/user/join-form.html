@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th = "http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title>로그인 폼</title>
+  <!-- 메타데이터 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- CSS -->
+  <link th:href ="@{/bootstrap/css/bootstrap.css}" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" th:href="@{/bootstrap/css/join-form.css}">
+
+  <script type="text/javascript" th:src="@{/bootstrap/js/jquery-1.12.4.js}"></script>
+  <script type="text/javascript" th:src="@{/bootstrap/js/bootstrap.js}"></script>
+</head>
+
+<body>
+<div id="wrap">
+  <!-- 헤더 -->
+
+  <!-- content : join -->
+  <div class="container">
+    <div id="join-header" class="row">
+      <div id="join-hello" class="col-xs-5">
+        <div>나만의 로또번호를</div>
+        <div>만들어 볼까요?</div>
+      </div>
+      <div class="col-xs-1">
+        <div>또는</div>
+      </div>
+      <!-- 연동 -->
+      <div id="join-api" class="col-xs-5">
+        <div>
+          <div>
+            <img src="/bookproject/asset/img/facebooklogo.png"> 페이스북으로 회원가입
+          </div>
+        </div>
+        <div>
+          <div>
+            <img src="/bookproject/asset/img/naverlogo.png"> 네이버로 회원가입
+          </div>
+        </div>
+      </div>
+      <div id="or" class="col-xs-1">
+      </div>
+    </div>
+  </div>
+
+  <!-- content : form -->
+  <div class="container">
+    <div id="join-content" class="row">
+      <form action="" method="get">
+        <div>이름*</div>
+        <div><input type="text" id="" name="username" placeholder="이름을 입력해주세요"></div>
+        <div>닉네임*</div>
+        <div><input type="text" id="" name="username" placeholder="닉네임을 입력해주세요"></div>
+        <div>이메일주소*</div>
+        <div class="except">
+          <input type="text" id="" name="e-mail"  placeholder="ID@example.com">
+          <!--메일주소가 사용중일경우-->
+          <P>이미 사용중이거나 탈퇴한 이메일 주소입니다.</P>
+          <!--메일주소양식이 틀렸을경우-->
+          <!-- <p>이메일 주소를 다시 확인해주세요.</p> -->
+        </div>
+        <div>비밀번호*</div>
+        <div><input type="password" id="" name="userpw" placeholder="비밀번호를 입력해주세요"></div>
+        <div>비밀번호 확인*</div>
+        <div class="except">
+          <input type="password" id="" name="re-pw" placeholder="비밀번호를 확인해주세요">
+          <!--비밀번호가 일치하지 않을경우-->
+          <p>비밀번호를 확인해주세요.</p>
+        </div>
+
+        <!--<div id="genrebox">
+          <span>평소 어떤 책을 즐기는지(택1)</span>
+          &lt;!&ndash;클릭시 이벤트 발생하는 js필요&ndash;&gt;
+          <div id="love" class="box">두근두근하는</div>
+          <div id="spectacle" class="box">스펙타클한</div>
+          <div id="impressive" class="box">감동적인</div>
+          <div id="horor" class="box">소름끼치는</div>
+          <div id="calm" class="box">잔잔한</div>
+          <div id="encouraging" class="box">용기를 북돋는</div>
+          <div id="touching" class="box">눈물나는</div>
+          <div id="fantastic" class="box">환상적인</div>
+        </div>-->
+        <br>
+        <button type="submit">회원가입</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- footer -->
+  <div th:replace="fragments/footer :: footer"/>
+
+</div>
+
+</body>
+</html>

@@ -1,33 +1,27 @@
 package lotto.practice.random.service;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lotto.practice.random.domain.Machine;
+import lotto.practice.random.repository.LottoRepository;
 import lotto.practice.random.vo.InputVo;
-import lotto.practice.random.repository.LottoMemoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 
 @Service
 @Slf4j //log 인터페이스
+@RequiredArgsConstructor
 public class LottoService {
 
     //필드
-    private final LottoMemoRepository lottoMemoRepository;
+    private final LottoRepository lottoRepository;
     private InputVo inputVo;
     Map<String, Object> resultBall = new HashMap<>();
     //domain
     private Machine machine = new Machine();
 
     List<HashSet<Integer>> allAutoResult = new ArrayList<>();
-
-
-    //생성자
-    @Autowired
-    public LottoService(LottoMemoRepository lottoMemoRepository) {
-        this.lottoMemoRepository = lottoMemoRepository;
-    }
 
     //메소드
     //2-1. 추출한 번호 map에 넣기
