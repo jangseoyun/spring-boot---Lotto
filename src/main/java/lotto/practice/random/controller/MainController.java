@@ -1,18 +1,20 @@
 package lotto.practice.random.controller;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import lotto.practice.random.service.LottoService;
 import lotto.practice.random.vo.InputVo;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
-//@Controller
+@Slf4j
+@Controller
 @RequiredArgsConstructor
 public class MainController {
 
     //필드
-    //final class? => 보안상의 이유로 사용.
     public final static int PRICE = 1000; //lotto 금액
     private final LottoService lottoService;
 
@@ -20,14 +22,14 @@ public class MainController {
     //메인화면
     @GetMapping("/index")
     public String main(){
-        System.out.println("컨트롤러 메인 접속");
-        return "/index/lotto-index";
+        log.info("컨트롤러 메인 접속");
+        return "index/lotto-index";
     }
 
     @GetMapping("/requestBall")
     public String  requestBall(@ModelAttribute InputVo inputVo, Model model){
 
-        System.out.println("컨트롤러 requestBall");
+        log.info("컨트롤러 requestBall");
 
         //1. 잘못된 입력 확인
         if(inputVo.getBuying() == 0 || (inputVo.getBuying()%PRICE) != 0){

@@ -1,8 +1,8 @@
 package lotto.practice.random.controller;
 
 import lombok.RequiredArgsConstructor;
+import lotto.practice.random.service.UserService;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,10 +15,12 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/user")
 public class UserController {
 
+    private final UserService userService;
+
     //로그인 폼
     @GetMapping("/loginForm")
     public String loginForm(){
-        return "/user/login-form";
+        return "user/login-form";
     }
 
     @PostMapping("/login")
@@ -30,8 +32,13 @@ public class UserController {
     //회원가입 폼
     @GetMapping ("/joinForm")
     public String joinForm(){
-        return "/user/join-form";
+        return "user/join-form";
+    }
 
+    //회언가입
+    @PostMapping("/join")
+    public String join(){
+        return "redirect:/loginForm";
     }
 
 

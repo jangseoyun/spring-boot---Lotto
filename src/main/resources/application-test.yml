@@ -1,7 +1,9 @@
 spring:
-  profiles:
-    activate: local
-
+  datasource:
+    url: jdbc:mysql://localhost:3306/Lotto?
+    username: root
+    password: 232323d
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
     hibernate:
@@ -15,6 +17,7 @@ logging:
   level:
     org.hibernate.sql: debug
 #    org.hibernate.type: trace 파라미터에 뭐가 들어가는지 찍어줌
+
 
 
 

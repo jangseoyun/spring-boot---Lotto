@@ -49,30 +49,40 @@
         <div id="contents" class="clearfix">
             <div id="content-top">
 
-                    <form action="/requestBall" method="get" id="radio-box" class="txt-bold-25-black">
-                        <span>
-                            <input type="radio" id="allAuto" name="type" value="allAuto">
-                            <label for="allAuto">전체자동</label>
-                        </span>
-                        <span>
-                            <input type="radio" id="selectNum" name="type" value="selectNum">
-                            <label for="selectNum">일부수동</label>
-                        </span>
-                        <span>
-                            <input type="radio" id="allSelect" name="type" value="allSelect">
-                            <label for="allSelect">전체수동</label>
-                        </span>
-                        <!-- 전체 수동인 경우 생성 -->
-                        <!-- <input type="number" name="" value="" placeholder="수동 입력 번호"> -->
+                <!--<div class="form-group">
+                    <label for="selectType">번호 추출 방법</label>
+                    <select name="type" id="selectType" class="form-type">
+                        <option value="">선택</option>
+                        <option th:each="type : ${types}"
+                                th:value="${type.id}"
+                                th:text="${type.name}" />
+                    </select>
+                </div>-->
 
-                        <div id="buying">
-                            <p class="txt-bold-25-black">구입하실 금액을 입력해주세요</p>
-                            <input type="number" name="buying" value="" placeholder="금액입력 후 Enter !">
-                        </div>
+                <form action="/requestBall" method="get" id="radio-box" class="txt-bold-25-black">
+                    <span>
+                        <input type="radio" id="allAuto" name="type" value="allAuto">
+                        <label for="allAuto">전체자동</label>
+                    </span>
+                    <span>
+                        <input type="radio" id="selectNum" name="type" value="selectNum">
+                        <label for="selectNum">일부수동</label>
+                    </span>
+                    <span>
+                        <input type="radio" id="allSelect" name="type" value="allSelect">
+                        <label for="allSelect">전체수동</label>
+                    </span>
+                    <!-- 전체 수동인 경우 생성 -->
+                    <!-- <input type="number" name="" value="" placeholder="수동 입력 번호"> -->
 
-                        <button type="submit" class="btn btn-warning btn-lg">GO!</button>
+                    <div id="buying">
+                        <p class="txt-bold-25-black">구입하실 금액을 입력해주세요</p>
+                        <input type="number" name="buying" value="" placeholder="금액입력 후 Enter !">
+                    </div>
 
-                    </form>
+                    <button type="submit" class="btn btn-warning btn-lg">GO!</button>
+
+                </form>
 
             </div>
 
@@ -82,7 +92,7 @@
         </div>
 
         <!--footer-->
-        <div th:replace="fragments/footer :: footer" />
+        <!--<div th:replace="fragments/footer :: footer" />-->
 
     </div>
 

@@ -1,5 +1,6 @@
 package lotto.practice.random.service;
 
+import com.google.gson.Gson;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lotto.practice.random.entity.Lotto;
@@ -18,31 +19,22 @@ import java.net.URL;
 public class LottoApiService {
 
     private final LottoApiRepository lottoApiRepository;
-
-    public String readUrl(String urlPath) throws Exception{
-        BufferedReader reader = null;
-        try {
-            URL url = new URL(urlPath);
-            reader = new BufferedReader(new InputStreamReader(url.openStream()));
-            StringBuffer buffer = new StringBuffer();
-            int read = -1;
-            char[] chars = new char[1024];
-            while ((read = reader.read(chars)) != -1) {
-                buffer.append(chars, 0, read);
-            }
-            return buffer.toString();
-        } finally {
-            if (reader != null) {
-                reader.close();
-            }
-        }
-
-    }
+    private final RestAPIService restAPIService;
 
     public Lotto lottoNumSave(Lotto lotto){
         Lotto createLotto = Lotto.createLotto(lotto);
         return lottoApiRepository.lottoNumSave(createLotto);
     }
 
+    public void insertLotto(Long no) {
+        for(int i = 1; i <= no; i++){
+            String json = restAPIService.readUrl("https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo=" + i);
+            Gson gson = new Gson();
+            Lotto lotto = gson.fromJson(json, Lotto.class);
 
+            //디비 등록
+            lottoNumSave(lotto);
+            log.info("lotto controller: " + lotto.toString());
+        }
+    }
 }
