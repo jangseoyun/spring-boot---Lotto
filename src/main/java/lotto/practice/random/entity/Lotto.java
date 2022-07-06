@@ -4,6 +4,7 @@ import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Getter
@@ -50,9 +51,8 @@ public class Lotto {
     private int bnusNo;
 
     /*번호 추출*/
-    @Temporal(TemporalType.DATE)
     @Column(name = "lotto_date")
-    private Date drwNoDate; //추첨일
+    private LocalDateTime drwNoDate; //추첨일
 
     @Column(name="tot_sellamnt")
     private Long totSellamnt;       //누적 상금

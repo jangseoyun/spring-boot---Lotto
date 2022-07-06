@@ -1,39 +1,24 @@
-package lotto.practice.random.vo;
+package lotto.practice.random.dto;
 
 import lombok.*;
-
-import java.util.Objects;
 
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class InputVo{
+public class InputDto {
 
     //사용자가 요청한 타입, 구입금액
 
     //필드
     private String numInput;
-
     private String type;
-
     private int buying;
 
-
-    //생성자
-    // NoArgsConstructor
-    // AllArgsConstructor
-
-    public InputVo(String type, int buying) {
+    public InputDto(String type, int buying) {
         this.type = type;
         this.buying = buying;
-    }
-
-    public InputVo(String type, int buying, String numInput) {
-        this.type = type;
-        this.buying = buying;
-        this.numInput = numInput;
     }
 
     //getter, setter

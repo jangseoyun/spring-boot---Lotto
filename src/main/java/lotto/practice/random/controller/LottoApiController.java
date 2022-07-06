@@ -8,20 +8,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Created by IntelliJ IDEA.
- * Time: 03:41
- * Title: Lotto API
- * Desc: gson라이브러리를 통한 파싱과 데이터 루프
- *
- * == Modification Infomation ==
- * <p>
- * 수정일         수정자         수정내용
- * ------------ ------------ ----------------------------
- * 2022/07/05   Seoyun           최초생성
- *
- * @Version 11
- * @author  Seoyun Jang
- * @since   2022-07-05
+ * 1. 동행복권 API (데이터 루프 저장)
+ * gson 사용
  */
 
 @RestController
