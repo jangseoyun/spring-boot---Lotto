@@ -46,7 +46,6 @@ td, tr, textarea, button, form {
 
 #logo {
     height: 45px;
-    margin-bottom: 100px;
     font-family: 'SBAggroB';
 }
 
@@ -137,7 +136,35 @@ td, tr, textarea, button, form {
     font-size: 25px;
 }
 
+/*---------------- source-------------- */
+.inline-b{
+    display: inline;
+}
 
 .test {
     border: #000000 solid 1px;
+}
+
+.float-r{
+    float: right;
+}
+
+.header-link{
+    float: right;
+    margin-right: 25px;
+    list-style:none;
+    font-size: 20px;
+}
+
+.color{
+    color: #FFFFFF;
+    font-weight: bold;
+}
+
+.form-select{
+    width: 350px;
+}
+
+.st-block{
+    display: block;
 }

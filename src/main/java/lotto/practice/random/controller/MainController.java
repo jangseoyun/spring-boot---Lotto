@@ -30,7 +30,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Slf4j
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/Lottery")
+@RequestMapping("/lottery")
 public class MainController {
 
     //필드

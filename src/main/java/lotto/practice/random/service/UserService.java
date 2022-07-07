@@ -1,7 +1,6 @@
 package lotto.practice.random.service;
 
 import lombok.RequiredArgsConstructor;
-import lotto.practice.random.domain.UserDomain;
 import lotto.practice.random.dto.JoinDto;
 import lotto.practice.random.entity.User;
 import lotto.practice.random.repository.UserRepository;
@@ -14,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserService {
 
     private final UserRepository userRepository;
-    private final UserDomain userDomain;
 
     //회원가입
     public Long joinUser(JoinDto joinDto){
