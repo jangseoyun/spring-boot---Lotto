@@ -40,6 +40,7 @@ public class UserController {
             log.info("회원가입시 null 발생");
             return "user/join-form";
         }
+
         Long resultJoinNo = userService.joinUser(joinDto);
         //resultJoinNo 있으면 loginForm으로, 없으면 가입실패 페이지
         return "redirect:/user/loginForm";
