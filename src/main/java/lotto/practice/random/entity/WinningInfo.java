@@ -1,30 +1,38 @@
 package lotto.practice.random.entity;
 
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Date;
+import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 
 @Getter
-@Setter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-@Entity(name = "winning_info")
+@Entity
+@NotNull
+@Table(name = "t_winning_info")
 public class WinningInfo {
 
+    //id전략
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int user_no;
-    private int win_cycle_no;
-    private int win_ranking;
-    private long win_prize;
+    @Column(name = "winning_info_no")
+    private Long no;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date win_date;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_no")
+    private User user;
 
-    private String win_sixnum;
+    private String winCycleNo;
+    private int winRanking;
+    private long winPrize;
+
+    private LocalDateTime winDate;
+
+    private String winSixNum;
 
 }

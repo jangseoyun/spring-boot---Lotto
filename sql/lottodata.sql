@@ -16,6 +16,9 @@ show tables;
 rename table winningInfo to winning_info,
             ballStorage to ball_storage;
 
+# 이미 존재하는 테이블에 FK 추가
+alter table ball_storage add foreign key (user_no) references users(user_no);
+
 #---- users ----------------------------------------
 # users table 확인
 select *
@@ -25,12 +28,12 @@ from users;
 drop table users;
 # 테이블 생성
 create table users (
-                       user_no INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                       user_id varchar(20) not null unique ,
-                       user_pw varchar(50) not null ,
-                       user_email varchar(50) not null ,
-                       user_phone varchar(50) ,
-                       join_data timestamp not null default now()
+   user_no INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+   user_id varchar(20) not null unique ,
+   user_pw varchar(50) not null ,
+   user_email varchar(50) not null ,
+   user_phone varchar(50) ,
+   join_data timestamp not null default now()
 );
 
 # insert
@@ -57,13 +60,13 @@ drop table winningInfo;
 
 # 테이블 생성
 create table winningInfo(
-                            user_no int not null primary key ,
-                            win_cycle_no int not null ,
-                            win_ranking int not null ,
-                            win_prize bigint not null,
-                            win_data timestamp not null default now(),
-                            win_sixnum varchar(100) not null ,
-                            foreign key (user_no) references users (user_no)
+    user_no int not null primary key ,
+    win_cycle_no int not null ,
+    win_ranking int not null ,
+    win_prize bigint not null,
+    win_data timestamp not null default now(),
+    win_sixnum varchar(100) not null ,
+    foreign key (user_no) references users (user_no)
 );
 
 # insert
@@ -91,11 +94,11 @@ drop table subscription;
 
 # 테이블 생성
 create table subscription (
-                              subscription_no INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                              user_no int not null ,
-                              licence boolean not null ,
-                              subscription_date timestamp not null default now(),
-                              foreign key (user_no) references users (user_no)
+      subscription_no INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+      user_no int not null ,
+      licence boolean not null ,
+      subscription_date timestamp not null default now(),
+      foreign key (user_no) references users (user_no)
 );
 
 # insert
@@ -123,11 +126,11 @@ drop table ballStorage;
 
 # 테이블 생성
 create table ballStorage(
-                            Storage_no int not null auto_increment primary key ,
-                            user_no int not null ,
-                            six_ball varchar(100) not null ,
-                            storage_cycle_num int not null ,
-                            storage_date timestamp not null default now()
+    Storage_no int not null auto_increment primary key ,
+    user_no int not null ,
+    six_ball varchar(100) not null ,
+    storage_cycle_num int not null ,
+    storage_date timestamp not null default now()
 );
 
 # insert
@@ -145,3 +148,33 @@ where user_no = 1;
 
 commit ;
 
+#---- user_storage ----------------------------------------
+# user_storage 테이블 확인
+select *
+from user_storage;
+
+# 테이블 삭제
+drop table user_storage;
+
+# 테이블 생성
+create table user_storage(
+     user_storage_no int not null auto_increment primary key ,
+     user_no int not null,
+     six_ball varchar(100) not null ,
+     storage_cycle int not null ,
+     storage_date timestamp not null default now(),
+     foreign key (user_no) references users (user_no)
+);
+
+# insert
+insert into user_storage
+values (null, 1, '2,3,4,5,7,8', 5110, now());
+
+#update
+update user_storage
+set six_ball = '1,2,3,4,5,6'
+where user_no = 1;
+
+#delete
+delete from user_storage
+where user_no = 1;

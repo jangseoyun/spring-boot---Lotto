@@ -1,30 +1,39 @@
 package lotto.practice.random.entity;
 
 
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Date;
+import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 
 @Getter
-@Setter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-@Entity(name = "ball_storage")
+@Entity
+@NotNull
+@Table(name = "t_ball_storage")
 public class BallStorage {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int storage_no;
+    @Column(name = "ball_storage_no")
+    private Long no;
 
-    private int user_no;
-    private String six_ball;
-    private int storage_cycle;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "cycle_storage_no")
+    private CycleStorage cycleStorage;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date storage_date;
+    @Column(name = "six_ball")
+    private String sixBall;
+
+    @Column(name = "storage_cycle_num")
+    private String storageCycleNum;
+
+    @Column(name = "ball_storage_date")
+    private LocalDateTime storageDate;
 
 }

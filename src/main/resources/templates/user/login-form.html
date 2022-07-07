@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th = "http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>로그인</title>
+    <!-- 메타데이터 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- CSS -->
+    <link rel="stylesheet" th:href="@{/bootstrap/css/source.css}">
+    <link rel="stylesheet" th:href="@{/bootstrap/css/login-form.css}">
+    <link th:href ="@{/bootstrap/css/bootstrap.css}" rel="stylesheet" type="text/css">
+
+    <script type="text/javascript" th:src="@{/bootstrap/js/jquery-1.12.4.js}"></script>
+    <script type="text/javascript" th:src="@{/bootstrap/js/bootstrap.js}"></script>
+</head>
+
+<body>
+<div id="wrap">
+
+    <!-- 헤더 -->
+
+    <div id="login_wrap">
+        <div id="login_header">
+
+            <h1 class="login_h1">로또번호, 더이상 억지로 생각하지마세요 </h1>
+            <h2 class="login_h2">Lottery로 가볍게 랜덤번호 뽑자!</h2>
+        </div>
+
+        <div>
+            <!-- 로그인 버튼 눌렀을 때 일치하지 않을 경우 -->
+            <p class="font_blue_2 txt_ms">*이메일 주소를 확인해주세요</p>
+            <input id="id"  class="login_input" type="text" name="" value="" placeholder="이메일 주소를 입력해 주세요">
+
+            <!-- 로그인 버튼 눌렀을 때 일치하지 않을 경우 -->
+            <p class="font_blue_2 txt_ms">*비밀번호를 확인해주세요</p>
+            <input id="password" class="login_input" type="text" name="" value="" placeholder="비밀번호를 입력해 주세요">
+
+            <button type="button" class="btn btn-lg btn-block line-none btn-login">로그인</button>
+        </div>
+        <div>
+            <div id="login_find">
+                <span>아이디찾기</span>
+                <span class="line-l-r">비밀번호 찾기</span>
+                <span><a th:href="@{/user/joinForm}">회원가입</a></span>
+            </div>
+            <button type="button" class="btn btn-lg btn-block btn-login">네이버로 로그인</button>
+        </div>
+    </div>
+
+    <!-- footer -->
+    <div th:replace="fragments/footer ::  footer"/>
+
+</div>
+
+</body>
+</html>
