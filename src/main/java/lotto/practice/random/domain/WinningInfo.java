@@ -1,9 +1,10 @@
-package lotto.practice.random.entity;
+package lotto.practice.random.domain;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lotto.practice.random.domain.user.User;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

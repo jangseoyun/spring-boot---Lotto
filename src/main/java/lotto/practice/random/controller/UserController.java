@@ -3,7 +3,7 @@ package lotto.practice.random.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lotto.practice.random.dto.JoinDto;
-import lotto.practice.random.service.UserService;
+import lotto.practice.random.domain.user.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;

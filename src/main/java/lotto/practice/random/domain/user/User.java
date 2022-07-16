@@ -1,4 +1,4 @@
-package lotto.practice.random.entity;
+package lotto.practice.random.domain.user;
 
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
@@ -41,9 +41,9 @@ public class User {
     private String joinDate;
 
     //--생성 로직--//
-    @Builder
-    public User(String userId, String userPw, String userEmail, String userTel) {
-        this.userId = userId;
+    @Builder(access = AccessLevel.PROTECTED)
+    private User(String userId, String userPw, String userEmail, String userTel) {
+        setUserId(userId);
         this.userPw = userPw;
         this.userEmail = userEmail;
         this.userTel = userTel;
@@ -52,4 +52,13 @@ public class User {
     public void joinDate(){
         this.joinDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"));
     }
+
+    //아이디가 3글자 이상 제한
+    private void setUserId(String userId){
+        if(userId.length() <= 3){
+            throw new IllegalArgumentException("아이디는 4글자 이상이어야합니다");
+        }
+        this.userId = userId;
+    }
+
 }

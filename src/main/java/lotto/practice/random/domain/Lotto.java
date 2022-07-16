@@ -1,11 +1,10 @@
-package lotto.practice.random.entity;
+package lotto.practice.random.domain;
 
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Getter
 @Setter

@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 class LottoApiRepositoryTest {
 
     @Test
-    public void lottonumLoop() throws Exception {
+    public void lottonumLoop() {
         //given
 
         //when
