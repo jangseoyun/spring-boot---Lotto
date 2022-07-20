@@ -3,6 +3,7 @@ package lotto.practice.random.domain.user;
 import lombok.RequiredArgsConstructor;
 import lotto.practice.random.dto.JoinDto;
 import lotto.practice.random.exception.AlreadyExistIdException;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,14 +13,13 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Transactional
 public class UserService {
-
-    private final UserRepository userRepository;
+    @Qualifier("UserJpaOperator")
+    private final UserOperator userOperator;
 
     //회원가입
     public Long joinUser(JoinDto joinDto){
         //아이디/이메일 검증
-        Optional<User> resultUser = userRepository.findUserId(joinDto.getUserId());
-
+        Optional<User> resultUser = userOperator.findUserId(joinDto.getUserId());
 
         //검색이 되었다면 이미 회원이 존재하는 것 따라서,
         if(!resultUser.isEmpty()){
@@ -30,14 +30,14 @@ public class UserService {
             //User user = new UserFactory().createUser(joinDto);
             User user = UserFactory.create(joinDto);
 
-            return userRepository.saveUser(user);
+            return userOperator.saveUser(user);
         }
 
     }
 
     public Long joinUser2(JoinDto joinDto){
         //아이디/이메일 검증
-        Optional<User> resultUser = userRepository.findUserId(joinDto.getUserId());
+        Optional<User> resultUser = userOperator.findUserId(joinDto.getUserId());
 
 
         //검색이 되었다면 이미 회원이 존재하는 것 따라서,
@@ -46,21 +46,21 @@ public class UserService {
             throw new AlreadyExistIdException("이미 존재하는 아이디 입니다.");
         }
         User user = UserFactory.create(joinDto);
-        return userRepository.saveUser(user);
+        return userOperator.saveUser(user);
 
     }
 
     //userRepository.getOldPassword(joinDto.getUserId());
     public Long joinUser3(JoinDto joinDto){
         //아이디/이메일 검증
-        Optional<User> optionalUser = userRepository.findUserId(joinDto.getUserId());
+        Optional<User> optionalUser = userOperator.findUserId(joinDto.getUserId());
         //optionalUser.ifPresent
         //optionalUser.orElseThrow() **
 
         //검색이 되었다면 이미 회원이 존재하는 것 따라서,
         if(optionalUser.isEmpty()) {
             User user = UserFactory.create(joinDto);
-            return userRepository.saveUser(user);
+            return userOperator.saveUser(user);
         }
 
         throw new AlreadyExistIdException("이미 존재하는 아이디 입니다.");

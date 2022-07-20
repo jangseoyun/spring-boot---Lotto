@@ -2,7 +2,7 @@ package lotto.practice.random.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import lotto.practice.random.domain.Machine;
+import lotto.practice.random.domain.machine.Machine;
 import lotto.practice.random.dto.InputDto;
 import org.springframework.stereotype.Service;
 

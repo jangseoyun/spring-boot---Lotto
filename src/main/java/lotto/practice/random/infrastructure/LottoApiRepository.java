@@ -1,4 +1,4 @@
-package lotto.practice.random.repository;
+package lotto.practice.random.infrastructure;
 
 
 import lombok.RequiredArgsConstructor;

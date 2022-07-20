@@ -1,4 +1,4 @@
-package lotto.practice.random.service;
+package lotto.practice.random.domain.machine;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

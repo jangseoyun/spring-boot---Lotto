@@ -1,9 +1,10 @@
-package lotto.practice.random.repository;
+package lotto.practice.random.infrastructure;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lotto.practice.random.domain.user.User;
-import lotto.practice.random.domain.user.UserRepository;
+import lotto.practice.random.domain.user.UserOperator;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -11,9 +12,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Slf4j
-@Repository
 @RequiredArgsConstructor
-public class UserRepositoryImpl implements UserRepository {
+@Repository
+@Qualifier("UserRepositoryImpl")
+public class UserJpaOperator implements UserOperator {
 
     private final EntityManager em;
 
