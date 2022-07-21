@@ -1,4 +1,4 @@
-package lotto.practice.random.domain;
+package lotto.practice.random.domain.winning;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

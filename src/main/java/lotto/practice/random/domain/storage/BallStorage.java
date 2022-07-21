@@ -1,4 +1,4 @@
-package lotto.practice.random.domain;
+package lotto.practice.random.domain.storage;
 
 
 import lombok.AccessLevel;
@@ -10,6 +10,9 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
+/**
+ * 각 회차별 추출번호 전체 저장소
+ */
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor

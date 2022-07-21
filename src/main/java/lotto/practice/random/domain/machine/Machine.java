@@ -1,6 +1,7 @@
 package lotto.practice.random.domain.machine;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -9,7 +10,11 @@ import java.util.Random;
 
 import static lotto.practice.random.controller.MainController.PRICE;
 
+/**
+ * 랜덤 번호 추출 비즈니스 로직
+ */
 @Slf4j
+@Component
 public class Machine {
 
     Random randomNum = new Random();
@@ -28,8 +33,8 @@ public class Machine {
     /**
      * 2. 번호 추출 (ball이 6개가 될때까지) + 파라미터 포함
      * 전체자동 : 구입한 갯수 만큼
-     * 전체수동 : 구입한 갯수 만큼 (사용자에게 번호를 받음) -> 나중에 금액이랑 선택한 볼 수가 일치하는지도 확인해줘야함
      * 반자동 : 구입한 갯수 만큼 (사용자가 입력하지 않은 번호 랜덤으로 반환)
+     * //전체수동 : 구입한 갯수 만큼 (사용자에게 번호를 받음) -> 나중에 금액이랑 선택한 볼 수가 일치하는지도 확인해줘야함
      */
 
     public List<HashSet<Integer>> allAutoNumSix(int buyNumResult){
@@ -62,6 +67,13 @@ public class Machine {
     }
 
 
+    /**
+     * inputDto 검증
+     */
+
+    // 로그인한 유저가 맞는지 검증
+
+    //
 
 
 

@@ -2,7 +2,7 @@ package lotto.practice.random.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import lotto.practice.random.service.LottoService;
+import lotto.practice.random.domain.machine.MachineService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,7 +35,7 @@ public class MainController {
 
     //필드
     public final static int PRICE = 1000; //lotto 금액
-    private final LottoService lottoService;
+    private final MachineService lottoService;
 
     //메소드
     //메인화면

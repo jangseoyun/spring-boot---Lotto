@@ -1,4 +1,4 @@
-package lotto.practice.random.domain;
+package lotto.practice.random.domain.lottoapi;
 
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
@@ -6,18 +6,17 @@ import lombok.extern.slf4j.Slf4j;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+/**
+ * 각 회차별 로또 당첨 정보(데이터)
+ */
 @Getter
 @Setter
 @Slf4j
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Entity
-@Table(name = "t_lotto")
-public class Lotto {
-    /**
-     * 각 회차별 로또 정보(데이터)
-     */
-
+@Table(name = "t_lotto_api")
+public class LottoApi {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "lotto_no")
@@ -87,8 +86,8 @@ public class Lotto {
             ,"drwtNo3":29
             ,"drwtNo1":10}*/
 
-    public static Lotto createLotto(Lotto lotto){
-        Lotto entity = new Lotto();
+    public static LottoApi createLotto(LottoApi lotto){
+        LottoApi entity = new LottoApi();
         entity.setTotSellamnt(lotto.getTotSellamnt());
         entity.setFirstPrzwnerCo(lotto.getFirstPrzwnerCo());
         entity.setFirstWinamnt(lotto.getFirstWinamnt());

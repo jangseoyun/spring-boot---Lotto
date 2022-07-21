@@ -1,4 +1,4 @@
-package lotto.practice.random.domain;
+package lotto.practice.random.domain.storage;
 
 
 import lombok.AccessLevel;
@@ -8,28 +8,36 @@ import lombok.NoArgsConstructor;
 import lotto.practice.random.domain.user.User;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
+/**
+ * 각 회차별 사용자 추출 번호 저장소
+ */
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Entity
-@Table(name = "t_subscription")
-public class Subscription {
+@NotNull
+@Table(name = "t_cycle_storage")
+public class CycleStorage {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "subscription_no")
+    @Column(name = "cycle_storage_no")
     private Long no;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_no")
     private User user;
 
-    @Enumerated(EnumType.STRING)
-    private licence licence;// 구독여부(라이센스 발급) -> ACCESS,DENIED
+    @Column(name = "six_ball")
+    private String sixBall;
 
-    @Column(name = "local_date_time")
-    private LocalDateTime subscriptionDate;
+    @Column(name = "storage_cycle")
+    private String storageCycle;
+
+    @Column(name = "cycle_storage_date")
+    private LocalDateTime storageDate;
 
 }

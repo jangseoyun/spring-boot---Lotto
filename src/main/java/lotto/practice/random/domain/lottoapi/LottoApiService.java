@@ -1,9 +1,8 @@
-package lotto.practice.random.service;
+package lotto.practice.random.domain.lottoapi;
 
 import com.google.gson.Gson;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import lotto.practice.random.domain.Lotto;
 import lotto.practice.random.infrastructure.LottoApiRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,18 +14,18 @@ import org.springframework.transaction.annotation.Transactional;
 public class LottoApiService {
 
     private final LottoApiRepository lottoApiRepository;
-    private final RestAPIService restAPIService;
+    private final RestApiService restApiService;
 
-    public Lotto lottoNumSave(Lotto lotto){
-        Lotto createLotto = Lotto.createLotto(lotto);
+    public LottoApi lottoNumSave(LottoApi lotto){
+        LottoApi createLotto = LottoApi.createLotto(lotto);
         return lottoApiRepository.lottoNumSave(createLotto);
     }
 
     public void insertLotto(Long no) {
         for(int i = 1; i <= no; i++){
-            String json = restAPIService.readUrl("https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo=" + i);
+            String json = restApiService.readUrl("https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo=" + i);
             Gson gson = new Gson();
-            Lotto lotto = gson.fromJson(json, Lotto.class);
+            LottoApi lotto = gson.fromJson(json, LottoApi.class);
 
             //디비 등록
             lottoNumSave(lotto);

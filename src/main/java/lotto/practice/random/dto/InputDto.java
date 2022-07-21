@@ -1,48 +1,45 @@
 package lotto.practice.random.dto;
 
-import lombok.*;
+import lombok.Data;
+import org.hibernate.validator.constraints.Length;
 
-@Getter
-@Setter
-@ToString
-@NoArgsConstructor
-@AllArgsConstructor
+import javax.validation.constraints.*;
+
+/**
+ * 사용자 요청 사항
+ */
+@Data
 public class InputDto {
 
-    //사용자가 요청한 타입, 구입금액
+    public final static int PRICE = 1000; //lotto 금액
 
+    //사용자가 요청한 타입, 구입금액
     //필드
-    private String numInput;
+    @NotNull(message = "userNo는 null일 수 없습니다.")
+    private Long userNo;
+
+    @Size(min = 7, max = 9)
+    @NotEmpty(message = "번호 추출 타입은 빈값일 수 없습니다.")
+    @NotNull(message = "번호 추출 타입은 null일 수 없습니다.")
     private String type;
+
+    @Positive//양수만 가능
+    @Max(value = 1000000) //100만원까지 가능
+    @NotNull(message = "금액은 null일 수 없습니다.")
     private int buying;
 
-    public InputDto(String type, int buying) {
+    protected InputDto(Long userNo, String type, int buying) {
+        this.userNo = userNo;
         this.type = type;
+
+        if((buying%PRICE) != 0){
+            throw new IllegalArgumentException("천원 단위로 입력해주세요");
+        }
+
         this.buying = buying;
     }
 
-    //getter, setter
-
     //일반 메소드
-    // - 번호 출력 타입
-    public String getTypeOut(String type){
-
-        String typeOut = "";
-
-        switch (type){
-            case "allAuto" :
-                typeOut = "allAuto";
-            break;
-            case "selectNum" :
-                typeOut = "selectNum";
-            break;
-            case "allSelect" :
-                typeOut = "allSelect";
-            break;
-        }
-
-        return typeOut;
-    }
 
 
 }

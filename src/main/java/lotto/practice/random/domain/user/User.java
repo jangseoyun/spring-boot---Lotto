@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import lotto.practice.random.dto.JoinDto;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -31,6 +32,7 @@ public class User {
     @Column(name = "user_pw", nullable = false)
     private String userPw;
 
+    @Email(message = "email 형태만 입력 가능합니다.")
     @Column(name = "user_email", nullable = false)
     private String userEmail;
 

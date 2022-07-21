@@ -2,7 +2,7 @@ package lotto.practice.random.infrastructure;
 
 
 import lombok.RequiredArgsConstructor;
-import lotto.practice.random.domain.Lotto;
+import lotto.practice.random.domain.lottoapi.LottoApi;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -13,7 +13,7 @@ public class LottoApiRepository {
 
     private final EntityManager em;
 
-    public Lotto lottoNumSave(Lotto lotto){
+    public LottoApi lottoNumSave(LottoApi lotto){
         em.persist(lotto);
         return lotto;
     }

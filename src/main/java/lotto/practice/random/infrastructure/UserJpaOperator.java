@@ -14,7 +14,7 @@ import java.util.Optional;
 @Slf4j
 @RequiredArgsConstructor
 @Repository
-@Qualifier("UserRepositoryImpl")
+@Qualifier("UserJpaOperator")
 public class UserJpaOperator implements UserOperator {
 
     private final EntityManager em;
@@ -28,7 +28,7 @@ public class UserJpaOperator implements UserOperator {
     }
     @Override
     //회원가입 검증(이메일, 이름)
-    public Optional<User> findUserId(String userId) {
+    public Optional<User> findUserNo(String userId) {
         List<User> findUserOne = em.createQuery("select u from User u where u.userId = :userId", User.class)
                 .setParameter("userId", userId)
                 .getResultList();

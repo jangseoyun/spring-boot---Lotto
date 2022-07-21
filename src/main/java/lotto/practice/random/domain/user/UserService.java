@@ -19,7 +19,7 @@ public class UserService {
     //회원가입
     public Long joinUser(JoinDto joinDto){
         //아이디/이메일 검증
-        Optional<User> resultUser = userOperator.findUserId(joinDto.getUserId());
+        Optional<User> resultUser = userOperator.findUserNo(joinDto.getUserId());
 
         //검색이 되었다면 이미 회원이 존재하는 것 따라서,
         if(!resultUser.isEmpty()){
@@ -37,7 +37,7 @@ public class UserService {
 
     public Long joinUser2(JoinDto joinDto){
         //아이디/이메일 검증
-        Optional<User> resultUser = userOperator.findUserId(joinDto.getUserId());
+        Optional<User> resultUser = userOperator.findUserNo(joinDto.getUserId());
 
 
         //검색이 되었다면 이미 회원이 존재하는 것 따라서,
@@ -53,7 +53,7 @@ public class UserService {
     //userRepository.getOldPassword(joinDto.getUserId());
     public Long joinUser3(JoinDto joinDto){
         //아이디/이메일 검증
-        Optional<User> optionalUser = userOperator.findUserId(joinDto.getUserId());
+        Optional<User> optionalUser = userOperator.findUserNo(joinDto.getUserId());
         //optionalUser.ifPresent
         //optionalUser.orElseThrow() **
 

@@ -1,4 +1,4 @@
-package lotto.practice.random.service;
+package lotto.practice.random.domain.lottoapi;
 
 import org.springframework.stereotype.Service;
 
@@ -8,7 +8,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 
 @Service
-public class FileRestApiServiceImpl implements RestAPIService {
+public class FileRestApiServiceImpl implements RestApiService {
     @Override
     public String readUrl(String urlPath) {
         BufferedReader reader = null;

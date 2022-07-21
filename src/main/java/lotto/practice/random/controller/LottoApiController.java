@@ -2,7 +2,7 @@ package lotto.practice.random.controller;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import lotto.practice.random.service.LottoApiService;
+import lotto.practice.random.domain.lottoapi.LottoApiService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;

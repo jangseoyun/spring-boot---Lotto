@@ -58,16 +58,16 @@
         <div id="contents" class="clearfix">
             <div id="content-top">
 
-                <form action="/requestBall" method="get" id="radio-box" class="txt-bold-25-black">
+                <form action="/machine/lottoNum" method="get" id="radio-box" class="txt-bold-25-black">
                     <label th:for="selectType" class="st-block">로또번호 생성기 타입을 선택해 주세요 !</label>
-                    <select th:id="selectType" name="machineType" class="form-select" aria-label=".form-select-lg example">
+                    <select th:id="selectType" name="type" class="form-select" aria-label=".form-select-lg example">
                         <option selected>타입 선택</option>
                         <option value="allAuto">전체자동</option>
                         <option value="selectNum">반자동</option>
                     </select>
 
                     <div id="buying">
-                        <p class="txt-bold-25-black">구입하실 금액을 입력해주세요</p>
+                        <p class="txt-bold-25-black">구입하실 금액을 입력해주세요(천원 ~ 백만원까지 가능)</p>
                         <input type="number" name="buying" value="" placeholder="금액입력 후 Enter !">
                     </div>
 
