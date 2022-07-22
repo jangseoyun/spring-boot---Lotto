@@ -4,55 +4,69 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lotto.practice.random.domain.machine.Machine;
 import lotto.practice.random.dto.InputDto;
+import lotto.practice.random.infrastructure.repository.CycleStorageJpaRepository;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.*;
 
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class MachineService {
 
     //필드
     private final Machine machine;
 
-    Map<String, Object> resultBall = new HashMap<>();
-    List<HashSet<Integer>> allAutoResult = new ArrayList<>();
+    @Qualifier("MachineRepository")
+    private final MachineRepository machineRepository;
+    private final CycleStorageJpaRepository csJpaRepository;
 
+    List<HashSet<Integer>> result = new ArrayList<>();
+
+    /**
+     * 타입에 따른 6개의 추출 번호
+     *  * 전체 자동
+     *  * 반자동 (수동 + 자동)
+     *  * 전체 수동
+     */
     //메소드
-    public Map<String, Object> operateMachine(InputDto inputDto){
+    public int operateMachine(InputDto inputDto){
 
-        log.info("service buyNum 접속");
-        log.debug("inputVo = " + inputDto);
+        log.info("service operateMachine 접속");
+        log.debug("inputDto = " + inputDto);
 
-        //비즈니스 로직 domain에 요청하여 응답 -> map
-        //구입한 갯수
-        int buyNumResult = machine.buyNum(inputDto.getBuying());
-        log.debug("buynum: "+buyNumResult);
-        resultBall.put("buyNum",buyNumResult);
+        //로그인한 user가져오기
 
-        //타입에 따른 6개의 추출 번호
+        //전체 자동
         if(inputDto.getType().equals("allAuto")){
-            //전체 자동
-            machine.allAutoNumSix(buyNumResult);
-            log.debug("allAuto");
-            log.debug("machine.allAutoNumSix(buyNumResult)");
-
-        }else if(inputDto.getType().equals("selectNum")){
-            //반자동
-            log.debug("selectNum");
-            //machine.selectNumSix();
-
-        }else if(inputDto.getType().equals("allSelect")){
-            //전체 수동
-            log.debug("allSelect");
-            //machine.allSelectNumSix();
+            log.info("allAuto");
+            List<HashSet<Integer>> allAutoResult = machine.allAutoSixBall(inputDto.getBuying());// 6개
+            int bonusBall = machine.bonusBall(); //보너스 번호
+            //입력
+            MachineCycleStorage cycleStorage = MachineFactory.createStorage(inputDto, allAutoResult, bonusBall);
+            csJpaRepository.save(cycleStorage);
         }
 
-        //보너스 번호
+        if(inputDto.getType().equals("selectNum")){
+            //반자동
+            log.info("selectNum");
+            //return machine.selectNumSixBall(inputDto.getBuying(), inputDto.getInputNum());
 
-        return resultBall;
+        }
+
+        if(inputDto.getType().equals("allSelect")){
+            //전체 수동
+            log.info("allSelect");
+            machine.allSelectSixBall(inputDto.getInputNum());
+            //return
+        }
+
+        return 0;
     }
 
 }

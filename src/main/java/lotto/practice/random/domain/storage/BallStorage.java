@@ -5,6 +5,7 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lotto.practice.random.domain.machine.MachineCycleStorage;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -28,7 +29,7 @@ public class BallStorage {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cycle_storage_no")
-    private CycleStorage cycleStorage;
+    private MachineCycleStorage cycleStorage;
 
     @Column(name = "six_ball")
     private String sixBall;

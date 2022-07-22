@@ -26,13 +26,10 @@ public class MachineController {
 
     //메서드
     @GetMapping("/lottoNum")
-    public String inputVerify(@ModelAttribute @Valid InputDto inputDto, Model model){
-
+    public String inputVerify(@ModelAttribute InputDto inputDto, Model model){
         log.info("controller inputDto = " + inputDto);
 
         machineService.operateMachine(inputDto);
-        //2-1. 구입한 갯수/추출 번호 요청 후 map으로 받기
-
         return "";
     }
 

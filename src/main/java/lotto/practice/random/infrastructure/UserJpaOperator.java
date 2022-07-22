@@ -12,8 +12,8 @@ import java.util.List;
 import java.util.Optional;
 
 @Slf4j
-@RequiredArgsConstructor
 @Repository
+@RequiredArgsConstructor
 @Qualifier("UserJpaOperator")
 public class UserJpaOperator implements UserOperator {
 
