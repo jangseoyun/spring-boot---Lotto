@@ -22,7 +22,7 @@ public class Machine {
 
     Random randomNum = new Random();
     List<HashSet<Integer>> machineResult = new ArrayList<>();
-    //인터페이스
+    //repository 인터페이스
 
 
     /**
@@ -74,9 +74,9 @@ public class Machine {
      * 보너스 번호
      */
     public int bonusBall(){
-        int bonusNum = randomNum.nextInt(45);
-        log.debug("보너스 번호 추출: " + bonusNum);
-        return bonusNum;
+            int bonusNum = randomNum.nextInt(45);
+            log.debug("보너스 번호 추출: " + bonusNum);
+            return bonusNum;
     }
 
 

@@ -3,8 +3,11 @@ package lotto.practice.random.domain.machine;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lotto.practice.random.domain.machine.Machine;
+import lotto.practice.random.domain.user.User;
+import lotto.practice.random.domain.user.UserOperator;
 import lotto.practice.random.dto.InputDto;
 import lotto.practice.random.infrastructure.repository.CycleStorageJpaRepository;
+import lotto.practice.random.infrastructure.repository.UserJpaRepository;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,6 +28,7 @@ public class MachineService {
     @Qualifier("MachineRepository")
     private final MachineRepository machineRepository;
     private final CycleStorageJpaRepository csJpaRepository;
+    private final UserJpaRepository userJpaRepository;
 
     List<HashSet<Integer>> result = new ArrayList<>();
 
@@ -41,6 +45,7 @@ public class MachineService {
         log.debug("inputDto = " + inputDto);
 
         //로그인한 user가져오기
+        Optional<User> findUser = userJpaRepository.findById(inputDto.getUserNo());
 
         //전체 자동
         if(inputDto.getType().equals("allAuto")){
@@ -48,7 +53,7 @@ public class MachineService {
             List<HashSet<Integer>> allAutoResult = machine.allAutoSixBall(inputDto.getBuying());// 6개
             int bonusBall = machine.bonusBall(); //보너스 번호
             //입력
-            MachineCycleStorage cycleStorage = MachineFactory.createStorage(inputDto, allAutoResult, bonusBall);
+            MachineCycleStorage cycleStorage = MachineFactory.createStorage(inputDto, allAutoResult, bonusBall, findUser.get());
             csJpaRepository.save(cycleStorage);
         }
 
