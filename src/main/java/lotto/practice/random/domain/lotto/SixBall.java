@@ -1,11 +1,13 @@
 package lotto.practice.random.domain.lotto;
 
+import lombok.EqualsAndHashCode;
 import lotto.practice.random.domain.machine.Ball;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
+@EqualsAndHashCode(of = "list")
 public class SixBall {
 
     private static final int LENGTH = 6;
@@ -52,9 +54,23 @@ public class SixBall {
     private HashSet<Ball> makeBallSet() {
         HashSet<Ball> hashSet = new HashSet<>();
 
-        for (int i = 0; hashSet.size() < LENGTH; i++) {
+        while (hashSet.size() < LENGTH) {
             hashSet.add(new Ball());
         }
         return hashSet;
     }
+
+    /*@Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SixBall sixBall = (SixBall) o;
+        return Objects.equals(list, sixBall.list);
+        리스트 6개의 값을 전부 체크해주는 코드 넣기
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(list);
+    }*/
 }

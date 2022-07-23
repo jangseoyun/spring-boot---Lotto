@@ -1,6 +1,8 @@
 package lotto.practice.random.domain.machine;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.RepeatedTest;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -9,6 +11,23 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 @DisplayName("볼을 테스트 한다")
 class BallTest {
+
+    @RepeatedTest(5000)
+    @DisplayName("랜덤으로 볼을 생성할 수 있다")
+    void name() {
+        //when
+        Ball ball = new Ball();
+        //then
+        assertThat(ball).isNotNull();
+    }
+
+    @Test
+    @DisplayName("볼 객체는 equals를 보장한다")
+//EqualsAndHashCode
+    void name2() {
+        //then
+        assertThat(new Ball(1)).isEqualTo(new Ball(1));
+    }
 
     @DisplayName("1~45의 값을 생성한다")
     @ParameterizedTest

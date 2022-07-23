@@ -5,6 +5,7 @@ import org.junit.jupiter.api.RepeatedTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@DisplayName("식스볼을 테스트 한다")
 class SixBallTest {
 
     @RepeatedTest(1000)
@@ -15,6 +16,6 @@ class SixBallTest {
 
         //then
         assertThat(sixBall.size()).isEqualTo(6);
-
+        //getnum이 숫자가 같으면 안됨
     }
 }
