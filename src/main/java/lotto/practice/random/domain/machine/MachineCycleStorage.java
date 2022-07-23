@@ -30,22 +30,22 @@ public class MachineCycleStorage {
     private User user;
 
     @Column(name = "ball_01")
-    private int drwtNo1;
+    private Ball drwtNo1;
 
     @Column(name = "ball_02")
-    private int drwtNo2;
+    private Ball drwtNo2;
 
     @Column(name = "ball_03")
-    private int drwtNo3;
+    private Ball drwtNo3;
 
     @Column(name = "ball_04")
-    private int drwtNo4;
+    private Ball drwtNo4;
 
     @Column(name = "ball_05")
-    private int drwtNo5;
+    private Ball drwtNo5;
 
     @Column(name = "ball_06")
-    private int drwtNo6;
+    private Ball drwtNo6;
 
     @Column(name = "six_ball")
     private String sixBall;
@@ -64,12 +64,12 @@ public class MachineCycleStorage {
                                int bonusBall, Long storageCycle) {
         this.user = user;
         //TODO: 컨버터
-        this.drwtNo1 = sixBall.getNo1().getValue();
-        this.drwtNo2 = drwtNo2;
-        this.drwtNo3 = drwtNo3;
-        this.drwtNo4 = drwtNo4;
-        this.drwtNo5 = drwtNo5;
-        this.drwtNo6 = drwtNo6;
+        this.drwtNo1 = sixBall.getNo1();
+        this.drwtNo2 = sixBall.getNo2();
+        this.drwtNo3 = sixBall.getNo3();
+        this.drwtNo4 = sixBall.getNo4();
+        this.drwtNo5 = sixBall.getNo5();
+        this.drwtNo6 = sixBall.getNo6();
         this.sixBall = sixBall.toString();
         this.bonusBall = bonusBall;
         this.storageCycle = storageCycle;

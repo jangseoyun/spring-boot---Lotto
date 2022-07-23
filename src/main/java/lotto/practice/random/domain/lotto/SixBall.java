@@ -5,51 +5,51 @@ import lotto.practice.random.domain.machine.Ball;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Random;
 
 public class SixBall {
-    private List<Ball> context;
+    private List<Ball> list;
+    Ball ball = new Ball();
 
     public SixBall() {
-        Random randomNum = new Random();
-        HashSet<Integer> hashSet = new HashSet<>();
-
-        //TODO: i로 변경
-        for (int x = 0; hashSet.size() < 6; x++) {
-            int ballVo = randomNum.nextInt(45);//Ball
-            hashSet.add(ballVo);
-        }
-
-        this.context = new ArrayList<>(hashSet);
+        this.list = new ArrayList<>(makeBallSet());
     }
 
     //TODO:
     public Ball getNo1() {
-        return context.get(0);
+        return list.get(0);
     }
 
-    public Integer getNo2() {
-        return context.get(1);
+    public Ball getNo2() {
+        return list.get(1);
     }
 
-    public Integer getNo3() {
-        return 0;
+    public Ball getNo3() {
+        return list.get(2);
     }
 
-    public Integer getNo4() {
-        return 0;
+    public Ball getNo4() {
+        return list.get(3);
     }
 
-    public Integer getNo5() {
-        return 0;
+    public Ball getNo5() {
+        return list.get(4);
     }
 
-    public Integer getNo6() {
-        return 0;
+    public Ball getNo6() {
+        return list.get(5);
     }
 
     @Override
     public String toString() {
-        return getNo1() + "," + drwtNo2 + "," + drwtNo3 + "," + drwtNo4 + "," + drwtNo5 + "," + drwtNo6
+        return getNo1() + "," + getNo2() + "," + getNo3() + "," + getNo4() + "," + getNo5() + "," + getNo6();
+    }
+
+    private HashSet<Ball> makeBallSet() {
+        HashSet<Ball> hashSet = new HashSet<>();
+
+        for (int i = 0; hashSet.size() < 6; i++) {
+            hashSet.add(ball);
+        }
+        return hashSet;
     }
 }

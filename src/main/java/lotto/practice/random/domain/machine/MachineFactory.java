@@ -17,12 +17,7 @@ public class MachineFactory {
 
     private static MachineCycleStorage getMachineCycleStorage(Long cycle, int bonusBall, User findUser, SixBall sixBall) {
         MachineCycleStorage buildCycleStorage = MachineCycleStorage.builder()
-                .drwtNo1(sixBall.getNo1())
-                .drwtNo2(sixBall.getNo2())
-                .drwtNo3(sixBall.getNo3())
-                .drwtNo4(sixBall.getNo4())
-                .drwtNo5(sixBall.getNo5())
-                .drwtNo6(sixBall.getNo6())
+                .sixBall(sixBall)
                 .bonusBall(bonusBall)
                 .user(findUser)
                 //.sixBall(resultList.get(0)+","+resultList.get(1)+","+resultList.get(2)+","+resultList.get(3)+","+resultList.get(4)+","+resultList.get(5))

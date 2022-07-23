@@ -2,6 +2,7 @@ package lotto.practice.random.dto;
 
 import lombok.*;
 import lotto.practice.random.domain.machine.dto.LottoCommand;
+import lotto.practice.random.domain.machine.dto.Lottotype;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.*;
@@ -26,7 +27,7 @@ public class LottoRequestDto {
     @Length(min = 7, max = 9)
     @NotEmpty(message = "번호 추출 타입은 빈값일 수 없습니다.")
     @NotNull(message = "번호 추출 타입은 null일 수 없습니다.")
-    private String type;
+    private Lottotype lottotype;
 
     @Positive//양수만 가능
     @Max(value = 1000000) //100만원까지 가능
@@ -41,9 +42,9 @@ public class LottoRequestDto {
 
     //요청 회차 (기존 회차 + 1)
 
-    private LottoRequestDto(Long userNo, String type, int buying) {
+    private LottoRequestDto(Long userNo, Lottotype lottotype, int buying) {
         this.userNo = userNo;
-        this.type = type;
+        this.lottotype = lottotype;
 
         if ((buying % PRICE) != 0) {
             throw new IllegalArgumentException("천원 단위로 입력해주세요");
@@ -70,8 +71,8 @@ public class LottoRequestDto {
     public LottoCommand toCommand() {
         return new LottoCommand(
                 this.getUserNo(),
-                this.getType(),
-                (this.getPrice() / PRICE),//여기서 카운트로 변경ㄹ해줌
+                this.getLottotype(),
+                (this.getPrice() / PRICE),//여기서 카운트로 변경해줌
                 this.getInputNum(),
                 this.getStorageCycle()
         );

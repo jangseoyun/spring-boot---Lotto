@@ -11,8 +11,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,7 +29,7 @@ public class MachineService {
     private final CycleStorageJpaRepository csJpaRepository;
     private final UserJpaRepository userJpaRepository;
 
-    List<HashSet<Integer>> result = new ArrayList<>();
+    //List<HashSet<Integer>> result = new ArrayList<>();
 
     /**
      * 타입에 따른 6개의 추출 번호
@@ -49,7 +47,7 @@ public class MachineService {
         Optional<User> findUser = userJpaRepository.findById(command.getUserNo());
 
         //전체 자동
-        if (command.getType().equals("allAuto")) {
+        if (command.getLottotype().equals("allAuto")) {
             log.info("allAuto");
             List<SixBall> allAutoResult = machine.allAutoSixBall(command.getCount());// 6개
             int bonusBall = machine.bonusBall(); //보너스 번호
@@ -62,14 +60,14 @@ public class MachineService {
 
         }
 
-        if (command.getType().equals("selectNum")) {
+        if (command.getLottotype().equals("selectNum")) {
             //반자동
             log.info("selectNum");
             //return machine.selectNumSixBall(command.getBuying(), command.getInputNum());
 
         }
 
-        if (command.getType().equals("allSelect")) {
+        if (command.getLottotype().equals("allSelect")) {
             //전체 수동
             log.info("allSelect");
             machine.allSelectSixBall(command.getInputNum());
