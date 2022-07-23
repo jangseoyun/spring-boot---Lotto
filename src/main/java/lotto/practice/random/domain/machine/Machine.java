@@ -3,12 +3,7 @@ package lotto.practice.random.domain.machine;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Random;
-
-import static lotto.practice.random.controller.MainController.PRICE;
+import java.util.*;
 
 /**
  * 랜덤 번호 추출 비즈니스 로직
@@ -28,24 +23,24 @@ public class Machine {
     /**
      * 1. 구입한 갯수
      */
-    private int buyNumber(int buying){
+    /*private int buyNumber(int buying){
         int buyNum = (buying/PRICE);
         log.debug("구입 갯수 : " + buyNum);
         return buyNum;
-    }
+    }*/
 
     /**
      * 2-1. 번호 추출 (ball이 6개가 될때까지)
      * * 전체자동 : 구입한 갯수 만큼
      */
-    public List<HashSet<Integer>> allAutoSixBall(int buying){
-        int buyNum = buyNumber(buying);
+    public List<HashSet<Integer>> allAutoSixBall(int count) {
+        //int buyNum = buyNumber(price);
 
         //2. 전체 자동
-        for(int y = 0; y < buyNum; y++){
+        for (int y = 0; y < count; y++) {
             HashSet<Integer> lottoSixNumVo = new HashSet<Integer>();
 
-            for(int x = 0; lottoSixNumVo.size() < 6; x++){
+            for (int x = 0; lottoSixNumVo.size() < 6; x++) {
                 int ballVo = randomNum.nextInt(45);
                 lottoSixNumVo.add(ballVo);
             }
@@ -60,11 +55,11 @@ public class Machine {
      * * 반자동 : 사용자 입력 번호 이외 자동 추출
      */
     public void selectNumSixBall(int buying, String[] inputNum){
-        int buyNum = buyNumber(buying);
+
 
     }
 
-    public void allSelectSixBall(String[] numInput){
+    public void allSelectSixBall(Set<Integer> numInput) {
         //전체 수동 -> 리스트로 받아야 할 것 같은데...
 
     }

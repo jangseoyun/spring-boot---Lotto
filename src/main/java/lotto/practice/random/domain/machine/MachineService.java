@@ -2,18 +2,18 @@ package lotto.practice.random.domain.machine;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import lotto.practice.random.domain.machine.Machine;
+import lotto.practice.random.domain.machine.dto.LottoCommand;
 import lotto.practice.random.domain.user.User;
-import lotto.practice.random.domain.user.UserOperator;
-import lotto.practice.random.dto.InputDto;
 import lotto.practice.random.infrastructure.repository.CycleStorageJpaRepository;
 import lotto.practice.random.infrastructure.repository.UserJpaRepository;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
 
 
 @Slf4j
@@ -34,40 +34,44 @@ public class MachineService {
 
     /**
      * 타입에 따른 6개의 추출 번호
-     *  * 전체 자동
-     *  * 반자동 (수동 + 자동)
-     *  * 전체 수동
+     * * 전체 자동
+     * * 반자동 (수동 + 자동)
+     * * 전체 수동
      */
     //메소드
-    public int operateMachine(InputDto inputDto){
+    public int operateMachine(LottoCommand command) {
 
         log.info("service operateMachine 접속");
-        log.debug("inputDto = " + inputDto);
+        log.debug("command = " + command);
 
         //로그인한 user가져오기
-        Optional<User> findUser = userJpaRepository.findById(inputDto.getUserNo());
+        Optional<User> findUser = userJpaRepository.findById(command.getUserNo());
 
         //전체 자동
-        if(inputDto.getType().equals("allAuto")){
+        if (command.getType().equals("allAuto")) {
             log.info("allAuto");
-            List<HashSet<Integer>> allAutoResult = machine.allAutoSixBall(inputDto.getBuying());// 6개
+            List<HashSet<Integer>> allAutoResult = machine.allAutoSixBall(command.getCount());// 6개
             int bonusBall = machine.bonusBall(); //보너스 번호
             //입력
-            MachineCycleStorage cycleStorage = MachineFactory.createStorage(inputDto, allAutoResult, bonusBall, findUser.get());
-            csJpaRepository.save(cycleStorage);
+            for (HashSet<Integer> resultVo : allAutoResult) {
+                MachineCycleStorage cycleStorage = MachineFactory.createStorage(command.getStorageCycle(), resultVo, bonusBall, findUser.get());
+                csJpaRepository.save(cycleStorage);
+            }
+
+
         }
 
-        if(inputDto.getType().equals("selectNum")){
+        if (command.getType().equals("selectNum")) {
             //반자동
             log.info("selectNum");
-            //return machine.selectNumSixBall(inputDto.getBuying(), inputDto.getInputNum());
+            //return machine.selectNumSixBall(command.getBuying(), command.getInputNum());
 
         }
 
-        if(inputDto.getType().equals("allSelect")){
+        if (command.getType().equals("allSelect")) {
             //전체 수동
             log.info("allSelect");
-            machine.allSelectSixBall(inputDto.getInputNum());
+            machine.allSelectSixBall(command.getInputNum());
             //return
         }
 

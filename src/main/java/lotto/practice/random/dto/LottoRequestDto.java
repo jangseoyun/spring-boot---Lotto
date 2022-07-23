@@ -1,19 +1,20 @@
 package lotto.practice.random.dto;
 
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lotto.practice.random.domain.machine.dto.LottoCommand;
 import org.hibernate.validator.constraints.Length;
-import org.springframework.util.StringUtils;
 
 import javax.validation.constraints.*;
+import java.util.Set;
 
 /**
  * 사용자 입력 사항
  */
 @Data
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class InputDto {
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+public class LottoRequestDto {
 
     public final static int PRICE = 1000; //lotto 금액
 
@@ -30,40 +31,51 @@ public class InputDto {
     @Positive//양수만 가능
     @Max(value = 1000000) //100만원까지 가능
     @NotNull(message = "금액은 null일 수 없습니다.")
-    private int buying;
+    private int price;
 
     @Positive
     @Size(max = 6)
-    private String[] inputNum;
+    private Set<Integer> inputNum;
+
+    private Long storageCycle;
 
     //요청 회차 (기존 회차 + 1)
 
-    private InputDto(Long userNo, String type, int buying) {
+    private LottoRequestDto(Long userNo, String type, int buying) {
         this.userNo = userNo;
         this.type = type;
 
-        if ((buying%PRICE) != 0) {
+        if ((buying % PRICE) != 0) {
             throw new IllegalArgumentException("천원 단위로 입력해주세요");
         }
-        this.buying = buying;
+        this.price = buying;
     }
 
-    private InputDto(Long userNo, String type, int buying, String inputNum) {
+    /*private LottoRequestDto(Long userNo, String type, int buying, Set<Integer> inputNum) {
         this.userNo = userNo;
         this.type = type;
 
-        if ((buying%PRICE) != 0) {
+        if ((buying % PRICE) != 0) {
             throw new IllegalArgumentException("천원 단위로 입력해주세요");
         }
-        this.buying = buying;
+        this.price = buying;
 
-        if(inputNum == null) {
+        if (inputNum == null) {
             throw new IllegalArgumentException("번호를 입력해주세요");
         }
-        String[] splitInputNum = StringUtils.split(inputNum, ",");
-        this.inputNum = splitInputNum;
-    }
+        this.inputNum = inputNum;
+    }*/
 
+    //TODO: 빌터 패던으로 변경
+    public LottoCommand toCommand() {
+        return new LottoCommand(
+                this.getUserNo(),
+                this.getType(),
+                (this.getPrice() / PRICE),//여기서 카운트로 변경ㄹ해줌
+                this.getInputNum(),
+                this.getStorageCycle()
+        );
+    }
 
 
 }
