@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.Set;
 
 /**
@@ -20,7 +19,7 @@ import java.util.Set;
 public class Machine {
     List<SixBall> machineResult = new ArrayList<>();
     //repository 인터페이스
-    Random randomNum = new Random();
+    //Random randomNum = new Random();
 
     /**
      * 1. 구입한 갯수
@@ -64,11 +63,11 @@ public class Machine {
     /**
      * 보너스 번호
      */
-    public int bonusBall() {
+    /*public int bonusBall() {
         int bonusNum = randomNum.nextInt(45);
         log.debug("보너스 번호 추출: " + bonusNum);
         return bonusNum;
-    }
+    }*/
 
 
 }

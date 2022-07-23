@@ -3,6 +3,7 @@ package lotto.practice.random.domain.machine;
 
 import lombok.*;
 import lotto.practice.random.domain.lotto.SixBall;
+import lotto.practice.random.domain.machine.converter.BallConverter;
 import lotto.practice.random.domain.user.User;
 
 import javax.persistence.*;
@@ -29,29 +30,36 @@ public class MachineCycleStorage {
     @JoinColumn(name = "user_no")
     private User user;
 
+    @Convert(converter = BallConverter.class)
     @Column(name = "ball_01")
-    private Ball drwtNo1;
+    private Ball ball1;
 
+    @Convert(converter = BallConverter.class)
     @Column(name = "ball_02")
-    private Ball drwtNo2;
+    private Ball ball2;
 
+    @Convert(converter = BallConverter.class)
     @Column(name = "ball_03")
-    private Ball drwtNo3;
+    private Ball ball3;
 
+    @Convert(converter = BallConverter.class)
     @Column(name = "ball_04")
-    private Ball drwtNo4;
+    private Ball ball4;
 
+    @Convert(converter = BallConverter.class)
     @Column(name = "ball_05")
-    private Ball drwtNo5;
+    private Ball ball5;
 
+    @Convert(converter = BallConverter.class)
     @Column(name = "ball_06")
-    private Ball drwtNo6;
+    private Ball ball6;
 
     @Column(name = "six_ball")
     private String sixBall;
 
+    @Convert(converter = BallConverter.class)
     @Column(name = "bonus_ball")
-    private int bonusBall;
+    private Ball bonusBall;
 
     @Column(name = "storage_cycle")
     private Long storageCycle;
@@ -60,18 +68,20 @@ public class MachineCycleStorage {
     private LocalDateTime storageDate;
 
     @Builder(access = AccessLevel.PROTECTED)
-    public MachineCycleStorage(User user, SixBall sixBall,
-                               int bonusBall, Long storageCycle) {
+    public MachineCycleStorage(User user, SixBall sixBall, Ball bonusBall, Long storageCycle) {
         this.user = user;
-        //TODO: 컨버터
-        this.drwtNo1 = sixBall.getNo1();
-        this.drwtNo2 = sixBall.getNo2();
-        this.drwtNo3 = sixBall.getNo3();
-        this.drwtNo4 = sixBall.getNo4();
-        this.drwtNo5 = sixBall.getNo5();
-        this.drwtNo6 = sixBall.getNo6();
+        this.ball1 = sixBall.getNo1();
+        this.ball2 = sixBall.getNo2();
+        this.ball3 = sixBall.getNo3();
+        this.ball4 = sixBall.getNo4();
+        this.ball5 = sixBall.getNo5();
+        this.ball6 = sixBall.getNo6();
         this.sixBall = sixBall.toString();
         this.bonusBall = bonusBall;
         this.storageCycle = storageCycle;
     }
+
+
+
+
 }

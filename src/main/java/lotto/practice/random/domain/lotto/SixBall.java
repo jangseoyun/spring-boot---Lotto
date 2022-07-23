@@ -7,14 +7,19 @@ import java.util.HashSet;
 import java.util.List;
 
 public class SixBall {
-    private List<Ball> list;
-    Ball ball = new Ball();
 
+    private static final int LENGTH = 6;
+    private final List<Ball> list;
+
+    //TODO: selectNum 반자동
     public SixBall() {
         this.list = new ArrayList<>(makeBallSet());
     }
 
-    //TODO:
+    public int size() {
+        return list.size();
+    }
+
     public Ball getNo1() {
         return list.get(0);
     }
@@ -47,8 +52,8 @@ public class SixBall {
     private HashSet<Ball> makeBallSet() {
         HashSet<Ball> hashSet = new HashSet<>();
 
-        for (int i = 0; hashSet.size() < 6; i++) {
-            hashSet.add(ball);
+        for (int i = 0; hashSet.size() < LENGTH; i++) {
+            hashSet.add(new Ball());
         }
         return hashSet;
     }

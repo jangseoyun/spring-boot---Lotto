@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lotto.practice.random.domain.lotto.SixBall;
 import lotto.practice.random.domain.machine.dto.LottoCommand;
+import lotto.practice.random.domain.machine.dto.Lottotype;
 import lotto.practice.random.domain.user.User;
 import lotto.practice.random.infrastructure.repository.CycleStorageJpaRepository;
 import lotto.practice.random.infrastructure.repository.UserJpaRepository;
@@ -47,27 +48,27 @@ public class MachineService {
         Optional<User> findUser = userJpaRepository.findById(command.getUserNo());
 
         //전체 자동
-        if (command.getLottotype().equals("allAuto")) {
+        if (command.getLottotype() == Lottotype.ALLAUTO) {
             log.info("allAuto");
-            List<SixBall> allAutoResult = machine.allAutoSixBall(command.getCount());// 6개
-            int bonusBall = machine.bonusBall(); //보너스 번호
+            List<SixBall> sixBallList = machine.allAutoSixBall(command.getCount());// 6개
+            //Ball bonusBall = new Ball(); //보너스 번호
             //입력
-            for (SixBall sixBall : allAutoResult) {
-                MachineCycleStorage cycleStorage = MachineFactory.createStorage(command.getStorageCycle(), sixBall, bonusBall, findUser.get());
+            for (SixBall sixBall : sixBallList) {
+                MachineCycleStorage cycleStorage = MachineFactory.createStorage(command.getStorageCycle(), sixBall, new Ball(), findUser.get());
                 csJpaRepository.save(cycleStorage);
             }
 
 
         }
 
-        if (command.getLottotype().equals("selectNum")) {
+        if (command.getLottotype() == Lottotype.SELECTNUM) {
             //반자동
             log.info("selectNum");
             //return machine.selectNumSixBall(command.getBuying(), command.getInputNum());
 
         }
 
-        if (command.getLottotype().equals("allSelect")) {
+        if (command.getLottotype() == Lottotype.ALLSELECT) {
             //전체 수동
             log.info("allSelect");
             machine.allSelectSixBall(command.getInputNum());

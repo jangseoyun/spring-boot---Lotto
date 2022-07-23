@@ -8,14 +8,14 @@ public class MachineFactory {
     //1. 출력된 공 꺼내기
     //2. 유저 가져오기
 
-    public static MachineCycleStorage createStorage(Long cycle, SixBall sixBall, int bonusBall, User findUser) {
+    public static MachineCycleStorage createStorage(Long cycle, SixBall sixBall, Ball bonusBall, User findUser) {
         //리스트로 변경 set -> list
         //**TODO: 일급 컬렉션
         //List<Integer> resultList = new ArrayList<>(resultVo);
         return getMachineCycleStorage(cycle, bonusBall, findUser, sixBall);
     }
 
-    private static MachineCycleStorage getMachineCycleStorage(Long cycle, int bonusBall, User findUser, SixBall sixBall) {
+    private static MachineCycleStorage getMachineCycleStorage(Long cycle, Ball bonusBall, User findUser, SixBall sixBall) {
         MachineCycleStorage buildCycleStorage = MachineCycleStorage.builder()
                 .sixBall(sixBall)
                 .bonusBall(bonusBall)
