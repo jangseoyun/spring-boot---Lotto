@@ -2,6 +2,7 @@ package lotto.practice.random.domain.machine;
 
 
 import lombok.*;
+import lotto.practice.random.domain.lotto.SixBall;
 import lotto.practice.random.domain.user.User;
 
 import javax.persistence.*;
@@ -59,16 +60,17 @@ public class MachineCycleStorage {
     private LocalDateTime storageDate;
 
     @Builder(access = AccessLevel.PROTECTED)
-    public MachineCycleStorage(User user, int drwtNo1, int drwtNo2, int drwtNo3, int drwtNo4, int drwtNo5, int drwtNo6,
+    public MachineCycleStorage(User user, SixBall sixBall,
                                int bonusBall, Long storageCycle) {
         this.user = user;
-        this.drwtNo1 = drwtNo1;
+        //TODO: 컨버터
+        this.drwtNo1 = sixBall.getNo1().getValue();
         this.drwtNo2 = drwtNo2;
         this.drwtNo3 = drwtNo3;
         this.drwtNo4 = drwtNo4;
         this.drwtNo5 = drwtNo5;
         this.drwtNo6 = drwtNo6;
-        this.sixBall = sixBall(drwtNo1 + "," + drwtNo2 + "," + drwtNo3 + "," + drwtNo4 + "," + drwtNo5 + "," + drwtNo6;
+        this.sixBall = sixBall.toString();
         this.bonusBall = bonusBall;
         this.storageCycle = storageCycle;
     }

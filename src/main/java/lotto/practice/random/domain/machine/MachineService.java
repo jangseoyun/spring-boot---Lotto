@@ -2,6 +2,7 @@ package lotto.practice.random.domain.machine;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import lotto.practice.random.domain.lotto.SixBall;
 import lotto.practice.random.domain.machine.dto.LottoCommand;
 import lotto.practice.random.domain.user.User;
 import lotto.practice.random.infrastructure.repository.CycleStorageJpaRepository;
@@ -50,11 +51,11 @@ public class MachineService {
         //전체 자동
         if (command.getType().equals("allAuto")) {
             log.info("allAuto");
-            List<HashSet<Integer>> allAutoResult = machine.allAutoSixBall(command.getCount());// 6개
+            List<SixBall> allAutoResult = machine.allAutoSixBall(command.getCount());// 6개
             int bonusBall = machine.bonusBall(); //보너스 번호
             //입력
-            for (HashSet<Integer> resultVo : allAutoResult) {
-                MachineCycleStorage cycleStorage = MachineFactory.createStorage(command.getStorageCycle(), resultVo, bonusBall, findUser.get());
+            for (SixBall sixBall : allAutoResult) {
+                MachineCycleStorage cycleStorage = MachineFactory.createStorage(command.getStorageCycle(), sixBall, bonusBall, findUser.get());
                 csJpaRepository.save(cycleStorage);
             }
 
