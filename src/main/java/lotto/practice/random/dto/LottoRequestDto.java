@@ -12,7 +12,7 @@ import java.util.Set;
  * 사용자 입력 사항
  */
 @Data
-@Builder
+@Builder(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class LottoRequestDto {
@@ -52,30 +52,15 @@ public class LottoRequestDto {
         this.price = buying;
     }
 
-    /*private LottoRequestDto(Long userNo, String type, int buying, Set<Integer> inputNum) {
-        this.userNo = userNo;
-        this.type = type;
-
-        if ((buying % PRICE) != 0) {
-            throw new IllegalArgumentException("천원 단위로 입력해주세요");
-        }
-        this.price = buying;
-
-        if (inputNum == null) {
-            throw new IllegalArgumentException("번호를 입력해주세요");
-        }
-        this.inputNum = inputNum;
-    }*/
-
-    //TODO: 빌터 패던으로 변경
-    public LottoCommand toCommand() {
-        return new LottoCommand(
-                this.getUserNo(),
-                this.getLottotype(),
-                (this.getPrice() / PRICE),//여기서 카운트로 변경해줌
-                this.getInputNum(),
-                this.getStorageCycle()
-        );
+    //request DTO-> command object
+    public LottoCommand toCommand(LottoRequestDto lottoRequestDto) {
+        return LottoCommand.builder()
+                .userNo(lottoRequestDto.getUserNo())
+                .lottotype(lottoRequestDto.getLottotype())
+                .count(lottoRequestDto.getPrice() / PRICE)//구입한 갯수 계산해서 넘김
+                .inputNum(lottoRequestDto.inputNum)
+                .storageCycle(lottoRequestDto.getStorageCycle())
+                .build();
     }
 
 

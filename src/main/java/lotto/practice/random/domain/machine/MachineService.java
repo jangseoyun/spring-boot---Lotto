@@ -30,8 +30,6 @@ public class MachineService {
     private final CycleStorageJpaRepository csJpaRepository;
     private final UserJpaRepository userJpaRepository;
 
-    //List<HashSet<Integer>> result = new ArrayList<>();
-
     /**
      * 타입에 따른 6개의 추출 번호
      * * 전체 자동
@@ -44,35 +42,32 @@ public class MachineService {
         log.info("service operateMachine 접속");
         log.debug("command = " + command);
 
-        //로그인한 user가져오기
+        //1.로그인한 user가져오기
         Optional<User> findUser = userJpaRepository.findById(command.getUserNo());
 
-        //전체 자동
+        //2-1.전체 자동
         if (command.getLottotype() == Lottotype.ALLAUTO) {
             log.info("allAuto");
             List<SixBall> sixBallList = machine.allAutoSixBall(command.getCount());// 6개
-            //Ball bonusBall = new Ball(); //보너스 번호
+
             //입력
+            //보너스 번호 -> Ball.class에서 호출(new Ball())
             for (SixBall sixBall : sixBallList) {
                 MachineCycleStorage cycleStorage = MachineFactory.createStorage(command.getStorageCycle(), sixBall, new Ball(), findUser.get());
                 csJpaRepository.save(cycleStorage);
             }
-
-
         }
 
+        //2-2.반자동
         if (command.getLottotype() == Lottotype.SELECTNUM) {
-            //반자동
             log.info("selectNum");
             //return machine.selectNumSixBall(command.getBuying(), command.getInputNum());
-
         }
 
+        //2-3.전체수동
         if (command.getLottotype() == Lottotype.ALLSELECT) {
-            //전체 수동
             log.info("allSelect");
             machine.allSelectSixBall(command.getInputNum());
-            //return
         }
 
         return 0;

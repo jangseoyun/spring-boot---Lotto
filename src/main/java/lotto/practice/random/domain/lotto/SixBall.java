@@ -47,7 +47,7 @@ public class SixBall {
     }
 
     @Override
-    public String toString() {
+    public String toString() {//** Stringbuffer
         return getNo1() + "," + getNo2() + "," + getNo3() + "," + getNo4() + "," + getNo5() + "," + getNo6();
     }
 

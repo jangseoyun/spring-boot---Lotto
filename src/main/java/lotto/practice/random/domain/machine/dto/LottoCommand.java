@@ -14,7 +14,7 @@ public class LottoCommand {
     //사용자가 요청한 타입, 구입금액
     //필드
     private Long userNo;
-    private Lottotype lottotype;//TODO: 이넘타입변경하기
+    private Lottotype lottotype; //enum 타입
     private int count;
     private Set<Integer> inputNum;
     private Long storageCycle;

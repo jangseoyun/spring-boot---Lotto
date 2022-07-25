@@ -14,7 +14,7 @@ class BallTest {
 
     @RepeatedTest(5000)
     @DisplayName("랜덤으로 볼을 생성할 수 있다")
-    void name() {
+    void 랜덤볼생성() {
         //when
         Ball ball = new Ball();
         //then
@@ -24,7 +24,7 @@ class BallTest {
     @Test
     @DisplayName("볼 객체는 equals를 보장한다")
 //EqualsAndHashCode
-    void name2() {
+    void 객체Equals() {
         //then
         assertThat(new Ball(1)).isEqualTo(new Ball(1));
     }
@@ -32,7 +32,7 @@ class BallTest {
     @DisplayName("1~45의 값을 생성한다")
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 45})
-    void test1(int value) {
+    void 볼범위생성(int value) {
         //when
         Ball ball = new Ball(value);
 
@@ -44,7 +44,7 @@ class BallTest {
     @DisplayName("1~45 이외의 값은 exception을 떨군다")
     @ParameterizedTest
     @ValueSource(ints = {0, 46, -1})
-    void test2(int value) {
+    void 볼범위예외(int value) {
         //expect
         assertThatThrownBy(() -> new Ball(value))
                 .isInstanceOf(IllegalArgumentException.class)

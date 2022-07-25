@@ -18,17 +18,6 @@ import java.util.Set;
 @Component
 public class Machine {
     List<SixBall> machineResult = new ArrayList<>();
-    //repository 인터페이스
-    //Random randomNum = new Random();
-
-    /**
-     * 1. 구입한 갯수
-     */
-    /*private int buyNumber(int buying){
-        int buyNum = (buying/PRICE);
-        log.debug("구입 갯수 : " + buyNum);
-        return buyNum;
-    }*/
 
     /**
      * 2-1. 번호 추출 (ball이 6개가 될때까지)

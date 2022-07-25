@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequiredArgsConstructor
 @RequestMapping("/machine")
 public class MachineController {
-
     //필드
     public final MachineService machineService;
 
@@ -30,9 +29,7 @@ public class MachineController {
         log.info("controller lottoRequestDto = " + lottoRequestDto);
 
         //lottoRequestDto service로 넘길때 변환해줘야한다.
-        //빌더패던 변경
-
-        machineService.operateMachine(lottoRequestDto.toCommand());
+        machineService.operateMachine(lottoRequestDto.toCommand(lottoRequestDto));
         return "";//TODO: 화면으로 보낼것
     }
 
