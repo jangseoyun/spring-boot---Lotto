@@ -43,7 +43,7 @@ public class MachineService {
         log.debug("command = " + command);
 
         //1.로그인한 user가져오기
-        Optional<User> findUser = userJpaRepository.findById(command.getUserNo());
+        Optional<User> findUserOne = userJpaRepository.findById(command.getUserNo());
 
         //2-1.전체 자동
         if (command.getLottotype() == Lottotype.ALLAUTO) {
@@ -53,7 +53,7 @@ public class MachineService {
             //입력
             //보너스 번호 -> Ball.class에서 호출(new Ball())
             for (SixBall sixBall : sixBallList) {
-                MachineCycleStorage cycleStorage = MachineFactory.createStorage(command.getStorageCycle(), sixBall, new Ball(), findUser.get());
+                MachineCycleStorage cycleStorage = MachineFactory.createStorage(command.getStorageCycle(), sixBall, new Ball(), findUserOne.get());
                 csJpaRepository.save(cycleStorage);
             }
         }
@@ -61,14 +61,14 @@ public class MachineService {
         //2-2.반자동
         if (command.getLottotype() == Lottotype.SELECTNUM) {
             log.info("selectNum");
-            //return machine.selectNumSixBall(command.getBuying(), command.getInputNum());
+            machine.selectNumSixBall(command.getCount(), command.getInputNum());//받은 번호, 구입 티켓 수
         }
 
         //2-3.전체수동
-        if (command.getLottotype() == Lottotype.ALLSELECT) {
+        /*if (command.getLottotype() == Lottotype.ALLSELECT) {
             log.info("allSelect");
             machine.allSelectSixBall(command.getInputNum());
-        }
+        }*/
 
         return 0;
     }

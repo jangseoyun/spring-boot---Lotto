@@ -20,13 +20,10 @@ public class Machine {
     List<SixBall> machineResult = new ArrayList<>();
 
     /**
-     * 2-1. 번호 추출 (ball이 6개가 될때까지)
+     * 2-1. 번호 추출 (구입한 티켓수 만큼 번호 뽑아줌)
      * * 전체자동 : 구입한 갯수 만큼
      */
     public List<SixBall> allAutoSixBall(int count) {
-        //int buyNum = buyNumber(price);
-
-        //2. 전체 자동
         for (int y = 0; y < count; y++) {
             machineResult.add(new SixBall());
         }
@@ -38,25 +35,15 @@ public class Machine {
      * 2-2. 번호 추출 (ball이 6개가 될때까지)
      * * 반자동 : 사용자 입력 번호 이외 자동 추출
      */
-    public void selectNumSixBall(int buying, String[] inputNum) {
+    public void selectNumSixBall(int count, Ball inputNum) {
+        //string으로 받은 문자열 int로 변경해하고 list에 담기
 
 
     }
 
-    public void allSelectSixBall(Set<Integer> numInput) {
+    public void allSelectSixBall(Set<Integer> inputNum) {
         //전체 수동 -> 리스트로 받아야 할 것 같은데...
 
     }
-
-
-    /**
-     * 보너스 번호
-     */
-    /*public int bonusBall() {
-        int bonusNum = randomNum.nextInt(45);
-        log.debug("보너스 번호 추출: " + bonusNum);
-        return bonusNum;
-    }*/
-
 
 }

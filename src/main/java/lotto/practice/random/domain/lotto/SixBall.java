@@ -48,17 +48,19 @@ public class SixBall {
 
     @Override
     public String toString() {//** Stringbuffer
-        return getNo1() + "," + getNo2() + "," + getNo3() + "," + getNo4() + "," + getNo5() + "," + getNo6();
+        return (getNo1() + "," + getNo2() + "," + getNo3() + "," + getNo4() + "," + getNo5() + "," + getNo6());
     }
 
     private HashSet<Ball> makeBallSet() {
         HashSet<Ball> hashSet = new HashSet<>();
-
+        //만약에 받은 번호가 있으면 그 번호 포함 length만큼 생성
         while (hashSet.size() < LENGTH) {
             hashSet.add(new Ball());
         }
         return hashSet;
     }
+
+
 
     /*@Override
     public boolean equals(Object o) {

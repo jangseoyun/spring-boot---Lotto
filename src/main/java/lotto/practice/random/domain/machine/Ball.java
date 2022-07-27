@@ -23,4 +23,11 @@ public class Ball {
         }
         this.value = value;
     }
+
+    @Override
+    public String toString() {
+        return "Ball{" +
+                "value=" + value +
+                '}';
+    }
 }

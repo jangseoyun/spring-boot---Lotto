@@ -1,15 +1,14 @@
 package lotto.practice.random.domain.user;
 
-import lombok.*;
-import lombok.extern.slf4j.Slf4j;
-import lotto.practice.random.dto.JoinDto;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -44,14 +43,15 @@ public class User {
 
     //--생성 로직--//
     @Builder(access = AccessLevel.PROTECTED)
-    private User(String userId, String userPw, String userEmail, String userTel) {
+    public User(String userId, String userPw, String userEmail, String userTel) {
         setUserId(userId);
         this.userPw = userPw;
         this.userEmail = userEmail;
         this.userTel = userTel;
     }
+
     @PrePersist
-    public void joinDate(){
+    public void joinDate() {
         this.joinDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"));
     }
 

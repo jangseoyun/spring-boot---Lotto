@@ -1,12 +1,17 @@
 package lotto.practice.random.dto;
 
 import lombok.*;
+import lotto.practice.random.domain.machine.Ball;
 import lotto.practice.random.domain.machine.dto.LottoCommand;
 import lotto.practice.random.domain.machine.dto.Lottotype;
 import org.hibernate.validator.constraints.Length;
 
-import javax.validation.constraints.*;
-import java.util.Set;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * 사용자 입력 사항
@@ -35,8 +40,7 @@ public class LottoRequestDto {
     private int price;
 
     @Positive
-    @Size(max = 6)
-    private Set<Integer> inputNum;
+    private String inputNum;//스트링으로 받아서 자르기
 
     private Long storageCycle;
 
@@ -54,11 +58,19 @@ public class LottoRequestDto {
 
     //request DTO-> command object
     public LottoCommand toCommand(LottoRequestDto lottoRequestDto) {
+
+        List<String> strings = Arrays.asList(lottoRequestDto.getInputNum().split(",")); //string 잘라서 하나씩 list에 담기
+        Ball ball = new Ball();
+
+        for (String string : strings) {
+            ball = new Ball(Integer.parseInt(string));//Ball로 변환하여 보냄
+        }
+
         return LottoCommand.builder()
                 .userNo(lottoRequestDto.getUserNo())
                 .lottotype(lottoRequestDto.getLottotype())
                 .count(lottoRequestDto.getPrice() / PRICE)//구입한 갯수 계산해서 넘김
-                .inputNum(lottoRequestDto.inputNum)
+                .inputNum(ball)
                 .storageCycle(lottoRequestDto.getStorageCycle())
                 .build();
     }

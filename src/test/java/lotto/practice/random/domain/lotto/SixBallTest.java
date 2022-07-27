@@ -5,12 +5,12 @@ import org.junit.jupiter.api.RepeatedTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@DisplayName("식스볼을 테스트 한다")
+@DisplayName("SixBall.class를 테스트 한다")
 class SixBallTest {
 
     @RepeatedTest(1000)
     @DisplayName("여섯개의 볼을 보장한다")
-    void name() {
+    void 여섯개의공추출() {
         //when
         SixBall sixBall = new SixBall();
 
