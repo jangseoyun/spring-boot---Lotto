@@ -1,6 +1,9 @@
 package lotto.practice.random.dto;
 
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lotto.practice.random.domain.machine.Ball;
 import lotto.practice.random.domain.machine.dto.LottoCommand;
 import lotto.practice.random.domain.machine.dto.Lottotype;
@@ -18,7 +21,6 @@ import java.util.List;
  */
 @Data
 @Builder(access = AccessLevel.PROTECTED)
-@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class LottoRequestDto {
 
@@ -54,6 +56,15 @@ public class LottoRequestDto {
             throw new IllegalArgumentException("천원 단위로 입력해주세요");
         }
         this.price = buying;
+    }
+
+    public LottoRequestDto(Long userNo, Lottotype lottotype, int price, String inputNum, Long storageCycle) {
+        this.userNo = userNo;
+        this.lottotype = lottotype;
+        this.price = price;
+        this.inputNum = inputNum;
+        //TODO: 생성자에서 변경하고 Ball로 반환하기
+        this.storageCycle = storageCycle;
     }
 
     //request DTO-> command object
