@@ -35,9 +35,11 @@ public class Machine {
      * 2-2. 번호 추출 (ball이 6개가 될때까지)
      * * 반자동 : 사용자 입력 번호 이외 자동 추출
      */
-    public void selectNumSixBall(int count, Ball inputNum) {
-        //string으로 받은 문자열 int로 변경해하고 list에 담기
-
+    public void selectNumSixBall(int count, List<Integer> inputNumList) {
+        //받은 공 리스트 카운트 만큼 돌리는데
+        for (int i = 0; i < count; i++) {
+            machineResult.add(new SixBall(inputNumList));
+        }
 
     }
 

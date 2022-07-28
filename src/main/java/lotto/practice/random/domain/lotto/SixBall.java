@@ -13,9 +13,13 @@ public class SixBall {
     private static final int LENGTH = 6;
     private final List<Ball> list;
 
-    //TODO: selectNum 반자동
     public SixBall() {
         this.list = new ArrayList<>(makeBallSet());
+    }
+
+    //TODO: 반자동 - inputNum이 있으면 새로운 makeBallSet 메소드를 타도록
+    public SixBall(List<Integer> inputNumList) {
+        this.list = new ArrayList<>(requestUserNum(inputNumList));
     }
 
     public int size() {
@@ -52,7 +56,7 @@ public class SixBall {
     }
 
     private HashSet<Ball> makeBallSet() {
-        HashSet<Ball> hashSet = new HashSet<>();
+        HashSet<Ball> hashSet = new HashSet<>(); //여기서 받으면 hashSet에 받은 받을 넣어줘야함
         //만약에 받은 번호가 있으면 그 번호 포함 length만큼 생성
         while (hashSet.size() < LENGTH) {
             hashSet.add(new Ball());
@@ -60,7 +64,15 @@ public class SixBall {
         return hashSet;
     }
 
+    private HashSet<Ball> requestUserNum(List<Integer> inputNumList) {
+        HashSet<Ball> hashSet = new HashSet<>(); //여기서 받으면 hashSet에 받은 받을 넣어줘야함
 
+        //만약에 받은 번호가 있으면 그 번호 포함 length만큼 생성
+        for (int i = 0; hashSet.size() < LENGTH; i++) {
+            hashSet.add(new Ball(inputNumList.get(i)));
+        }
+        return hashSet;
+    }
 
     /*@Override
     public boolean equals(Object o) {

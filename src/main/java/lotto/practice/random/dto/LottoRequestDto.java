@@ -4,7 +4,7 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lotto.practice.random.domain.machine.Ball;
+import lombok.extern.slf4j.Slf4j;
 import lotto.practice.random.domain.machine.dto.LottoCommand;
 import lotto.practice.random.domain.machine.dto.Lottotype;
 import org.hibernate.validator.constraints.Length;
@@ -13,12 +13,14 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 /**
  * 사용자 입력 사항
  */
+@Slf4j
 @Data
 @Builder(access = AccessLevel.PROTECTED)
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
@@ -47,43 +49,62 @@ public class LottoRequestDto {
     private Long storageCycle;
 
     //요청 회차 (기존 회차 + 1)
-
-    private LottoRequestDto(Long userNo, Lottotype lottotype, int buying) {
+    private LottoRequestDto(Long userNo, Lottotype lottotype, int price) {
         this.userNo = userNo;
         this.lottotype = lottotype;
-
-        if ((buying % PRICE) != 0) {
-            throw new IllegalArgumentException("천원 단위로 입력해주세요");
-        }
-        this.price = buying;
+        validBuying(price);
+        this.price = price;
     }
 
     public LottoRequestDto(Long userNo, Lottotype lottotype, int price, String inputNum, Long storageCycle) {
         this.userNo = userNo;
         this.lottotype = lottotype;
+        validBuying(price);
         this.price = price;
         this.inputNum = inputNum;
-        //TODO: 생성자에서 변경하고 Ball로 반환하기
         this.storageCycle = storageCycle;
     }
 
     //request DTO-> command object
     public LottoCommand toCommand(LottoRequestDto lottoRequestDto) {
 
-        List<String> strings = Arrays.asList(lottoRequestDto.getInputNum().split(",")); //string 잘라서 하나씩 list에 담기
-        Ball ball = new Ball();
-
-        for (String string : strings) {
-            ball = new Ball(Integer.parseInt(string));//Ball로 변환하여 보냄
-        }
-
         return LottoCommand.builder()
                 .userNo(lottoRequestDto.getUserNo())
                 .lottotype(lottoRequestDto.getLottotype())
                 .count(lottoRequestDto.getPrice() / PRICE)//구입한 갯수 계산해서 넘김
-                .inputNum(ball)
+                .inputNum(changeInputNum(lottoRequestDto.getInputNum()))
                 .storageCycle(lottoRequestDto.getStorageCycle())
                 .build();
+    }
+
+    /**
+     * 사용자가 구입한 화폐단위가 범위에 들어온지 검증
+     *
+     * @param buying
+     */
+    private void validBuying(int buying) {
+        if ((buying % PRICE) != 0) {
+            throw new IllegalArgumentException("천원 단위로 입력해주세요");
+        }
+    }
+
+    /**
+     * 사용자가 입력한 로또 번호 Ball로 변경
+     * - 화면에서 리스트로 받는 방법
+     * - string으로 받아서 잘라서 사용하는 방법 **
+     * - 번호 타입 자체를 문자열로 변경하는 방법
+     */
+    public List<Integer> changeInputNum(String inputNum) {
+        List<Integer> inputNumList = new ArrayList(); //ball 담을 리스트 생성
+
+        List<String> splitInputNum = Arrays.asList(inputNum.split(",")); //1.string 잘라서 하나씩 list에 담기
+        for (String inputNumVo : splitInputNum) {
+            Integer changeIntNum = Integer.parseInt(inputNumVo);//2.string -> Integer로 변경
+            inputNumList.add(changeIntNum);
+            log.info("inputNumList = ", inputNumList);
+        }
+
+        return inputNumList;
     }
 
 

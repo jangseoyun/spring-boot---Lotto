@@ -3,7 +3,8 @@ package lotto.practice.random.domain.machine.dto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Value;
-import lotto.practice.random.domain.machine.Ball;
+
+import java.util.List;
 
 @Value
 @Builder
@@ -15,7 +16,7 @@ public class LottoCommand {
     private Long userNo;
     private Lottotype lottotype; //enum 타입
     private int count;
-    private Ball inputNum;
+    private List<Integer> inputNum;
     private Long storageCycle;
 
 }
