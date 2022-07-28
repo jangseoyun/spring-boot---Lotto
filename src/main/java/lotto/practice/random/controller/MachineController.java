@@ -30,6 +30,7 @@ public class MachineController {
 
         //lottoRequestDto service로 넘길때 변환해줘야한다.
         machineService.operateMachine(lottoRequestDto.toCommand(lottoRequestDto));
+
         return "";//TODO: 화면으로 보낼것
     }
 

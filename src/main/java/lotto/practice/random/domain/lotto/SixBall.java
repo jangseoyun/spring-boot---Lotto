@@ -1,12 +1,14 @@
 package lotto.practice.random.domain.lotto;
 
 import lombok.EqualsAndHashCode;
+import lombok.extern.slf4j.Slf4j;
 import lotto.practice.random.domain.machine.Ball;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
+@Slf4j
 @EqualsAndHashCode(of = "list")
 public class SixBall {
 
@@ -58,20 +60,27 @@ public class SixBall {
     private HashSet<Ball> makeBallSet() {
         HashSet<Ball> hashSet = new HashSet<>(); //여기서 받으면 hashSet에 받은 받을 넣어줘야함
         //만약에 받은 번호가 있으면 그 번호 포함 length만큼 생성
-        while (hashSet.size() < LENGTH) {
-            hashSet.add(new Ball());
-        }
+        makeBallLength(hashSet);
         return hashSet;
     }
 
     private HashSet<Ball> requestUserNum(List<Integer> inputNumList) {
-        HashSet<Ball> hashSet = new HashSet<>(); //여기서 받으면 hashSet에 받은 받을 넣어줘야함
+        HashSet<Ball> hashSet = new HashSet<>();
 
         //만약에 받은 번호가 있으면 그 번호 포함 length만큼 생성
-        for (int i = 0; hashSet.size() < LENGTH; i++) {
-            hashSet.add(new Ball(inputNumList.get(i)));
+        for (Integer integer : inputNumList) {//1개씩
+            hashSet.add(new Ball(integer));
         }
+        makeBallLength(hashSet);
+
+        log.info("hashSet = " + hashSet);
         return hashSet;
+    }
+
+    private void makeBallLength(HashSet<Ball> hashSet) {
+        while (hashSet.size() < LENGTH) {
+            hashSet.add(new Ball());
+        }
     }
 
     /*@Override

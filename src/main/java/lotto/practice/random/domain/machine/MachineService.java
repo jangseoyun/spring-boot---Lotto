@@ -61,7 +61,13 @@ public class MachineService {
         //2-2.반자동
         if (command.getLottotype() == Lottotype.SELECTNUM) {
             log.info("selectNum");
-            machine.selectNumSixBall(command.getCount(), command.getInputNum());//받은 번호, 구입 티켓 수
+            List<SixBall> sixBallList = machine.selectNumSixBall(command.getCount(), command.getInputNum());//받은 번호, 구입 티켓 수 return : 6개의 볼
+
+            for (SixBall sixBall : sixBallList) {
+                MachineCycleStorage cycleStorage = MachineFactory.createStorage(command.getStorageCycle(), sixBall, new Ball(), findUserOne.get());
+                csJpaRepository.save(cycleStorage);
+            }
+
         }
 
         //2-3.전체수동

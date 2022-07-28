@@ -35,12 +35,13 @@ public class Machine {
      * 2-2. 번호 추출 (ball이 6개가 될때까지)
      * * 반자동 : 사용자 입력 번호 이외 자동 추출
      */
-    public void selectNumSixBall(int count, List<Integer> inputNumList) {
-        //받은 공 리스트 카운트 만큼 돌리는데
+    public List<SixBall> selectNumSixBall(int count, List<Integer> inputNumList) {
+        //TODO: 티켓마다 inputNum이 중복으로 들어가는 문제 해결하기
         for (int i = 0; i < count; i++) {
             machineResult.add(new SixBall(inputNumList));
         }
-
+        log.info("selectNumSixBall = " + machineResult);
+        return machineResult;
     }
 
     public void allSelectSixBall(Set<Integer> inputNum) {

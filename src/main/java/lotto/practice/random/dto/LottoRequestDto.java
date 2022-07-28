@@ -27,6 +27,7 @@ import java.util.List;
 public class LottoRequestDto {
 
     public final static int PRICE = 1000; //lotto 금액
+    private static final int MAX = 45;
 
     //사용자가 요청한 타입, 구입금액
     //필드
@@ -49,11 +50,12 @@ public class LottoRequestDto {
     private Long storageCycle;
 
     //요청 회차 (기존 회차 + 1)
-    private LottoRequestDto(Long userNo, Lottotype lottotype, int price) {
+    private LottoRequestDto(Long userNo, Lottotype lottotype, int price, Long storageCycle) {
         this.userNo = userNo;
         this.lottotype = lottotype;
         validBuying(price);
         this.price = price;
+        this.storageCycle = storageCycle;
     }
 
     public LottoRequestDto(Long userNo, Lottotype lottotype, int price, String inputNum, Long storageCycle) {
@@ -61,13 +63,13 @@ public class LottoRequestDto {
         this.lottotype = lottotype;
         validBuying(price);
         this.price = price;
-        this.inputNum = inputNum;
+        this.inputNum = inputNum;//범위 검증
         this.storageCycle = storageCycle;
     }
 
     //request DTO-> command object
     public LottoCommand toCommand(LottoRequestDto lottoRequestDto) {
-
+        //inputNum이 있는 경우와 없는 경우..
         return LottoCommand.builder()
                 .userNo(lottoRequestDto.getUserNo())
                 .lottotype(lottoRequestDto.getLottotype())
@@ -79,8 +81,6 @@ public class LottoRequestDto {
 
     /**
      * 사용자가 구입한 화폐단위가 범위에 들어온지 검증
-     *
-     * @param buying
      */
     private void validBuying(int buying) {
         if ((buying % PRICE) != 0) {
@@ -94,17 +94,31 @@ public class LottoRequestDto {
      * - string으로 받아서 잘라서 사용하는 방법 **
      * - 번호 타입 자체를 문자열로 변경하는 방법
      */
-    public List<Integer> changeInputNum(String inputNum) {
+    private List<Integer> changeInputNum(String inputNum) {
+        if (inputNum.isEmpty()) {
+            inputNum = null;
+        }
+
         List<Integer> inputNumList = new ArrayList(); //ball 담을 리스트 생성
 
         List<String> splitInputNum = Arrays.asList(inputNum.split(",")); //1.string 잘라서 하나씩 list에 담기
         for (String inputNumVo : splitInputNum) {
             Integer changeIntNum = Integer.parseInt(inputNumVo);//2.string -> Integer로 변경
-            inputNumList.add(changeIntNum);
-            log.info("inputNumList = ", inputNumList);
+            inputNumList.add(numValidScope(changeIntNum));//3.범위 검증
         }
 
+        log.info("inputNumList = " + inputNumList);
         return inputNumList;
+    }
+
+    /**
+     * 사용자가 입력한 번호 범위 검증
+     */
+    private Integer numValidScope(Integer changeIntNum) {
+        if (changeIntNum < 1 || changeIntNum > MAX) {
+            throw new IllegalArgumentException("1~45 사이의 숫자만 가능합니다");
+        }
+        return changeIntNum;
     }
 
 
