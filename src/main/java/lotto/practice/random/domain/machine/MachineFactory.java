@@ -10,7 +10,7 @@ public class MachineFactory {
 
     public static MachineCycleStorage createStorage(Long cycle, SixBall sixBall, Ball bonusBall, User findUser) {
         //리스트로 변경 set -> list
-        //**TODO: 일급 컬렉션
+        //**일급 컬렉션
         //List<Integer> resultList = new ArrayList<>(resultVo);
         return getMachineCycleStorage(cycle, bonusBall, findUser, sixBall);
     }

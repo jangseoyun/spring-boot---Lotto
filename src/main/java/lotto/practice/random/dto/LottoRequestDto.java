@@ -74,6 +74,7 @@ public class LottoRequestDto {
                 .userNo(lottoRequestDto.getUserNo())
                 .lottotype(lottoRequestDto.getLottotype())
                 .count(lottoRequestDto.getPrice() / PRICE)//구입한 갯수 계산해서 넘김
+                //TODO: 값의 유무에 따른 로직 수정
                 .inputNum(changeInputNum(lottoRequestDto.getInputNum()))
                 .storageCycle(lottoRequestDto.getStorageCycle())
                 .build();

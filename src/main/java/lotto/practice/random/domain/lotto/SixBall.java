@@ -19,7 +19,6 @@ public class SixBall {
         this.list = new ArrayList<>(makeBallSet());
     }
 
-    //TODO: 반자동 - inputNum이 있으면 새로운 makeBallSet 메소드를 타도록
     public SixBall(List<Integer> inputNumList) {
         this.list = new ArrayList<>(requestUserNum(inputNumList));
     }
