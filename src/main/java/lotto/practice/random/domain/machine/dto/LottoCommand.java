@@ -17,6 +17,4 @@ public class LottoCommand {
     private List<Integer> inputNum;
     private Long storageCycle;
 
-    //inputNum 없는 경우
-
 }

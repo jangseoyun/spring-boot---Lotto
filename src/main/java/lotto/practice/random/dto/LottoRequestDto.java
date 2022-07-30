@@ -63,21 +63,31 @@ public class LottoRequestDto {
         this.lottotype = lottotype;
         validBuying(price);
         this.price = price;
-        this.inputNum = inputNum;//범위 검증
+        this.inputNum = inputNum;
         this.storageCycle = storageCycle;
     }
 
     //request DTO-> command object
     public LottoCommand toCommand(LottoRequestDto lottoRequestDto) {
         //inputNum이 있는 경우와 없는 경우..
+        if (lottoRequestDto.inputNum == null) {
+            LottoCommand inputNumBuild = LottoCommand.builder()
+                    .userNo(lottoRequestDto.getUserNo())
+                    .lottotype(lottoRequestDto.getLottotype())
+                    .count(lottoRequestDto.getPrice() / PRICE)//구입한 갯수 계산해서 넘김
+                    .storageCycle(lottoRequestDto.getStorageCycle())
+                    .build();
+            return inputNumBuild;
+        }
+
         return LottoCommand.builder()
                 .userNo(lottoRequestDto.getUserNo())
                 .lottotype(lottoRequestDto.getLottotype())
                 .count(lottoRequestDto.getPrice() / PRICE)//구입한 갯수 계산해서 넘김
-                //TODO: 값의 유무에 따른 로직 수정
                 .inputNum(changeInputNum(lottoRequestDto.getInputNum()))
                 .storageCycle(lottoRequestDto.getStorageCycle())
                 .build();
+
     }
 
     /**

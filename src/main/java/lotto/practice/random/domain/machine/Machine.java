@@ -39,6 +39,7 @@ public class Machine {
         //TODO: 티켓마다 inputNum이 중복으로 들어가는 문제 해결하기
         for (int i = 0; i < count; i++) {
             machineResult.add(new SixBall(inputNumList));
+            //만약 i가 0 이상인 경우 ...새로운 로직 돌도록
         }
         log.info("selectNumSixBall = " + machineResult);
         return machineResult;

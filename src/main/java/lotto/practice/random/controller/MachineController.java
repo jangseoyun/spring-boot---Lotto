@@ -24,11 +24,9 @@ public class MachineController {
     //메서드
     @GetMapping("/lottoNum")
     public String inputVerify(@ModelAttribute LottoRequestDto lottoRequestDto, Model model) {
-
-        //찍어보고 변환
         log.info("controller lottoRequestDto = " + lottoRequestDto);
 
-        //lottoRequestDto service로 넘길때 변환해줘야한다.
+        //lottoRequestDto service로 넘길때 command object로 변환해줘야한다.
         machineService.operateMachine(lottoRequestDto.toCommand(lottoRequestDto));
 
         return "";//TODO: 화면으로 보낼것
