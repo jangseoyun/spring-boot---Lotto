@@ -60,25 +60,29 @@
 
                 <form action="/machine/lottoNum" method="get" id="radio-box" class="txt-bold-25-black">
                     <label th:for="selectType" class="st-block">로또번호 생성기 타입을 선택해 주세요 !</label>
-                    <select th:id="selectType" name="type" class="form-select" aria-label=".form-select-lg example">
+                    <select th:id="selectType" name="type" class="form-select" aria-label=".form-select-lg example"
+                            onchange="showInputBox()">
                         <option selected>타입 선택</option>
                         <option value="allAuto">전체자동</option>
                         <option value="selectNum">반자동</option>
+                        <option value="allSelect">전체수동</option>
                     </select>
+
+                    <div id="showInputBox">
+                        <!--만약 번호를 선택하는 타입을 누를 경우 input박스가 나오도록 js-->
+                    </div>
 
                     <div id="buying">
                         <p class="txt-bold-25-black">구입하실 금액을 입력해주세요(천원 ~ 백만원까지 가능)</p>
-                        <input type="number" name="buying" value="" placeholder="금액입력 후 Enter !">
+                        <input type="number" name="price" value="" placeholder="금액입력 후 Enter !">
                     </div>
 
+                    <!--                    //TODO: 로그인한 유저 번호, 회차 번호 숨겨서 보내기-->
                     <button type="submit" class="btn btn-warning btn-lg">GO!</button>
 
                 </form>
 
             </div>
-
-            <!--.. if문 ..-->
-            <!--<span th:if="${warning != null}" th:text="${warning}"></span>-->
 
         </div>
 

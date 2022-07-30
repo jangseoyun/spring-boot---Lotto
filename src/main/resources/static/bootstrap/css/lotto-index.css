@@ -95,17 +95,24 @@ td, tr, textarea, button, form {
     margin: 100px 0px;
 }
 
-#buying{
+#buying {
     text-align: center;
-   margin: 20px;
+    margin: 20px;
 }
 
-#buying>input{
+#buying > input {
     width: 350px;
     text-align: center;
 }
 
-#radio-box{
+#showInputBox > input {
+    width: 350px;
+    text-align: center;
+    margin: 5px 0px 5px 0px;
+    font-size: 16px;
+}
+
+#radio-box {
     text-align: center;
     margin: 20px;
 }
