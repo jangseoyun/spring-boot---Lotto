@@ -5,8 +5,11 @@ import lombok.extern.slf4j.Slf4j;
 import lotto.practice.random.domain.lotto.SixBall;
 import lotto.practice.random.domain.machine.dto.LottoCommand;
 import lotto.practice.random.domain.machine.dto.Lottotype;
+import lotto.practice.random.domain.storage.BallStorage;
+import lotto.practice.random.domain.storage.StorageFactory;
 import lotto.practice.random.domain.user.User;
 import lotto.practice.random.infrastructure.repository.CycleStorageJpaRepository;
+import lotto.practice.random.infrastructure.repository.StorageJpaRepository;
 import lotto.practice.random.infrastructure.repository.UserJpaRepository;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -30,6 +33,7 @@ public class MachineService {
     private final MachineRepository machineRepository;
     private final CycleStorageJpaRepository csJpaRepository;
     private final UserJpaRepository userJpaRepository;
+    private final StorageJpaRepository storageJpaRepository;
 
     /**
      * 타입에 따른 6개의 추출 번호
@@ -59,8 +63,10 @@ public class MachineService {
             for (SixBall sixBall : sixBallList) {
                 MachineCycleStorage storageVo = MachineFactory.createStorage(command.getStorageCycle(), sixBall, new Ball(), findUserOne.get());
                 csJpaRepository.save(storageVo);
-                //TODO: BallStorage에 동시에 저장
                 cycleStorageList.add(storageVo);
+
+                //TODO: BallStorage에 동시에 저장
+                savaBallStorage(storageVo, findUserOne);
             }
         }
 
@@ -88,8 +94,17 @@ public class MachineService {
                 csJpaRepository.save(cycleStorage);
             }
         }*/
-
         return cycleStorageList;
+    }
+
+    /**
+     * BallStorage에 저장
+     */
+    private Long savaBallStorage(MachineCycleStorage storageVo, Optional<User> findUserOne) {//회차번호, sixBall, user
+        BallStorage ballStorage = StorageFactory.createBallStorage(findUserOne.get(), storageVo.getSixBall(), storageVo.getStorageCycle());
+        BallStorage ballStorageNo = storageJpaRepository.save(ballStorage);
+        log.info("BallStorageNo 저장 = " + ballStorageNo.getNo());
+        return ballStorageNo.getNo();
     }
 
 }
