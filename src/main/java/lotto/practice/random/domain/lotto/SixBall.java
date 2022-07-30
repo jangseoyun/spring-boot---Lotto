@@ -51,11 +51,6 @@ public class SixBall {
         return list.get(5);
     }
 
-    @Override
-    public String toString() {//** Stringbuffer
-        return (getNo1() + "," + getNo2() + "," + getNo3() + "," + getNo4() + "," + getNo5() + "," + getNo6());
-    }
-
     private HashSet<Ball> makeBallSet() {
         HashSet<Ball> hashSet = new HashSet<>(); //여기서 받으면 hashSet에 받은 받을 넣어줘야함
         //만약에 받은 번호가 있으면 그 번호 포함 length만큼 생성
@@ -95,4 +90,5 @@ public class SixBall {
     public int hashCode() {
         return Objects.hash(list);
     }*/
+
 }

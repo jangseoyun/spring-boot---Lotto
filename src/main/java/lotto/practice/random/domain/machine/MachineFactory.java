@@ -5,9 +5,6 @@ import lotto.practice.random.domain.user.User;
 
 public class MachineFactory {
 
-    //1. 출력된 공 꺼내기
-    //2. 유저 가져오기
-
     public static MachineCycleStorage createStorage(Long cycle, SixBall sixBall, Ball bonusBall, User findUser) {
         //리스트로 변경 set -> list
         //**일급 컬렉션

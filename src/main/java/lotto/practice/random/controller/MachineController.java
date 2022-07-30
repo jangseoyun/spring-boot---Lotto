@@ -2,6 +2,7 @@ package lotto.practice.random.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import lotto.practice.random.domain.machine.MachineCycleStorage;
 import lotto.practice.random.domain.machine.MachineService;
 import lotto.practice.random.dto.LottoRequestDto;
 import org.springframework.stereotype.Controller;
@@ -9,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 /**
  * 사용자 랜덤 번호 추출 요청
@@ -27,9 +30,10 @@ public class MachineController {
         log.info("controller lottoRequestDto = " + lottoRequestDto);
 
         //lottoRequestDto service로 넘길때 command object로 변환해줘야한다.
-        machineService.operateMachine(lottoRequestDto.toCommand(lottoRequestDto));
+        List<MachineCycleStorage> numResultList = machineService.operateMachine(lottoRequestDto.toCommand(lottoRequestDto));
+        model.addAttribute("NumResultList", numResultList);
 
-        return "";//TODO: 화면으로 보낼것
+        return "lotto-result-num";
     }
 
 

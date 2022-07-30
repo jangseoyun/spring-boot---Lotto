@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,7 +38,7 @@ public class MachineService {
      * * 전체 수동
      */
     //메소드
-    public int operateMachine(LottoCommand command) {
+    public List<MachineCycleStorage> operateMachine(LottoCommand command) {
 
         log.info("service operateMachine 접속");
         log.debug("command = " + command);
@@ -45,16 +46,21 @@ public class MachineService {
         //1.로그인한 user가져오기
         Optional<User> findUserOne = userJpaRepository.findById(command.getUserNo());
 
+        //2.번호 추출 및 등록 요청
+        List<MachineCycleStorage> cycleStorageList = new ArrayList<>();
+
         //2-1.전체 자동
         if (command.getLottotype() == Lottotype.ALLAUTO) {
             log.info("allAuto");
             List<SixBall> sixBallList = machine.allAutoSixBall(command.getCount());// 6개
 
-            //입력
+            //입력 TODO : 중복 코드 분리하기
             //보너스 번호 -> Ball.class에서 호출(new Ball())
             for (SixBall sixBall : sixBallList) {
-                MachineCycleStorage cycleStorage = MachineFactory.createStorage(command.getStorageCycle(), sixBall, new Ball(), findUserOne.get());
-                csJpaRepository.save(cycleStorage);
+                MachineCycleStorage storageVo = MachineFactory.createStorage(command.getStorageCycle(), sixBall, new Ball(), findUserOne.get());
+                csJpaRepository.save(storageVo);
+                //TODO: BallStorage에 동시에 저장
+                cycleStorageList.add(storageVo);
             }
         }
 
@@ -64,8 +70,10 @@ public class MachineService {
             List<SixBall> sixBallList = machine.selectNumSixBall(command.getCount(), command.getInputNum());//받은 번호, 구입 티켓 수 return : 6개의 볼
 
             for (SixBall sixBall : sixBallList) {
-                MachineCycleStorage cycleStorage = MachineFactory.createStorage(command.getStorageCycle(), sixBall, new Ball(), findUserOne.get());
-                csJpaRepository.save(cycleStorage);
+                MachineCycleStorage storageVo = MachineFactory.createStorage(command.getStorageCycle(), sixBall, new Ball(), findUserOne.get());
+                csJpaRepository.save(storageVo);
+                //TODO: BallStorage에 동시에 저장
+                cycleStorageList.add(storageVo);
             }
 
         }
@@ -81,7 +89,7 @@ public class MachineService {
             }
         }*/
 
-        return 0; //TODO : return 값
+        return cycleStorageList;
     }
 
 }

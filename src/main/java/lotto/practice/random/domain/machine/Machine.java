@@ -34,6 +34,7 @@ public class Machine {
      * 2-2. 번호 추출 (ball이 6개가 될때까지)
      * * 반자동 : 사용자 입력 번호 이외 자동 추출
      */
+    //반자동은 순서가 섞이도록 Set, 전체수동은 순서에 맞게 List??
     public List<SixBall> selectNumSixBall(int count, List<Integer> inputNumList) {
         //TODO: 티켓마다 inputNum이 중복으로 들어가는 문제 해결하기 -> 한번 쓰면 지워지도록
         for (int i = 0; i < count; i++) {
