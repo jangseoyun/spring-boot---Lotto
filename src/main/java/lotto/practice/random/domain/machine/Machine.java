@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 /**
  * 랜덤 번호 추출 비즈니스 로직
@@ -36,17 +35,30 @@ public class Machine {
      * * 반자동 : 사용자 입력 번호 이외 자동 추출
      */
     public List<SixBall> selectNumSixBall(int count, List<Integer> inputNumList) {
-        //TODO: 티켓마다 inputNum이 중복으로 들어가는 문제 해결하기
+        //TODO: 티켓마다 inputNum이 중복으로 들어가는 문제 해결하기 -> 한번 쓰면 지워지도록
         for (int i = 0; i < count; i++) {
             machineResult.add(new SixBall(inputNumList));
-            //만약 i가 0 이상인 경우 ...새로운 로직 돌도록
         }
         log.info("selectNumSixBall = " + machineResult);
         return machineResult;
     }
 
-    public void allSelectSixBall(Set<Integer> inputNum) {
-        //전체 수동 -> 리스트로 받아야 할 것 같은데...
+    /*public List<SixBall> allSelectSixBall(int count, List<Integer> inputNumList) {
+        log.info("allselectSixBall");
+
+        for (int i = 0; i < count; i++) {
+            machineResult.add(new SixBall(inputNumList));
+        }
+        log.info("selectAll = " + machineResult);
+
+        return machineResult;
+    }*/
+
+    /**
+     * 1차적으로 6개만 받을 수 있도록 천원
+     * refect: 6개 단위로 끊어서 자동으로 5천원 한 묶음으로
+     */
+    private void makeTicket() {
 
     }
 

@@ -64,6 +64,7 @@ public class LottoRequestDto {
         validBuying(price);
         this.price = price;
         this.inputNum = inputNum;
+
         this.storageCycle = storageCycle;
     }
 
@@ -106,16 +107,16 @@ public class LottoRequestDto {
      * - 번호 타입 자체를 문자열로 변경하는 방법
      */
     private List<Integer> changeInputNum(String inputNum) {
-        if (inputNum.isEmpty()) {
-            inputNum = null;
-        }
-
         List<Integer> inputNumList = new ArrayList(); //ball 담을 리스트 생성
 
         List<String> splitInputNum = Arrays.asList(inputNum.split(",")); //1.string 잘라서 하나씩 list에 담기
+
         for (String inputNumVo : splitInputNum) {
             Integer changeIntNum = Integer.parseInt(inputNumVo);//2.string -> Integer로 변경
             inputNumList.add(numValidScope(changeIntNum));//3.범위 검증
+        }
+        if (this.lottotype == Lottotype.ALLSELECT) {
+            checkLength(inputNumList);
         }
 
         log.info("inputNumList = " + inputNumList);
@@ -130,6 +131,17 @@ public class LottoRequestDto {
             throw new IllegalArgumentException("1~45 사이의 숫자만 가능합니다");
         }
         return changeIntNum;
+    }
+
+    /**
+     * Allselect 전체수동의 경우 6개씩 한묶음으로 번호를 받야한다
+     * 1티켓당 5천원까지 => 최대 30개의 숫자
+     */
+    private void checkLength(List<Integer> inputNumList) {
+        //TODO: 긍정문으로 변경할 수 있도록 로직을 생각해볼 것
+        if ((inputNumList.size() % 6) != 0) {
+            throw new ArrayIndexOutOfBoundsException("6개의 숫자를 모두 입력해주세요");
+        }
     }
 
 

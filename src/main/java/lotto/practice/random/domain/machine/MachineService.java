@@ -59,7 +59,7 @@ public class MachineService {
         }
 
         //2-2.반자동
-        if (command.getLottotype() == Lottotype.SELECTNUM) {
+        if (command.getLottotype() == Lottotype.SELECTNUM || command.getLottotype() == Lottotype.ALLSELECT) {
             log.info("selectNum");
             List<SixBall> sixBallList = machine.selectNumSixBall(command.getCount(), command.getInputNum());//받은 번호, 구입 티켓 수 return : 6개의 볼
 
@@ -73,10 +73,15 @@ public class MachineService {
         //2-3.전체수동
         /*if (command.getLottotype() == Lottotype.ALLSELECT) {
             log.info("allSelect");
-            machine.allSelectSixBall(command.getInputNum());
+            List<SixBall> sixBallList = machine.allSelectSixBall(command.getCount(), command.getInputNum());
+
+            for (SixBall sixBall : sixBallList) {
+                MachineCycleStorage cycleStorage = MachineFactory.createStorage(command.getStorageCycle(), sixBall, new Ball(), findUserOne.get());
+                csJpaRepository.save(cycleStorage);
+            }
         }*/
 
-        return 0;
+        return 0; //TODO : return 값
     }
 
 }
