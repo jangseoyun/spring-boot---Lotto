@@ -64,13 +64,12 @@ public class MachineService {
                 MachineCycleStorage storageVo = MachineFactory.createStorage(command.getStorageCycle(), sixBall, new Ball(), findUserOne.get());
                 csJpaRepository.save(storageVo);
                 cycleStorageList.add(storageVo);
-
-                //TODO: BallStorage에 동시에 저장
+                //전체 저장소 저장
                 savaBallStorage(storageVo, findUserOne);
             }
         }
 
-        //2-2.반자동
+        //2-2.반자동/전체수동
         if (command.getLottotype() == Lottotype.SELECTNUM || command.getLottotype() == Lottotype.ALLSELECT) {
             log.info("selectNum");
             List<SixBall> sixBallList = machine.selectNumSixBall(command.getCount(), command.getInputNum());//받은 번호, 구입 티켓 수 return : 6개의 볼
@@ -78,22 +77,13 @@ public class MachineService {
             for (SixBall sixBall : sixBallList) {
                 MachineCycleStorage storageVo = MachineFactory.createStorage(command.getStorageCycle(), sixBall, new Ball(), findUserOne.get());
                 csJpaRepository.save(storageVo);
-                //TODO: BallStorage에 동시에 저장
                 cycleStorageList.add(storageVo);
+                //전체 저장소 저장
+                savaBallStorage(storageVo, findUserOne);
             }
 
         }
 
-        //2-3.전체수동
-        /*if (command.getLottotype() == Lottotype.ALLSELECT) {
-            log.info("allSelect");
-            List<SixBall> sixBallList = machine.allSelectSixBall(command.getCount(), command.getInputNum());
-
-            for (SixBall sixBall : sixBallList) {
-                MachineCycleStorage cycleStorage = MachineFactory.createStorage(command.getStorageCycle(), sixBall, new Ball(), findUserOne.get());
-                csJpaRepository.save(cycleStorage);
-            }
-        }*/
         return cycleStorageList;
     }
 
@@ -103,7 +93,7 @@ public class MachineService {
     private Long savaBallStorage(MachineCycleStorage storageVo, Optional<User> findUserOne) {//회차번호, sixBall, user
         BallStorage ballStorage = StorageFactory.createBallStorage(findUserOne.get(), storageVo.getSixBall(), storageVo.getStorageCycle());
         BallStorage ballStorageNo = storageJpaRepository.save(ballStorage);
-        log.info("BallStorageNo 저장 = " + ballStorageNo.getNo());
+        log.info("BallStorageNo 저장 getNo = " + ballStorageNo.getNo());
         return ballStorageNo.getNo();
     }
 

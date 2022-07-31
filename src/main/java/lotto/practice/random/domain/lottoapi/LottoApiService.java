@@ -22,7 +22,7 @@ public class LottoApiService {
     }
 
     public void insertLotto(Long no) {
-        for(int i = 1; i <= no; i++){
+        for (int i = 1; i <= no; i++) {
             String json = restApiService.readUrl("https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo=" + i);
             Gson gson = new Gson();
             LottoApi lotto = gson.fromJson(json, LottoApi.class);
@@ -31,5 +31,10 @@ public class LottoApiService {
             lottoNumSave(lotto);
             log.info("lotto controller: " + lotto.toString());
         }
+    }
+
+    //지난 회차 당첨번호
+    public void lastSixNum() {
+
     }
 }

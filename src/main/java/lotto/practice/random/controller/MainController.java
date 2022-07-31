@@ -2,7 +2,7 @@ package lotto.practice.random.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import lotto.practice.random.domain.machine.MachineService;
+import lotto.practice.random.domain.lottoapi.LottoApiService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,15 +34,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MainController {
 
     //필드
-    public final static int PRICE = 1000; //lotto 금액
-    private final MachineService lottoService;
+    private final LottoApiService lottoApiService;
+
 
     //메소드
     //메인화면
     @GetMapping("/index")
-    public String main(){
+    public String main() {
         log.info("컨트롤러 메인 접속");
+        //지난 회차 당첨 번호
         return "index/lotto-index";
     }
+
+    //
 
 }

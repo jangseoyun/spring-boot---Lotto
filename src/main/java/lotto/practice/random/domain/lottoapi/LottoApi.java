@@ -4,7 +4,6 @@ import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 /**
  * 각 회차별 로또 당첨 정보(데이터)
@@ -50,7 +49,7 @@ public class LottoApi {
 
     /*번호 추출*/
     @Column(name = "lotto_date")
-    private LocalDateTime drwNoDate; //추첨일
+    private String drwNoDate; //추첨일
 
     @Column(name="tot_sellamnt")
     private Long totSellamnt;       //누적 상금
