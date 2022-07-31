@@ -7,6 +7,7 @@ import lotto.practice.random.domain.winning.WinningRepository;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
@@ -26,7 +27,11 @@ public class WinningDbRepository implements WinningRepository {
 
     //cycleStorage에서 sixNum과 일치하는 데이터 가져옴
     @Override
-    public MachineCycleStorage getWinner(String sixNum) {
-        return null;
+    public List<MachineCycleStorage> getWinner(String sixNum) {
+        return em.createQuery(
+                        "select cs from MachineCycleStorage cs" +
+                                " where cs.sixBall = :sixNum")
+                .setParameter("sixNum", sixNum)
+                .getResultList();
     }
 }
