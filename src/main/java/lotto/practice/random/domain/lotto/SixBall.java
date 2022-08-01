@@ -77,6 +77,16 @@ public class SixBall {
         }
     }
 
+    @Override
+    public String toString() {
+        return getNo1().getValue() + ","
+                + getNo2().getValue() + ","
+                + getNo3().getValue() + ","
+                + getNo4().getValue() + ","
+                + getNo5().getValue() + ","
+                + getNo6().getValue();
+    }
+
     /*@Override
     public boolean equals(Object o) {
         if (this == o) return true;

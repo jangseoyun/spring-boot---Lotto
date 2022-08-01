@@ -17,7 +17,6 @@ public class MachineFactory {
                 .sixBall(sixBall)
                 .bonusBall(bonusBall)
                 .user(findUser)
-                //.sixBall(resultList.get(0)+","+resultList.get(1)+","+resultList.get(2)+","+resultList.get(3)+","+resultList.get(4)+","+resultList.get(5))
                 .storageCycle(cycle)
                 .build();
         return buildCycleStorage;

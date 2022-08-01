@@ -16,7 +16,7 @@ public class WinningController {
 
     @GetMapping("/request/winner")
     public void thisWeekWinner(@RequestParam("drwNo") Long drwNo) {
-        log.info("이번주 당첨자 요청");
+        log.info("이번주 당첨자 요청 controller");
         winningService.getWinner(drwNo);
     }
 

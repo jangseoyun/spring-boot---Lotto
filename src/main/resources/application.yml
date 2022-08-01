@@ -3,7 +3,7 @@ server:
 
 spring:
   profiles:
-    activate: dev
+    activate: local
 
   jpa:
     hibernate:
