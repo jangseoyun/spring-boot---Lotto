@@ -1,6 +1,7 @@
 package lotto.practice.random.infrastructure;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import lotto.practice.random.domain.lottoapi.LottoApi;
 import lotto.practice.random.domain.machine.MachineCycleStorage;
 import lotto.practice.random.domain.winning.WinningRepository;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import java.util.List;
 
+@Slf4j
 @Repository
 @RequiredArgsConstructor
 public class WinningDbRepository implements WinningRepository {
@@ -29,6 +31,8 @@ public class WinningDbRepository implements WinningRepository {
     //sixNum toString 형태 일치 시켜야함
     @Override
     public List<MachineCycleStorage> getWinner(String sixNum) {
+        log.info("api sixNum = " + sixNum);
+        //String test = "5,41,12,13,31,32";
         return em.createQuery(
                         "select cs from MachineCycleStorage cs" +
                                 " where cs.sixBall = :sixNum")

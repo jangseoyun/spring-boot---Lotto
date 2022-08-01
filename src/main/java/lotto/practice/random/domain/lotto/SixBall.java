@@ -62,6 +62,7 @@ public class SixBall {
         HashSet<Ball> hashSet = new HashSet<>();
 
         //만약에 받은 번호가 있으면 그 번호 포함 length만큼 생성
+        //TODO: 아... 여기서  hashSet으로 받으니까 순서 보장안됨 List로 하면서 중복되는 숫자 제거할 수 있도록
         for (Integer integer : inputNumList) {//1개씩
             hashSet.add(new Ball(integer));
         }

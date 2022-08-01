@@ -10,6 +10,7 @@ import lotto.practice.random.domain.user.User;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * 각 회차별 추출번호 전체 저장소
@@ -36,7 +37,7 @@ public class BallStorage {
     private String sixBall;
 
     @Column(name = "ball_storage_date")
-    private LocalDateTime storageDate;
+    private String storageDate;
 
     @Builder(access = AccessLevel.PROTECTED)
     public BallStorage(Long no, Long cycleStorageNum, User user, String sixBall, LocalDateTime storageDate) {
@@ -44,6 +45,6 @@ public class BallStorage {
         this.cycleStorageNum = cycleStorageNum;
         this.user = user;
         this.sixBall = sixBall;
-        this.storageDate = storageDate;
+        this.storageDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"));
     }
 }

@@ -63,10 +63,10 @@ public class MachineCycleStorage {
     private Ball bonusBall;
 
     @Column(name = "storage_cycle")
-    private Long storageCycle;
+    private Long storageCycle; //로또 회차
 
     @Column(name = "cycle_storage_date")
-    private String storageDate;
+    private String storageDate; //추출 등록 날짜
 
     @Builder(access = AccessLevel.PROTECTED)
     public MachineCycleStorage(User user, SixBall sixBall, Ball bonusBall, Long storageCycle, LocalDateTime storageDate) {
@@ -83,5 +83,21 @@ public class MachineCycleStorage {
         this.storageDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"));
     }
 
-
+    @Override
+    public String toString() {
+        return "MachineCycleStorage{" +
+                "no=" + no +
+                ", user=" + user +
+                ", ball1=" + ball1.getValue() +
+                ", ball2=" + ball2.getValue() +
+                ", ball3=" + ball3.getValue() +
+                ", ball4=" + ball4.getValue() +
+                ", ball5=" + ball5.getValue() +
+                ", ball6=" + ball6.getValue() +
+                ", sixBall='" + sixBall + '\'' +
+                ", bonusBall=" + bonusBall.getValue() +
+                ", storageCycle=" + storageCycle +
+                ", storageDate='" + storageDate + '\'' +
+                '}';
+    }
 }

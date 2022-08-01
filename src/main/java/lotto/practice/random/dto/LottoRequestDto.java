@@ -109,6 +109,7 @@ public class LottoRequestDto {
     private List<Integer> changeInputNum(String inputNum) {
         List<Integer> inputNumList = new ArrayList(); //ball 담을 리스트 생성
 
+        //TODO: string을 번호 순서대로 넣을 수 있도록(list로 각각 넣어야하나..)
         List<String> splitInputNum = Arrays.asList(inputNum.split(",")); //1.string 잘라서 하나씩 list에 담기
 
         for (String inputNumVo : splitInputNum) {

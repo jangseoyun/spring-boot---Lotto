@@ -1,9 +1,6 @@
 package lotto.practice.random.domain.user;
 
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -13,10 +10,11 @@ import java.time.format.DateTimeFormatter;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
+@ToString
 @Table(name = "t_user",
         uniqueConstraints = {@UniqueConstraint(
-            name = "id_email_unique",
-            columnNames = {"user_id", "user_email"})}
+                name = "id_email_unique",
+                columnNames = {"user_id", "user_email"})}
 )
 public class User {
 
