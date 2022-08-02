@@ -19,6 +19,7 @@ public class WinningService {
     private final WinningDbRepository winningDbRepository;
 
     //값을 받아와야 하기때문에 service에서 dto 변환
+    //회차별 당첨 번호 로직으로도 사용할 수 있음
     public List<MachineCycleStorage> getWinner(Long drwNo) {
         LottoApi getThisWeekWinning = winningDbRepository.getThisWeekWinning(drwNo);
         log.info("getThisWeekWinning = " + getThisWeekWinning);
