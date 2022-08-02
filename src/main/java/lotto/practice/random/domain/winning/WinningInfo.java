@@ -1,7 +1,7 @@
 package lotto.practice.random.domain.winning;
 
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lotto.practice.random.domain.user.User;
@@ -12,7 +12,6 @@ import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor
 @Entity
 @NotNull
 @Table(name = "t_winning_info")
@@ -24,16 +23,42 @@ public class WinningInfo {
     @Column(name = "winning_info_no")
     private Long no;
 
+    @Column(name = "tot_selling_price")
+    private Long totSellingPrice;  //총 판매액
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_no")
-    private User user;
+    private User user;  //당첨자
 
-    private String winCycleNo;
-    private int winRanking;
-    private long winPrize;
+    @Column(name = "lotto_cycle_num")
+    private String lottoCycleNum;   //로또 회차 번호
 
-    private LocalDateTime winDate;
+    @Column(name = "winner_rank")
+    private int winnerRank;         //당첨 순위
+    @Column(name = "total_amount")
+    private Long totalAmount;       //등위별 총 당첨금액
+    @Column(name = "winner_amount")
+    private Long winnerAmount;      //1인당 당첨금액
+    @Column(name = "winner_total_count")
+    private Long winnerTotalCount;  //해당순위 총 당첨인원
+    @Column(name = "win_date")
+    private LocalDateTime winDate;  //당첨일
 
-    private String winSixNum;
+    @Column(name = "win_num")
+    private String winNum;   //당첨 번호 -> 보너스 번호 포함
+
+    @Builder
+    public WinningInfo(Long no, Long totSellingPrice, User user, String lottoCycleNum, int winnerRank, Long totalAmount, Long winnerAmount, Long winnerTotalCount, LocalDateTime winDate, String winNum) {
+        this.no = no;
+        this.totSellingPrice = totSellingPrice;
+        this.user = user;
+        this.lottoCycleNum = lottoCycleNum;
+        this.winnerRank = winnerRank;
+        this.totalAmount = totalAmount;
+        this.winnerAmount = winnerAmount;
+        this.winnerTotalCount = winnerTotalCount;
+        this.winDate = winDate;
+        this.winNum = winNum;
+    }
+
 
 }

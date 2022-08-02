@@ -17,19 +17,28 @@ import java.util.List;
 public class WinningService {
 
     private final WinningDbRepository winningDbRepository;
+    private final FindWinning findWinning;
 
-    //값을 받아와야 하기때문에 service에서 dto 변환
     //회차별 당첨 번호 로직으로도 사용할 수 있음
     public List<MachineCycleStorage> getWinner(Long drwNo) {
         LottoApi getThisWeekWinning = winningDbRepository.getThisWeekWinning(drwNo);
-        log.info("getThisWeekWinning = " + getThisWeekWinning);
+        log.info("이번주 당첨 번호 = " + getThisWeekWinning);
 
-        List<MachineCycleStorage> winner = winningDbRepository.getWinner(getThisWeekWinning.getSixBall());
-        for (int i = 0; i < winner.size(); i++) {
-            log.info("winner" + i + "번째" + winner.get(i));
-        }
+        List<MachineCycleStorage> findAllUser = winningDbRepository.findAllUser();
+        log.info("추첨한 사용자 리스트 = " + findAllUser);
 
-        return winner;
+        WinningInfo winner = findWinning.findWinner(getThisWeekWinning, findAllUser);
+        log.info("당첨자 정보 = " + winner);
+
+
+        //만약 winner가 있다면 iter돌려서 winnerInfo 테이블에 넣어준다
+        //당첨자 winning_info 테이블에 저장
+        /*createWinnerInfo();
+        winningDbRepository.saveWinner();
+
+        return winner;*/
     }
+
+
 
 }

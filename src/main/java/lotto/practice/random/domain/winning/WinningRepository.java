@@ -11,4 +11,10 @@ public interface WinningRepository {
 
     //cycleStorage에서 sixNum과 일치하는 데이터 가져옴
     List<MachineCycleStorage> getWinner(String sixNum);
+
+    //당첨자 저장
+    Long saveWinner(WinningInfo winningInfo);
+
+    //이번 회차 추첨 사용자 전체 가져오기
+    List<MachineCycleStorage> findAllUser();
 }

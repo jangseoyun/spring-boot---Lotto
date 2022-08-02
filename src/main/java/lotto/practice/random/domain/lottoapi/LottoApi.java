@@ -51,17 +51,17 @@ public class LottoApi {
     @Column(name = "lotto_date")
     private String drwNoDate; //추첨일
 
-    @Column(name="tot_sellamnt")
-    private Long totSellamnt;       //누적 상금
+    @Column(name = "tot_sellamnt")
+    private Long totSellamnt;       //총 판매액
 
-    @Column(name="first_winamnt")
-    private Long firstWinamnt;      //1등 당첨액
+    @Column(name = "first_winamnt")
+    private Long firstWinamnt;      //1게임당 당첨금액
 
     @Column(name="first_przwner_co")
     private Long firstPrzwnerCo;    //1등 당첨인원
 
-    @Column(name="first_accumamnt")
-    private Long firstAccumamnt;    //1등 총액
+    @Column(name = "first_accumamnt")
+    private Long firstAccumamnt;    //등위별 총 당첨금액
 
     @Column(name = "drw_no")
     private Long drwNo; //로또 회차

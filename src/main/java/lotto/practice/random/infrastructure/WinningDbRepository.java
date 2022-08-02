@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lotto.practice.random.domain.lottoapi.LottoApi;
 import lotto.practice.random.domain.machine.MachineCycleStorage;
+import lotto.practice.random.domain.winning.WinningInfo;
 import lotto.practice.random.domain.winning.WinningRepository;
 import org.springframework.stereotype.Repository;
 
@@ -35,8 +36,23 @@ public class WinningDbRepository implements WinningRepository {
         //String test = "5,41,12,13,31,32";
         return em.createQuery(
                         "select cs from MachineCycleStorage cs" +
-                                " where cs.sixBall = :sixNum")
+                                " where cs.sixBall = :sixNum", MachineCycleStorage.class)
                 .setParameter("sixNum", sixNum)
                 .getResultList();
     }
+
+    @Override
+    public Long saveWinner(WinningInfo winningInfo) {
+        em.persist(winningInfo);
+        return winningInfo.getNo();
+    }
+
+    @Override
+    public List<MachineCycleStorage> findAllUser() {
+        return em.createQuery(
+                        "select cs From MachineCycleStorage cs")
+                .getResultList();
+    }
+
+
 }

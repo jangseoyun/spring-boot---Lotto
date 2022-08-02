@@ -37,23 +37,13 @@ public class Machine {
     //반자동은 순서가 섞이도록 Set, 전체수동은 순서에 맞게 List??
     public List<SixBall> selectNumSixBall(int count, List<Integer> inputNumList) {
         //TODO: 티켓마다 inputNum이 중복으로 들어가는 문제 해결하기 -> 한번 쓰면 지워지도록
+        // 두번째 돌때 초기화 해주기
         for (int i = 0; i < count; i++) {
             machineResult.add(new SixBall(inputNumList));
         }
         log.info("selectNumSixBall = " + machineResult);
         return machineResult;
     }
-
-    /*public List<SixBall> allSelectSixBall(int count, List<Integer> inputNumList) {
-        log.info("allselectSixBall");
-
-        for (int i = 0; i < count; i++) {
-            machineResult.add(new SixBall(inputNumList));
-        }
-        log.info("selectAll = " + machineResult);
-
-        return machineResult;
-    }*/
 
     /**
      * 1차적으로 6개만 받을 수 있도록 천원
@@ -62,5 +52,6 @@ public class Machine {
     private void makeTicket() {
 
     }
+
 
 }
