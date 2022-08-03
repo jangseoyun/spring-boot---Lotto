@@ -38,26 +38,33 @@ public class WinningInfo {
     private Long totalAmount;       //등위별 총 당첨금액
     @Column(name = "winner_amount")
     private Long winnerAmount;      //1인당 당첨금액
+
     @Column(name = "winner_total_count")
-    private Long winnerTotalCount;  //해당순위 총 당첨인원
+    private int winnerTotalCount;
+
     @Column(name = "win_date")
     private LocalDateTime winDate;  //당첨일
 
     @Column(name = "win_num")
-    private String winNum;   //당첨 번호 -> 보너스 번호 포함
+    private String winAllNum;   //당첨 번호 -> 보너스 번호 포함
 
     @Builder
-    public WinningInfo(Long no, Long totSellingPrice, User user, String lottoCycleNum, int winnerRank, Long totalAmount, Long winnerAmount, Long winnerTotalCount, LocalDateTime winDate, String winNum) {
+    public WinningInfo(Long no, Long totSellingPrice, User user, String lottoCycleNum, int winnerRank, Long totalAmount, Long winnerAmount, LocalDateTime winDate, String winAllNum, int winnerTotalCount) {
         this.no = no;
         this.totSellingPrice = totSellingPrice;
         this.user = user;
         this.lottoCycleNum = lottoCycleNum;
         this.winnerRank = winnerRank;
-        this.totalAmount = totalAmount;
-        this.winnerAmount = winnerAmount;
+
         this.winnerTotalCount = winnerTotalCount;
+        this.totalAmount = totalAmount;
+        this.winnerAmount = setWinnerAmount(totalAmount, winnerTotalCount);
         this.winDate = winDate;
-        this.winNum = winNum;
+        this.winAllNum = winAllNum;
+    }
+
+    private Long setWinnerAmount(Long totalAmount, int winnerTotalCount) {
+        return (totalAmount / winnerTotalCount);
     }
 
 

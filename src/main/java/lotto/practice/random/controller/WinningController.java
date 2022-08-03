@@ -16,10 +16,7 @@ public class WinningController {
 
     @GetMapping("/request/winner")
     public void thisWeekWinner(@RequestParam("drwNo") Long drwNo) {
-        log.info("이번주 당첨자 요청 controller");
-        // TODO: 검증할 것이 뭐이 있다면 requestDTO
-        //- 이번주 회차가 맞는지? 한 개 일때 requestDTO로 받을 이유가 있나 ?
-
+        log.info("이번회차 당첨자 요청 controller");
         //TODO: return DTO로 변경해서 화면으로 보내기!
         winningService.getWinner(drwNo);
     }

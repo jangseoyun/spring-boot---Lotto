@@ -1,45 +1,60 @@
 package lotto.practice.random.domain.winning;
 
 import lombok.extern.slf4j.Slf4j;
-import lotto.practice.random.domain.lottoapi.LottoApi;
-import lotto.practice.random.domain.machine.MachineCycleStorage;
 import lotto.practice.random.domain.winning.dto.WinningDto;
 
+import java.util.List;
 import java.util.Map;
 
 @Slf4j
 public class WinningFactory {
 
-    public static WinningDto createWinningInfo(WinningDto findWinnerRank, Map<String, Object> winnerAmount, LottoApi getThisWeekWinning, MachineCycleStorage userOne) {
-
-        //TODO: 나머지 채워넣기
-        return WinningDto.builder()
-                .sixBall(userOne.getSixBall())
-                .totSellingPrice(getThisWeekWinning.getTotSellamnt())
-                .user(userOne.getUser())
-                .lottoCycleNum(getThisWeekWinning.getDrwNo())
-                .winnerRank(findWinnerRank.getWinnerRank())
-                .totalAmount(getTotalAmount(winnerAmount, findWinnerRank.getWinnerRank()))
-                .winnerAmount()
-                .winnerTotalCount()
-                .bonusBall(userOne.getBonusBall())
+    public static WinningInfo createWinningInfo(WinningDto winner, Map<String, Long> winningAmount, List<Integer> totalCount) {
+        //몇등인지 알아야함
+        return WinningInfo.builder()
+                .totSellingPrice(winner.getTotSellingPrice())
+                .user(winner.getUser())
+                .lottoCycleNum(winner.getLottoCycleNum())
+                .winnerRank(winner.getWinnerRank())
+                .totalAmount(getAmount(winningAmount, winner.getWinnerRank()))
+                .winnerTotalCount(getTotalCount(totalCount, winner.getWinnerRank()))
                 .build();
     }
 
-    /*public static Long getTotalAmount(Map<String, Object> winnerAmount, int userRank){
-        log.info("winnerAmount = " + winnerAmount);
-        if(userRank == 1){
-            return winnerAmount.get("firstAmount");
-        } else if (userRank == 2 || userRank == 3) {
-            return winnerAmount.get("secondAndThirdAmount");
-        } else if (userRank == 4) {
-            return winnerAmount.get("fourthTotalAmount");
-        } else if (userRank == 5) {
-            return winnerAmount.get("fifthTotalAmount");
-        }else {
-            return 0;
+    public static Long getAmount(Map<String, Long> winningAmount, int rank) {
+        switch (rank) {
+            case 5:
+                return winningAmount.get("fifthTotalAmount");
+            case 4:
+                return winningAmount.get("fourthTotalAmount");
+            case 3:
+            case 2:
+                return winningAmount.get("secondAndThirdAmount");
+            case 1:
+                return winningAmount.get("firstAmount");
+            default:
+                break;
         }
-    }*/
+        return null;
+    }
+
+    private static int getTotalCount(List<Integer> totalCount, int rank) {
+        switch (rank) {
+            case 5:
+                return totalCount.get(5);
+            case 4:
+                return totalCount.get(4);
+            case 3:
+                return totalCount.get(3);
+            case 2:
+                return totalCount.get(2);
+            case 1:
+                return totalCount.get(1);
+            default:
+                break;
+        }
+        return 0;
+    }
 
 
 }

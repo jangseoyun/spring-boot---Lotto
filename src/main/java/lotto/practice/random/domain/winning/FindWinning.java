@@ -5,6 +5,7 @@ import lotto.practice.random.domain.lottoapi.LottoApi;
 import lotto.practice.random.domain.machine.Ball;
 import lotto.practice.random.domain.machine.MachineCycleStorage;
 import lotto.practice.random.domain.winning.dto.WinningDto;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,10 +13,87 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+
 @Slf4j
+@Component
 public class FindWinning {
 
-    //TODO : 도메인 옮기기
+    public List<WinningDto> getWinnerList(LottoApi getThisWeekWinning, List<MachineCycleStorage> findAllUser) {
+        List<WinningDto> winnerList = new ArrayList<>();
+        //등위별 당첨자
+        for (MachineCycleStorage userOne : findAllUser) {
+            //1. 당첨 여부 및 당첨자 순위
+            int findWinnerRank = findWinnerRank(getThisWeekWinning, userOne);
+            WinningDto winner = WinningDto.builder()
+                    .sixBall(userOne.getSixBall())
+                    .totSellingPrice(getThisWeekWinning.getTotSellamnt())
+                    .user(userOne.getUser())
+                    .lottoCycleNum(getThisWeekWinning.getDrwNo())
+                    .winnerRank(findWinnerRank)
+                    .bonusBall(userOne.getBonusBall())
+                    .build();
+            winnerList.add(winner);
+        }
+
+        return winnerList;
+    }
+
+    public int findWinnerRank(LottoApi getThisWeekWinning, MachineCycleStorage userOne) {
+        //1. 해당 유저의 6개의 추출 번호 확인
+        List<Ball> sixNum = getSixnum(userOne);
+        //2. 맞는 볼이 있는지 검증
+        int resultCheckBall = vaildSixBall(sixNum, getThisWeekWinning);
+        //3. 당첨 순위
+        if (resultCheckBall >= 3) {
+            return calculateCount(resultCheckBall, getThisWeekWinning.getBnusNo(), userOne.getBonusBall());
+        }
+        return 0;
+    }
+
+    //6개의 list<ball>만들기
+    public List<Ball> getSixnum(MachineCycleStorage userOne) {
+        List<Ball> getSixnum = new ArrayList<>();
+        getSixnum.add(userOne.getBall1());
+        getSixnum.add(userOne.getBall2());
+        getSixnum.add(userOne.getBall3());
+        getSixnum.add(userOne.getBall4());
+        getSixnum.add(userOne.getBall5());
+        getSixnum.add(userOne.getBall6());
+        return getSixnum;
+    }
+
+    /**
+     * 로또 추첨 번호 비교
+     *
+     * @param sixNum
+     * @param getThisWeekWinning
+     * @return 맞은 번호 갯수
+     */
+    private int vaildSixBall(List<Ball> sixNum, LottoApi getThisWeekWinning) {
+        List<Ball> result = sixNum.stream()
+                .filter(ball -> ball.getValue() == getThisWeekWinning.getDrwtNo1()
+                        || ball.getValue() == getThisWeekWinning.getDrwtNo2()
+                        || ball.getValue() == getThisWeekWinning.getDrwtNo3()
+                        || ball.getValue() == getThisWeekWinning.getDrwtNo4()
+                        || ball.getValue() == getThisWeekWinning.getDrwtNo5()
+                        || ball.getValue() == getThisWeekWinning.getDrwtNo6())
+                .collect(Collectors.toList());
+        log.info("checkRank = " + result);
+        log.info("checkRank size = " + result.size());
+
+        return result.size();
+    }
+
+    /**
+     * 보너스 번호 일치 여부
+     */
+    public boolean checkBonusBall(Ball userBonusNum, int bonusBall) {
+        if (userBonusNum.getValue() == bonusBall) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     /**
      * 랭킹 찾아 내는 로직
@@ -25,66 +103,6 @@ public class FindWinning {
      * 3등 : 5개
      * 4등 : 4개
      */
-    public WinningInfo findWinner(LottoApi getThisWeekWinning, List<MachineCycleStorage> findAllUser) {
-        //등위별 총 당첨자
-        for (MachineCycleStorage userOne : findAllUser) {
-            //1. 당첨자 찾기 rank
-            WinningDto findWinnerRank = findWinnerRank(getThisWeekWinning, userOne);
-            //2. 등위별 당첨자 총 카운트 만들기
-            iterCount(findAllUser, findWinnerRank);
-            //3. 당첨금 계산
-            Map<String, Object> winnerAmount = calculateAmount(getThisWeekWinning.getTotSellamnt());
-
-            WinningFactory.createWinningInfo(findWinnerRank, winnerAmount, getThisWeekWinning, userOne);
-
-        }
-
-    }
-
-
-    public WinningDto findWinnerRank(LottoApi getThisWeekWinning, MachineCycleStorage userOne) {
-        //1. 해당 유저의 6개의 추출 번호 확인
-        List<Ball> sixNum = getSixnum(userOne);
-        //2. 맞는 볼이 있는지 검증 -> 당첨자 순위 확인
-        int winnerRank = checkRank(sixNum, getThisWeekWinning);
-    }
-
-    //6개의 list<ball>만들기
-    public List<Ball> getSixnum(MachineCycleStorage userOne) {
-        List<Ball> createUserSixnum = new ArrayList<>();
-        createUserSixnum.add(1, userOne.getBall1());
-        createUserSixnum.add(2, userOne.getBall2());
-        createUserSixnum.add(3, userOne.getBall3());
-        createUserSixnum.add(4, userOne.getBall4());
-        createUserSixnum.add(5, userOne.getBall5());
-        createUserSixnum.add(6, userOne.getBall6());
-        return createUserSixnum;
-    }
-
-    //당첨순위 확인
-    private int checkRank(List<Ball> sixNum, LottoApi getThisWeekWinning) {
-        List<Ball> result = sixNum.stream()
-                .filter(ball -> sixNum.contains(getThisWeekWinning.getDrwtNo1()))
-                .filter(ball -> sixNum.contains(getThisWeekWinning.getDrwtNo2()))
-                .filter(ball -> sixNum.contains(getThisWeekWinning.getDrwtNo3()))
-                .filter(ball -> sixNum.contains(getThisWeekWinning.getDrwtNo4()))
-                .filter(ball -> sixNum.contains(getThisWeekWinning.getDrwtNo5()))
-                .filter(ball -> sixNum.contains(getThisWeekWinning.getDrwtNo6()))
-                .collect(Collectors.toList());
-        log.info("checkRank = " + result);
-        log.info("checkRank size = " + result.size());
-
-        return result.size();
-    }
-
-    private void iterCount(List<MachineCycleStorage> findAllUser, WinningDto findWinnerRank) {
-
-        //2. 등위별 총 당첨자 계산
-        for (int i = 0; i < findAllUser.size(); i++) {
-            calculateCount(findWinnerRank.getWinnerRank());
-        }
-    }
-
     //TODO: 일급 객체로 만들기
     //당첨금 계산하려면 누적되어야함 당첨자 카운트
     int firstTotalCount = 0;
@@ -94,40 +112,74 @@ public class FindWinning {
     int fifthTotalCount = 0;
 
     //등위별 총 당첨자 파악
-    public void calculateCount(int getWinnerRank) {
+    public int calculateCount(int resultCheckBall, int getBonusNum, Ball userBonusBall) {
 
-        if (getWinnerRank == 5) {
+        if (resultCheckBall == 3) {
             fifthTotalCount += 1;
-        } else if (getWinnerRank == 4) {
+            return 5;
+
+        } else if (resultCheckBall == 4) {
             fourthTotalCount += 1;
-        } else if (getWinnerRank == 3) {
+            return 4;
+
+        } else if (resultCheckBall == 5) {
+            //보너스 번호 체크
+            boolean checkBonusBall = checkBonusBall(userBonusBall, getBonusNum);
+            if (checkBonusBall == true) {
+                secondTotalCount += 1;
+                return 2;
+            }
             thirdTotalCount += 1;
-        } else if (getWinnerRank == 2) {
-            secondTotalCount += 1;
-        } else if (getWinnerRank == 1) {
+            return 3;
+
+        } else {
             firstTotalCount += 1;
+            return 1;
+
         }
     }
 
-    //등위별 당첨금 계산
-    public Map<String, Object> calculateAmount(Long totSellingPrice) {
+    /**
+     * * 등위별 총 당첨금액 계산
+     * 1등 :  (총 당첨금 - i ) * 0.75
+     * 2등 :  (총 당첨금 - i ) * 0.125
+     * 3등 :  (총 당첨금 -  i )* 0.125
+     * 4등 : 전체 금액 - (50,000)
+     * 5등 : 전체 금액 - (5,000)
+     * * 4 + 5등의 합 = i
+     */
+    public Map<String, Long> calculateAmount(Long totSellingPrice) {
+
         //5위 총 금액
         Long fifthTotalAmount = (fifthTotalCount * 5000L);
+        //4위 총 금액
         Long fourthTotalAmount = (fourthTotalCount * 50000L);
+        //4위 5위 합산
         Long fifAndFour = (fifthTotalAmount + fourthTotalAmount);
 
         //2위,3위
-        double secondAndThirdAmount = ((totSellingPrice - fifAndFour) * 0.125);
+        Long secondAndThirdAmount = ((totSellingPrice - fifAndFour) * (25 / 100)) / 2;
 
         //1위
-        double firstAmount = ((totSellingPrice - fifAndFour) * 0.75);
+        Long firstAmount = ((totSellingPrice - fifAndFour) * (75 / 100));
 
-        Map<String, Object> winnerAmount = new HashMap<>();
+        Map<String, Long> winnerAmount = new HashMap<>();
         winnerAmount.put("fifthTotalAmount", fifthTotalAmount);
         winnerAmount.put("fourthTotalAmount", fourthTotalAmount);
         winnerAmount.put("secondAndThirdAmount", secondAndThirdAmount);
         winnerAmount.put("firstAmount", firstAmount);
 
         return winnerAmount;
+    }
+
+    //TODO: 일급 객체
+    public List<Integer> makeTotalCount() {
+        List<Integer> totalCount = new ArrayList<>();
+        totalCount.add(firstTotalCount);
+        totalCount.add(secondTotalCount);
+        totalCount.add(thirdTotalCount);
+        totalCount.add(fourthTotalCount);
+        totalCount.add(fifthTotalCount);
+        return totalCount;
     }
 }
