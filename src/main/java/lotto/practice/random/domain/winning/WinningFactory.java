@@ -2,6 +2,7 @@ package lotto.practice.random.domain.winning;
 
 import lombok.extern.slf4j.Slf4j;
 import lotto.practice.random.domain.winning.dto.WinningDto;
+import lotto.practice.random.domain.winning.entity.WinningInfo;
 
 import java.util.List;
 import java.util.Map;

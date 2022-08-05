@@ -1,4 +1,4 @@
-package lotto.practice.random.domain.winning;
+package lotto.practice.random.domain.winning.domain;
 
 import lombok.extern.slf4j.Slf4j;
 import lotto.practice.random.domain.lottoapi.LottoApi;
@@ -148,10 +148,10 @@ public class FindWinning {
      * 5등 : 전체 금액 - (5,000)
      * * 4 + 5등의 합 = i
      */
-    public Map<String, Long> calculateAmount(Long totSellingPrice) {
+    public Map<String, Long> calculateAmount(Long totSellingPrice, List<Integer> totalCount) {
 
         //5위 총 금액
-        Long fifthTotalAmount = (fifthTotalCount * 5000L);
+        Long fifthTotalAmount = (totalCount.get(5) * 5000L);
         //4위 총 금액
         Long fourthTotalAmount = (fourthTotalCount * 50000L);
         //4위 5위 합산

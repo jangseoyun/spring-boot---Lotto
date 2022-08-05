@@ -4,8 +4,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lotto.practice.random.domain.lottoapi.LottoApi;
 import lotto.practice.random.domain.machine.MachineCycleStorage;
-import lotto.practice.random.domain.winning.WinningInfo;
-import lotto.practice.random.domain.winning.WinningRepository;
+import lotto.practice.random.domain.winning.entity.WinningInfo;
+import lotto.practice.random.domain.winning.repository.WinningRepository;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -18,9 +18,18 @@ public class WinningDbRepository implements WinningRepository {
 
     private final EntityManager em;
 
+    //이번주 회차 번호 가지고 오기ß
+    @Override
+    public String getCycleNum() {
+        return em.createQuery(
+                        "select max(lottoApi.drwNo) as max_cyclenum from LottoApi lottoApi")
+                .getSingleResult();
+
+    }
+
     //이번주 회차 데이터 가져오기 "엔티티로 받고! straem() dto로 변환해야함"
     @Override
-    public LottoApi getThisWeekWinning(Long drwNo) {
+    public LottoApi getThisWeekWinning(String drwNo) {
         return em.createQuery(
                         "select api from LottoApi api" +
                                 " where api.drwNo = :drwNo", LottoApi.class)
