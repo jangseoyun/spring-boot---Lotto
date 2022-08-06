@@ -23,9 +23,18 @@ public class WinningService {
     private final WinningDbRepository winningDbRepository;
     private final FindWinning findWinning;
 
-    //이번주 회차 번호 가지고 오기
-    public String getLastCycleNum() {
+    //회차 리스트 가져오기
+    public List<Long> getCycleNumList() {
+        List<Long> cycleNumList = winningDbRepository.getCycleNumList();
+        log.info("회차 정보 리스트 : " + cycleNumList);
+        return cycleNumList;
+    }
 
+    //이번주 회차 번호 가지고 오기
+    public Long getLastCycleNum() {
+        Long getLastCycelNum = winningDbRepository.getCycleNum();
+        log.info("이번주 회차 번호 : " + getLastCycelNum);
+        return getLastCycelNum;
     }
 
     //회차별 당첨 번호 로직으로도 사용할 수 있음

@@ -30,7 +30,7 @@ public class WinningInfo {
     private User user;  //당첨자
 
     @Column(name = "lotto_cycle_num")
-    private String lottoCycleNum;   //로또 회차 번호
+    private Long lottoCycleNum;   //로또 회차 번호
 
     @Column(name = "winner_rank")
     private int winnerRank;         //당첨 순위
@@ -49,7 +49,7 @@ public class WinningInfo {
     private String winAllNum;   //당첨 번호 -> 보너스 번호 포함
 
     @Builder
-    public WinningInfo(Long no, Long totSellingPrice, User user, String lottoCycleNum, int winnerRank, Long totalAmount, Long winnerAmount, LocalDateTime winDate, String winAllNum, int winnerTotalCount) {
+    public WinningInfo(Long no, Long totSellingPrice, User user, Long lottoCycleNum, int winnerRank, Long totalAmount, Long winnerAmount, LocalDateTime winDate, String winAllNum, int winnerTotalCount) {
         this.no = no;
         this.totSellingPrice = totSellingPrice;
         this.user = user;

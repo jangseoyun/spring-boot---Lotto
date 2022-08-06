@@ -18,13 +18,21 @@ public class WinningDbRepository implements WinningRepository {
 
     private final EntityManager em;
 
-    //이번주 회차 번호 가지고 오기ß
+    //회차 전체 리스트
     @Override
-    public String getCycleNum() {
+    public List<Long> getCycleNumList() {
         return em.createQuery(
-                        "select max(lottoApi.drwNo) as max_cyclenum from LottoApi lottoApi")
-                .getSingleResult();
+                        "select api.drwNo from LottoApi api", Long.class)
+                .getResultList();
+    }
 
+    //이번주 회차 번호 가지고 오기
+    @Override
+    public Long getCycleNum() {
+        return em.createQuery(
+                        "select max(api.drwNo) from LottoApi api"
+                        , Long.class)
+                .getSingleResult();
     }
 
     //이번주 회차 데이터 가져오기 "엔티티로 받고! straem() dto로 변환해야함"

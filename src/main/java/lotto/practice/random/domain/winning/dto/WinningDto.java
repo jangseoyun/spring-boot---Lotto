@@ -18,7 +18,7 @@ public class WinningDto {
 
     private User user; //당첨자
 
-    private String lottoCycleNum;     //로또 회차
+    private Long lottoCycleNum;     //로또 회차
 
     private int winnerRank;         //당첨 순위
     private Long totalAmount;       //등위별 총 당첨금액
@@ -29,7 +29,7 @@ public class WinningDto {
     private String winAllNum;
 
     @Builder
-    public WinningDto(String sixBall, Long totSellingPrice, User user, String lottoCycleNum, int winnerRank, Ball bonusBall, String winAllNum) {
+    public WinningDto(String sixBall, Long totSellingPrice, User user, Long lottoCycleNum, int winnerRank, Ball bonusBall, String winAllNum) {
         this.sixBall = sixBall;
         this.totSellingPrice = totSellingPrice;
         this.user = user;

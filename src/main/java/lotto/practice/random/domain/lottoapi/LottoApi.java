@@ -64,7 +64,7 @@ public class LottoApi {
     private Long firstAccumamnt;    //등위별 총 당첨금액
 
     @Column(name = "drw_no")
-    private String drwNo; //로또 회차
+    private Long drwNo; //로또 회차
 
     /**
      * 생성 메서드
