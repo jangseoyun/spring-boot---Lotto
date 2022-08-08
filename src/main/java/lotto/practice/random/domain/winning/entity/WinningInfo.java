@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lotto.practice.random.domain.user.User;
+import lotto.practice.random.domain.winning.RankType;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -33,7 +34,7 @@ public class WinningInfo {
     private Long lottoCycleNum;   //로또 회차 번호
 
     @Column(name = "winner_rank")
-    private int winnerRank;         //당첨 순위
+    private RankType winnerRank;         //당첨 순위
     @Column(name = "total_amount")
     private Long totalAmount;       //등위별 총 당첨금액
     @Column(name = "winner_amount")
@@ -49,7 +50,7 @@ public class WinningInfo {
     private String winAllNum;   //당첨 번호 -> 보너스 번호 포함
 
     @Builder
-    public WinningInfo(Long no, Long totSellingPrice, User user, Long lottoCycleNum, int winnerRank, Long totalAmount, Long winnerAmount, LocalDateTime winDate, String winAllNum, int winnerTotalCount) {
+    public WinningInfo(Long no, Long totSellingPrice, User user, Long lottoCycleNum, RankType winnerRank, Long totalAmount, Long winnerAmount, LocalDateTime winDate, String winAllNum, int winnerTotalCount) {
         this.no = no;
         this.totSellingPrice = totSellingPrice;
         this.user = user;
