@@ -8,7 +8,7 @@ import lotto.practice.random.domain.winning.RankType;
 public class ThirdRank extends Rank {
 
     public ThirdRank(Long count) {
-        super(count);
+        super();
     }
 
     @Override
