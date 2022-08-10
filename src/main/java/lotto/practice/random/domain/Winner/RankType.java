@@ -1,6 +1,5 @@
 package lotto.practice.random.domain.Winner;
 
-@
 public enum RankType {
     FIRST,
     SECOND,
