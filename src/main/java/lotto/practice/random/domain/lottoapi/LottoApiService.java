@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lotto.practice.random.infrastructure.LottoApiRepository;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,17 +14,20 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class LottoApiService {
 
+    @Value("${api.lotto.host}")
+    private String lottoHost;
+
     private final LottoApiRepository lottoApiRepository;
     private final RestApiService restApiService;
 
-    public LottoApi lottoNumSave(LottoApi lotto){
+    public LottoApi lottoNumSave(LottoApi lotto) {
         LottoApi createLotto = LottoApi.createLotto(lotto);
         return lottoApiRepository.lottoNumSave(createLotto);
     }
 
     public void insertLotto(Long no) {
         for (int i = 1; i <= no; i++) {
-            String json = restApiService.readUrl("https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo=" + i);
+            String json = restApiService.readUrl(lottoHost + "?method=getLottoNumber&drwNo=" + i);
             Gson gson = new Gson();
             LottoApi lotto = gson.fromJson(json, LottoApi.class);
 
@@ -33,8 +37,4 @@ public class LottoApiService {
         }
     }
 
-    //지난 회차 당첨번호
-    public void lastSixNum() {
-
-    }
 }
