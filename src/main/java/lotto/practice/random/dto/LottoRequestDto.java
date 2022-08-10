@@ -5,8 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import lotto.practice.random.domain.machine.dto.LottoCommand;
-import lotto.practice.random.domain.machine.dto.Lottotype;
+import lotto.practice.random.domain.machine.command.LottoCommand;
+import lotto.practice.random.domain.machine.command.Lottotype;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Max;

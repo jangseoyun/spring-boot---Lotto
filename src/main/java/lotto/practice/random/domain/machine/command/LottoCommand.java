@@ -1,4 +1,4 @@
-package lotto.practice.random.domain.machine.dto;
+package lotto.practice.random.domain.machine.command;
 
 import lombok.Builder;
 import lombok.Value;
