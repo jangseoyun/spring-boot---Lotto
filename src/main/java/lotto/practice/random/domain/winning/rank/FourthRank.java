@@ -1,16 +1,16 @@
 package lotto.practice.random.domain.winning.rank;
 
+import lombok.NoArgsConstructor;
 import lotto.practice.random.domain.winning.RankType;
 
 /**
  * 4등 총 당첨자 수
  * 4등 총 당첨 금액
  */
+@NoArgsConstructor
 public class FourthRank extends Rank {
 
-    public FourthRank(Long count) {
-        super();
-    }
+    private int fourthCount;
 
     @Override
     public RankType getRankType() {
@@ -18,11 +18,15 @@ public class FourthRank extends Rank {
     }
 
     @Override
-    public Long getWinningTotalCount(Long count) {
-        return count;
+    public int getRankTotalCount(RankType fourth) {
+        if (fourth == RankType.FOURTH) {
+            this.fourthCount += 1;
+        }
+        return fourthCount;
     }
 
-    public Long getFourthAmount(Long count) {
-        return count * 50000L;//등위별 당첨금액 : 4등 총 당첨금액
+    public Long getRankAmount() {
+        return fourthCount * 50000L;
     }
+
 }

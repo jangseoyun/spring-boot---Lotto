@@ -1,14 +1,22 @@
 package lotto.practice.random.domain.winning.rank;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lotto.practice.random.domain.winning.RankType;
 
 /**
  * 3등 총 누적 수
+ * 3등 :  (총 당첨금 -  i )* 0.125 / 당첨자수
  */
+@NoArgsConstructor
+@AllArgsConstructor
 public class ThirdRank extends Rank {
 
-    public ThirdRank(Long count) {
-        super();
+    private int thirdCount;
+    private Long getSubtractAmount;
+
+    public ThirdRank(Long getSubtractAmount) {
+        this.getSubtractAmount = getSubtractAmount;
     }
 
     @Override
@@ -17,7 +25,15 @@ public class ThirdRank extends Rank {
     }
 
     @Override
-    public Long getWinningTotalCount(Long count) {//3등 당첨 누적 총 인원수
-        return count;
+    public int getRankTotalCount(RankType third) {
+        if (third == RankType.THIRD) {
+            this.thirdCount += 1;
+        }
+        return thirdCount;
     }
+
+    public Long getRankAmount() {//4,5등을 제외한 금액 파라미터로 받아서
+        return getSubtractAmount * (125 / 1000);
+    }
+
 }
