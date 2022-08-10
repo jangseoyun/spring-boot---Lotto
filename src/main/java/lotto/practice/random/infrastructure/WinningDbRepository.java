@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lotto.practice.random.domain.lottoapi.LottoApi;
 import lotto.practice.random.domain.machine.MachineCycleStorage;
-import lotto.practice.random.domain.winning.entity.WinningInfo;
+import lotto.practice.random.domain.winning.entity.Winner;
 import lotto.practice.random.domain.winning.repository.WinningRepository;
 import org.springframework.stereotype.Repository;
 
@@ -59,9 +59,9 @@ public class WinningDbRepository implements WinningRepository {
     }
 
     @Override
-    public Long saveWinner(WinningInfo winningInfo) {
-        em.persist(winningInfo);
-        return winningInfo.getNo();
+    public Long saveWinner(Winner winner) {
+        em.persist(winner);
+        return winner.getNo();
     }
 
     @Override

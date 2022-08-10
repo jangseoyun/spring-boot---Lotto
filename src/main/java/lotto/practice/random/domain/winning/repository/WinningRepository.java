@@ -2,7 +2,7 @@ package lotto.practice.random.domain.winning.repository;
 
 import lotto.practice.random.domain.lottoapi.LottoApi;
 import lotto.practice.random.domain.machine.MachineCycleStorage;
-import lotto.practice.random.domain.winning.entity.WinningInfo;
+import lotto.practice.random.domain.winning.entity.Winner;
 
 import java.util.List;
 
@@ -21,7 +21,7 @@ public interface WinningRepository {
     List<MachineCycleStorage> getWinner(String sixNum);
 
     //당첨자 저장
-    Long saveWinner(WinningInfo winningInfo);
+    Long saveWinner(Winner winner);
 
     //이번 회차 추첨 사용자 전체 가져오기
     List<MachineCycleStorage> findAllUser();
