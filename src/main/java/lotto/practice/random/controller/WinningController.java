@@ -2,8 +2,8 @@ package lotto.practice.random.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import lotto.practice.random.domain.machine.MachineCycleStorage;
 import lotto.practice.random.domain.winning.WinningService;
+import lotto.practice.random.domain.winning.command.WinnerCommand;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +24,6 @@ public class WinningController {
 
     /**
      * 사용자가 '요청한 회차' 결과 리스트
-     *
      * @param drwNo
      */
     //여기서 회차별 로직 확인할 수 있도록
@@ -41,12 +40,12 @@ public class WinningController {
 
         //이번 회차 당첨자 리스트 가져오기
         //TODO: return DTO로 변경해서 화면으로 보내기
-        List<MachineCycleStorage> winner = winningService.getWinner(drwNo);
+        List<WinnerCommand> winnerList = winningService.saveWinner(drwNo);
 
         //map에 담아서 회차 리스트랑 같이 보내기 -> 이 경우 리스트를 계속 요청하게 되는데 다른 방법이 있나요
         Map<String, Object> resultWinnerMap = new HashMap<>();
         resultWinnerMap.put("cycleNumList", cycleNumList);
-        resultWinnerMap.put("winnerInfo", winner);
+        resultWinnerMap.put("winnerInfo", winnerList);
         model.addAttribute("resultWinnerMap", resultWinnerMap);
 
         return "";
