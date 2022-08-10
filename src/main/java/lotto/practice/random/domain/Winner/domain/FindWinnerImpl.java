@@ -1,12 +1,12 @@
-package lotto.practice.random.domain.winning.domain;
+package lotto.practice.random.domain.Winner.domain;
 
 import lombok.extern.slf4j.Slf4j;
+import lotto.practice.random.domain.Winner.RankType;
+import lotto.practice.random.domain.Winner.command.WinnerCommand;
+import lotto.practice.random.domain.Winner.rank.*;
 import lotto.practice.random.domain.lottoapi.LottoApi;
 import lotto.practice.random.domain.machine.Ball;
 import lotto.practice.random.domain.machine.MachineCycleStorage;
-import lotto.practice.random.domain.winning.RankType;
-import lotto.practice.random.domain.winning.command.WinnerCommand;
-import lotto.practice.random.domain.winning.rank.*;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @Component
-public class FindWinningImpl implements FindWinning {
+public class FindWinnerImpl implements FindWinner {
 
     @Override
     public List<WinnerCommand> getWinnerList(LottoApi getThisWeekWinning, List<MachineCycleStorage> findAllUser) {

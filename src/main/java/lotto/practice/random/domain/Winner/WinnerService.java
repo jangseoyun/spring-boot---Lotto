@@ -1,13 +1,13 @@
-package lotto.practice.random.domain.winning;
+package lotto.practice.random.domain.Winner;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import lotto.practice.random.domain.Winner.command.WinnerCommand;
+import lotto.practice.random.domain.Winner.domain.FindWinner;
+import lotto.practice.random.domain.Winner.entity.Winner;
 import lotto.practice.random.domain.lottoapi.LottoApi;
 import lotto.practice.random.domain.machine.MachineCycleStorage;
-import lotto.practice.random.domain.winning.command.WinnerCommand;
-import lotto.practice.random.domain.winning.domain.FindWinning;
-import lotto.practice.random.domain.winning.entity.Winner;
-import lotto.practice.random.infrastructure.WinningDbRepository;
+import lotto.practice.random.infrastructure.WinnerDbRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,10 +17,10 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
-public class WinningService {
+public class WinnerService {
 
-    private final WinningDbRepository winningDbRepository;
-    private final FindWinning findWinning;
+    private final WinnerDbRepository winningDbRepository;
+    private final FindWinner findWinning;
 
 
     /**
@@ -58,7 +58,7 @@ public class WinningService {
         log.info("이번회차 당첨자 정보 리스트 = " + winnerList);
 
         for (WinnerCommand winner : winnerList) {
-            Winner getWinner = WinningFactory.toWinner(winner);
+            Winner getWinner = WinnerFactory.toWinner(winner);
             winningDbRepository.saveWinner(getWinner);
         }
 

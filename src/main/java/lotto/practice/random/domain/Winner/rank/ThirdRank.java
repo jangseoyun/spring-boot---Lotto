@@ -1,8 +1,8 @@
-package lotto.practice.random.domain.winning.rank;
+package lotto.practice.random.domain.Winner.rank;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import lotto.practice.random.domain.winning.RankType;
+import lotto.practice.random.domain.Winner.RankType;
 
 /**
  * 3등 총 누적 수

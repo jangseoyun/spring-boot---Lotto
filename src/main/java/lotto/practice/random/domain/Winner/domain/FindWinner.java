@@ -1,11 +1,11 @@
-package lotto.practice.random.domain.winning.domain;
+package lotto.practice.random.domain.Winner.domain;
 
+import lotto.practice.random.domain.Winner.command.WinnerCommand;
 import lotto.practice.random.domain.lottoapi.LottoApi;
 import lotto.practice.random.domain.machine.MachineCycleStorage;
-import lotto.practice.random.domain.winning.command.WinnerCommand;
 
 import java.util.List;
 
-public interface FindWinning {
+public interface FindWinner {
     List<WinnerCommand> getWinnerList(LottoApi getThisWeekWinning, List<MachineCycleStorage> findAllUser);
 }

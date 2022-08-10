@@ -1,7 +1,7 @@
-package lotto.practice.random.domain.winning.rank;
+package lotto.practice.random.domain.Winner.rank;
 
 import lombok.NoArgsConstructor;
-import lotto.practice.random.domain.winning.RankType;
+import lotto.practice.random.domain.Winner.RankType;
 
 /**
  * 4등 총 당첨자 수

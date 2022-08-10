@@ -1,7 +1,7 @@
 package lotto.practice.random.common;
 
 import lombok.RequiredArgsConstructor;
-import lotto.practice.random.domain.winning.WinningService;
+import lotto.practice.random.domain.Winner.WinnerService;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -15,7 +15,7 @@ public class MemoryContext {
     //TODO
     public static Map<MemoryKey, Object> memory;
 
-    private final WinningService winningService;
+    private final WinnerService winningService;
 
     @PostConstruct
     public void init() {

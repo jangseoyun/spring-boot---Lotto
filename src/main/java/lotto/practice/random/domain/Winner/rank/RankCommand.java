@@ -1,4 +1,4 @@
-package lotto.practice.random.domain.winning.rank;
+package lotto.practice.random.domain.Winner.rank;
 
 import lombok.Builder;
 import lombok.Data;

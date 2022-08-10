@@ -1,14 +1,14 @@
-package lotto.practice.random.domain.winning.entity;
+package lotto.practice.random.domain.Winner.entity;
 
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lotto.practice.random.domain.Winner.RankType;
 import lotto.practice.random.domain.lottoapi.LottoApi;
 import lotto.practice.random.domain.machine.Ball;
 import lotto.practice.random.domain.machine.converter.BallConverter;
 import lotto.practice.random.domain.user.User;
-import lotto.practice.random.domain.winning.RankType;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

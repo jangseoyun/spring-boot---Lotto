@@ -2,10 +2,10 @@ package lotto.practice.random.infrastructure;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import lotto.practice.random.domain.Winner.entity.Winner;
+import lotto.practice.random.domain.Winner.repository.WinnerRepository;
 import lotto.practice.random.domain.lottoapi.LottoApi;
 import lotto.practice.random.domain.machine.MachineCycleStorage;
-import lotto.practice.random.domain.winning.entity.Winner;
-import lotto.practice.random.domain.winning.repository.WinningRepository;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -14,7 +14,7 @@ import java.util.List;
 @Slf4j
 @Repository
 @RequiredArgsConstructor
-public class WinningDbRepository implements WinningRepository {
+public class WinnerDbRepository implements WinnerRepository {
 
     private final EntityManager em;
 

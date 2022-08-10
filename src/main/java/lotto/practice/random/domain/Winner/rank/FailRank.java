@@ -1,6 +1,6 @@
-package lotto.practice.random.domain.winning.rank;
+package lotto.practice.random.domain.Winner.rank;
 
-import lotto.practice.random.domain.winning.RankType;
+import lotto.practice.random.domain.Winner.RankType;
 
 public class FailRank extends Rank {
 

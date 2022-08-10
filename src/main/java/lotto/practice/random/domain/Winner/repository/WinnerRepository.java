@@ -1,12 +1,12 @@
-package lotto.practice.random.domain.winning.repository;
+package lotto.practice.random.domain.Winner.repository;
 
+import lotto.practice.random.domain.Winner.entity.Winner;
 import lotto.practice.random.domain.lottoapi.LottoApi;
 import lotto.practice.random.domain.machine.MachineCycleStorage;
-import lotto.practice.random.domain.winning.entity.Winner;
 
 import java.util.List;
 
-public interface WinningRepository {
+public interface WinnerRepository {
 
     //회차 리스트
     List<Long> getCycleNumList();

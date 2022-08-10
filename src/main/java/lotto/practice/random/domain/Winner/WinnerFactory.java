@@ -1,11 +1,11 @@
-package lotto.practice.random.domain.winning;
+package lotto.practice.random.domain.Winner;
 
 import lombok.extern.slf4j.Slf4j;
-import lotto.practice.random.domain.winning.command.WinnerCommand;
-import lotto.practice.random.domain.winning.entity.Winner;
+import lotto.practice.random.domain.Winner.command.WinnerCommand;
+import lotto.practice.random.domain.Winner.entity.Winner;
 
 @Slf4j
-public class WinningFactory {
+public class WinnerFactory {
 
     public static Winner toWinner(WinnerCommand winnerCommand) {
         return Winner.builder()
