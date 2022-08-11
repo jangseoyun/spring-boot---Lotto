@@ -69,7 +69,7 @@ public class MachineCycleStorage {
     private String storageDate; //추출 등록 날짜
 
     @Builder(access = AccessLevel.PROTECTED)
-    public MachineCycleStorage(User user, SixBall sixBall, Ball bonusBall, Long storageCycle, LocalDateTime storageDate) {
+    public MachineCycleStorage(User user, SixBall sixBall, Ball bonusBall, Long storageCycle) {
         this.user = user;
         this.ball1 = sixBall.getNo1();
         this.ball2 = sixBall.getNo2();
