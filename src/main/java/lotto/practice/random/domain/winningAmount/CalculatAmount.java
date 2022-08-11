@@ -66,4 +66,5 @@ public class CalculatAmount {
         long amount = minusAmount + (thirdNsecondAmount * 2);
         return (totalSellAmount - amount);
     }
+
 }
