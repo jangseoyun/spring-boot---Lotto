@@ -14,12 +14,28 @@ public class WinningDbRepository {
 
     private final EntityManager em;
 
-    public int getRankTotalCount(RankType rank) {
+    /**
+     * 당회차 등위별 당첨자 수
+     */
+    public int getRankTotalCount(RankType rank, Long lottoCycleNum) {
         return em.createQuery(
                         "select count(winner.winnerRank) from Winner winner" +
-                                " where winner.winnerRank = :rank", Integer.class)
-                .setParameter("rank", rank
-                ).getSingleResult();
+                                " where winner.winnerRank = :rank" +
+                                " and winner.lottoCycleNum = :lottoCycleNum", Integer.class)
+                .setParameter("rank", rank)
+                .setParameter("lottoCycleNum", lottoCycleNum)
+                .getSingleResult();
+    }
+
+    /**
+     * 당회차 전체 판매 금액
+     */
+    public Long getTotalSellAmount(Long lottoCycleNum) {
+        return em.createQuery(
+                        "select api.totSellamnt from LottoApi api" +
+                                " where api.drwNo = :lottoCycleNum", Long.class)
+                .setParameter("lottoCycleNum", lottoCycleNum)
+                .getSingleResult();
     }
 
 
