@@ -61,7 +61,7 @@ public class LottoApi {
     private Long firstPrzwnerCo;    //1등 당첨인원
 
     @Column(name = "first_accumamnt")
-    private Long firstAccumamnt;    //등위별 총 당첨금액
+    private Long firstAccumamnt;    //1등 등위별 총 당첨금액
 
     @Column(name = "drw_no")
     private Long drwNo; //로또 회차
