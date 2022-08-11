@@ -5,7 +5,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lotto.practice.random.domain.Winner.RankType;
-import lotto.practice.random.domain.lottoapi.LottoApi;
 import lotto.practice.random.domain.machine.Ball;
 import lotto.practice.random.domain.machine.converter.BallConverter;
 import lotto.practice.random.domain.user.User;
@@ -42,22 +41,27 @@ public class Winner {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "winner_rank")
-    private RankType winnerRank;         //당첨 순위
+    private RankType winnerRank;   //당첨 순위
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "drw_no")
-    private LottoApi lottoApi;   //로또 회차 번호//join
+    @Column(name = "lotto_cycle_num")
+    private Long lottoCycleNum;   //로또 회차 번호
+
+    @Column(name = "api_drwno_date")
+    private String drwNoDate;      //추첨일
 
     @Column(name = "win_date")
     private LocalDateTime winDate;  //당첨일
 
     @Builder
-    public Winner(String sixBall, Ball bonusBall, String winAllNum, User user, RankType winnerRank, LottoApi lottoApi) {
+    public Winner(Long no, String sixBall, Ball bonusBall, String winAllNum, User user, RankType winnerRank, Long lottoCycleNum, String drwNoDate, LocalDateTime winDate) {
+        this.no = no;
         this.sixBall = sixBall;
         this.bonusBall = bonusBall;
         this.winAllNum = winAllNum;
         this.user = user;
         this.winnerRank = winnerRank;
-        this.lottoApi = lottoApi;
+        this.lottoCycleNum = lottoCycleNum;
+        this.drwNoDate = drwNoDate;
+        this.winDate = winDate;
     }
 }

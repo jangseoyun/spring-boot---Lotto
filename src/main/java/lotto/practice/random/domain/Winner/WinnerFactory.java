@@ -14,7 +14,8 @@ public class WinnerFactory {
                 .winAllNum(winnerCommand.getWinAllNum())
                 .user(winnerCommand.getUser())
                 .winnerRank(winnerCommand.getWinnerRank())
-                .lottoApi(winnerCommand.getLottoApi())
+                .lottoCycleNum(winnerCommand.getLottoCycleNum())
+                .drwNoDate(winnerCommand.getDrwNoDate())
                 .build();
     }
 
