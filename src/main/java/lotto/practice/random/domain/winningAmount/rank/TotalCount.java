@@ -1,7 +1,9 @@
 package lotto.practice.random.domain.winningAmount.rank;
 
 import lombok.Builder;
+import lombok.Getter;
 
+@Getter
 public class TotalCount {
 
     private int fifthTotalCount;
@@ -11,11 +13,14 @@ public class TotalCount {
     private int firstTotalCount;
 
     @Builder
-    public TotalCount(int fifthTotalCount, int fourthTotalCount, int thirdTotalCount, int secondTotalCount, int firstTotalCount) {
+    public TotalCount(int fifthTotalCount, int fourthTotalCount, int thirdTotalCount,
+                      int secondTotalCount, int firstTotalCount) {
         this.fifthTotalCount = fifthTotalCount;
         this.fourthTotalCount = fourthTotalCount;
         ThirdTotalCount = thirdTotalCount;
         this.secondTotalCount = secondTotalCount;
         this.firstTotalCount = firstTotalCount;
     }
+
+
 }
