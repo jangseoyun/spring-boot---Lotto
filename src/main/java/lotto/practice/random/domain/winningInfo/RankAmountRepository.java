@@ -1,4 +1,4 @@
-package lotto.practice.random.domain.winning;
+package lotto.practice.random.domain.winningInfo;
 
 import lotto.practice.random.domain.Winner.RankType;
 
