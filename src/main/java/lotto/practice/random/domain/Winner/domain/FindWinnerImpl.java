@@ -31,7 +31,7 @@ public class FindWinnerImpl implements FindWinner {
                     .bonusBall(userOne.getBonusBall())
                     .user(userOne.getUser())
                     .winnerRank(getWinnerRank)
-                    .lottoCycleNum(getThisWeekWinning)
+                    .lottoApi(getThisWeekWinning)
                     .build();
 
             winnerList.add(winner);

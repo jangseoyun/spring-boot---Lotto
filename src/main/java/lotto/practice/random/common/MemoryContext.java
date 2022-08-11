@@ -15,12 +15,12 @@ public class MemoryContext {
     //TODO
     public static Map<MemoryKey, Object> memory;
 
-    private final WinnerService winningService;
+    private final WinnerService winnerService;
 
     @PostConstruct
     public void init() {
         //마지막 회차 번호 얻기
-        Long lastCycleNum = winningService.getLastCycleNum();
+        Long lastCycleNum = winnerService.getLastCycleNum();
 
         memory.put(LAST_CYCLE_NUM, lastCycleNum);
     }

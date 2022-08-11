@@ -19,24 +19,15 @@ import java.util.List;
 @Transactional(readOnly = true)
 public class WinnerService {
 
-    private final WinnerDbRepository winningDbRepository;
+    private final WinnerDbRepository winnerDbRepository;
     private final FindWinner findWinning;
 
-
-    /**
-     * 회차 전체 리스트 가져오기
-     */
-    public List<Long> getCycleNumList() {
-        List<Long> cycleNumList = winningDbRepository.getCycleNumList();
-        log.info("회차 전체 리스트 : " + cycleNumList);
-        return cycleNumList;
-    }
 
     /**
      * 이번주 회차 번호 가지고 오기
      */
     public Long getLastCycleNum() {
-        Long getLastCycelNum = winningDbRepository.getCycleNum();
+        Long getLastCycelNum = winnerDbRepository.getCycleNum();
         log.info("이번주 회차 번호 : " + getLastCycelNum);
         return getLastCycelNum;
     }
@@ -47,10 +38,10 @@ public class WinnerService {
      */
     @Transactional
     public List<WinnerCommand> saveWinner(String drwNo) {
-        LottoApi getThisWeekWinning = winningDbRepository.getThisWeekWinning(drwNo);
+        LottoApi getThisWeekWinning = winnerDbRepository.getThisWeekWinning(drwNo);
         log.info("회차 당첨 번호 = " + getThisWeekWinning);
 
-        List<MachineCycleStorage> findAllUser = winningDbRepository.findAllUser();
+        List<MachineCycleStorage> findAllUser = winnerDbRepository.findAllUser();
         log.info("이번회차 사용자 리스트 = " + findAllUser);
 
         //당첨자 찾기
@@ -59,7 +50,7 @@ public class WinnerService {
 
         for (WinnerCommand winner : winnerList) {
             Winner getWinner = WinnerFactory.toWinner(winner);
-            winningDbRepository.saveWinner(getWinner);
+            winnerDbRepository.saveWinner(getWinner);
         }
 
         return winnerList;
