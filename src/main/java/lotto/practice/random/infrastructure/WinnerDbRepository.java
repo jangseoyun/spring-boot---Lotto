@@ -71,5 +71,11 @@ public class WinnerDbRepository implements WinnerRepository {
                 .getResultList();
     }
 
+    @Override
+    public List<Winner> findAllWinner() {
+        return em.createQuery("select winner from Winner winner", Winner.class)
+                .getResultList();
+    }
+
 
 }

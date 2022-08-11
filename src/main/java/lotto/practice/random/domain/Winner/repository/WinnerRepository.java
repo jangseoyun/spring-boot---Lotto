@@ -25,4 +25,7 @@ public interface WinnerRepository {
 
     //이번 회차 추첨 사용자 전체 가져오기
     List<MachineCycleStorage> findAllUser();
+
+    //당첨자 전체 가지고오기
+    List<Winner> findAllWinner();
 }
