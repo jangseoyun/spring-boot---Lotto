@@ -21,17 +21,17 @@ public class WinnerCommand {
     private String winAllNum;
     private User user; //당첨자
     private RankType winnerRank;         //당첨 순위
-    private LottoApi lottoCycleNum;   //로또 회차 번호
+    private LottoApi lottoApi;   //로또 회차 번호
     private LocalDateTime winDate;  //당첨일
 
     @Builder
-    public WinnerCommand(String sixBall, Ball bonusBall, User user, RankType winnerRank, LottoApi lottoCycleNum, LocalDateTime winDate) {
+    public WinnerCommand(String sixBall, Ball bonusBall, User user, RankType winnerRank, LottoApi lottoApi, LocalDateTime winDate) {
         this.sixBall = sixBall;
         this.bonusBall = bonusBall;
         this.winAllNum = toString();
         this.user = user;
         this.winnerRank = winnerRank;
-        this.lottoCycleNum = lottoCycleNum;
+        this.lottoApi = lottoApi;
         this.winDate = winDate;
     }
 

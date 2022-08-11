@@ -46,19 +46,18 @@ public class Winner {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "drw_no")
-    @Column(name = "lotto_cycle_num")
-    private LottoApi lottoCycleNum;   //로또 회차 번호//join
+    private LottoApi lottoApi;   //로또 회차 번호//join
 
     @Column(name = "win_date")
     private LocalDateTime winDate;  //당첨일
 
     @Builder
-    public Winner(String sixBall, Ball bonusBall, String winAllNum, User user, RankType winnerRank, LottoApi lottoCycleNum) {
+    public Winner(String sixBall, Ball bonusBall, String winAllNum, User user, RankType winnerRank, LottoApi lottoApi) {
         this.sixBall = sixBall;
         this.bonusBall = bonusBall;
         this.winAllNum = winAllNum;
         this.user = user;
         this.winnerRank = winnerRank;
-        this.lottoCycleNum = lottoCycleNum;
+        this.lottoApi = lottoApi;
     }
 }
