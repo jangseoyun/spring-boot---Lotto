@@ -5,6 +5,9 @@ import lombok.extern.slf4j.Slf4j;
 import lotto.practice.random.domain.Winner.WinnerService;
 import lotto.practice.random.domain.Winner.command.WinnerCommand;
 import lotto.practice.random.domain.winningAmount.WinningAmountService;
+import lotto.practice.random.domain.winningInfo.WinningInfoCommand;
+import lotto.practice.random.domain.winningInfo.WinningMap;
+import lotto.practice.random.domain.winningInfo.WinningService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,7 +26,9 @@ import java.util.Map;
 public class WinningController {
 
     private final WinnerService winnerService;
-    private final WinningAmountService winningService;
+    private final WinningAmountService winningAmountService;
+
+    private final WinningService winningService;
 
     /**
      * 매주 당첨 결과가 나올 때 실행하는 것 -> 주 1회
@@ -40,18 +45,22 @@ public class WinningController {
      * 사용자가 '요청한 회차' 결과 리스트
      */
     @GetMapping("/result/winner")
-    public String requestGameResult(@RequestParam("drwNo") String drwNo, Model model) {
+    public String requestGameResult(@RequestParam("drwNo") Long lottoCycleNum, Model model) {
         log.info("당첨자 요청 페이지 controller");
-        //회차 리스트
+        //전체 회차 리스트
         List<Long> cycleNumList = winningService.getCycleNumList();
-        //당첨자 리스트 가져오기
+
+        //화면에 뿌려줄 winningInfo 가져오기
+        WinningMap winningMap = winningAmountService.calcAmount(lottoCycleNum);
+        List<WinningInfoCommand> resultWinInfoList = winningService.makeWinningInfo(winningMap);
 
         //map에 담아서 회차 리스트랑 같이 보내기 -> 이 경우 리스트를 계속 요청하게 되는데 다른 방법이 있나요
         Map<String, Object> resultWinnerMap = new HashMap<>();
         resultWinnerMap.put("cycleNumList", cycleNumList);
+        resultWinnerMap.put("resultWinInfoList", resultWinInfoList);
         model.addAttribute("resultWinnerMap", resultWinnerMap);
 
-        return "";
+        return ""; //TODO: 화면 만들어서 보내주기
     }
 
 
