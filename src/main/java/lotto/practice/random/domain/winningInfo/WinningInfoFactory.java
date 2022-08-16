@@ -20,14 +20,14 @@ public class WinningInfoFactory {
      * - 수동인지 자동인지 응모 타입 (winningStorage 컬럼에 그럼 응모 타입 있어야함) -> winner로 전달받아서 저장
      */
 
-    public static WinningInfoCommand setWinningInfo(Winner winner, WinningMap winningMap) {
-        return WinningInfoCommand.builder()
+    public static WinningInfo setWinningInfo(Winner winner, WinningResult winningResult) {
+        return WinningInfo.builder()
                 .lottoCycleNum(winner.getLottoCycleNum())
                 .sixBall(winner.getSixBall())
-                .bonusBall(winner.getBonusBall())
+                .bonusBall(winner.getBonusBall().getValue())
                 .winnerRank(winner.getWinnerRank())
-                .rankTotalAmount(matchAmount(winningMap.getRankAmountCommand(), winner.getWinnerRank()))
-                .rankTotalCount(matchCount(winningMap.getTotalCount(), winner.getWinnerRank()))
+                .rankTotalAmount(matchAmount(winningResult.getRankAmountCommand(), winner.getWinnerRank()))
+                .rankTotalCount(matchCount(winningResult.getTotalCount(), winner.getWinnerRank()))
                 .userId(winner.getUser().getUserId())
                 .build();
     }
@@ -36,33 +36,45 @@ public class WinningInfoFactory {
 
         if (rank == RankType.FIFTH) {
             return getAmountCommand.getFifthAmount();
-        } else if (rank == RankType.FOURTH) {
-            return getAmountCommand.getFourthAmount();
-        } else if (rank == RankType.THIRD || rank == RankType.SECOND) {
-            return getAmountCommand.getThirdNsecondAmount();
-        } else if (rank == RankType.FIRST) {
-            return getAmountCommand.getFirstAmount();
-        } else {
-            return 0L;
         }
 
+        if (rank == RankType.FOURTH) {
+            return getAmountCommand.getFourthAmount();
+        }
+
+        if (rank == RankType.THIRD || rank == RankType.SECOND) {
+            return getAmountCommand.getThirdNsecondAmount();
+        }
+
+        if (rank == RankType.FIRST) {
+            return getAmountCommand.getFirstAmount();
+        }
+
+        return 0L;
     }
 
-    public static int matchCount(TotalCount getTotalCount, RankType rank) {
+    public static Long matchCount(TotalCount getTotalCount, RankType rank) {
 
         if (rank == RankType.FIFTH) {
             return getTotalCount.getFifthTotalCount();
-        } else if (rank == RankType.FOURTH) {
-            return getTotalCount.getFourthTotalCount();
-        } else if (rank == RankType.THIRD) {
-            return getTotalCount.getThirdTotalCount();
-        } else if (rank == RankType.SECOND) {
-            return getTotalCount.getSecondTotalCount();
-        } else if (rank == RankType.FIRST) {
-            return getTotalCount.getFirstTotalCount();
-        } else {
-            return 0;
         }
+
+        if (rank == RankType.FOURTH) {
+            return getTotalCount.getFourthTotalCount();
+        }
+
+        if (rank == RankType.THIRD) {
+            return getTotalCount.getThirdTotalCount();
+        }
+
+        if (rank == RankType.SECOND) {
+            return getTotalCount.getSecondTotalCount();
+        }
+
+        if (rank == RankType.FIRST) {
+            return getTotalCount.getFirstTotalCount();
+        }
+        return 0L;
 
     }
 

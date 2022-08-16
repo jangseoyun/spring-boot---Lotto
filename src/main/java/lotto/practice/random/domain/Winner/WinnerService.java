@@ -38,7 +38,7 @@ public class WinnerService {
      * 2. 당첨자 DB 저장 (t_winner)
      */
     @Transactional
-    public List<WinnerCommand> saveWinner(String drwNo) {
+    public List<WinnerCommand> saveWinner(Long drwNo) {
         LottoApi getThisWeekWinning = winnerDbRepository.getThisWeekWinning(drwNo);
         log.info("회차 당첨 번호 = " + getThisWeekWinning);
 
@@ -51,7 +51,9 @@ public class WinnerService {
 
         for (WinnerCommand winner : winnerList) {
             Winner getWinner = WinnerFactory.toWinner(winner);
-            winnerDbRepository.saveWinner(getWinner);
+            if (getWinner.getWinnerRank() != RankType.FAIL) {
+                winnerDbRepository.saveWinner(getWinner);
+            }
         }
 
         return winnerList;

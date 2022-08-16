@@ -15,7 +15,7 @@ import static lotto.practice.random.common.MemoryContext.MemoryKey.LAST_CYCLE_NU
 @RequiredArgsConstructor
 public class MemoryContext {
     //TODO
-    public static Map<MemoryKey, Object> memory = new HashMap<>();
+    public static Map<MemoryKey, Long> memory = new HashMap<>();
     private final WinnerService winnerService;
     private final Environment environment;
 

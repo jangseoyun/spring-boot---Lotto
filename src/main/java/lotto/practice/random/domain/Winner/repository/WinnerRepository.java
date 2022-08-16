@@ -15,7 +15,7 @@ public interface WinnerRepository {
     Long getCycleNum();
 
     //이번주 회차 데이터 가져오기
-    LottoApi getThisWeekWinning(String drwNo);
+    LottoApi getThisWeekWinning(Long drwNo);
 
     //cycleStorage에서 sixNum과 일치하는 데이터 가져옴
     List<MachineCycleStorage> getWinner(String sixNum);

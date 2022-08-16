@@ -1,11 +1,10 @@
-package lotto.practice.random.domain.winningInfo;
+package lotto.practice.random.domain.winningInfo.command;
 
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lotto.practice.random.domain.Winner.RankType;
-import lotto.practice.random.domain.Winner.entity.Winner;
 import lotto.practice.random.domain.machine.Ball;
 
 @Data
@@ -25,20 +24,19 @@ public class WinningInfoCommand {
      * - 수동인지 자동인지 응모 타입 (winningStorage 컬럼에 그럼 응모 타입 있어야함) -> winner로 전달받아서 저장
      */
 
-    private Winner winner;
     private Long lottoCycleNum; //회차 번호
     private String sixBall; //당첨 번호
     private Ball bonusBall;
     private RankType winnerRank; //당첨 순위
     private Long rankTotalAmount; //등위별 총 당첨금액
-    private int rankTotalCount; //등위별 총 당첨자
+    private Long rankTotalCount; //등위별 총 당첨자
     private Long gameAmount; //당첨자가 수령할 금액
     private String userId;
     //private 응모타입
 
     @Builder
     public WinningInfoCommand(Long lottoCycleNum, String sixBall, Ball bonusBall, RankType winnerRank,
-                              Long rankTotalAmount, int rankTotalCount, Long gameAmount, String userId) {
+                              Long rankTotalAmount, Long rankTotalCount, Long gameAmount, String userId) {
         this.lottoCycleNum = lottoCycleNum;
         this.sixBall = sixBall;
         this.bonusBall = bonusBall;
@@ -49,7 +47,7 @@ public class WinningInfoCommand {
         this.userId = userId;
     }
 
-    private Long setGameAmount(Long rankTotalAmount, int rankTotalCount) {
+    private Long setGameAmount(Long rankTotalAmount, Long rankTotalCount) {
         return (rankTotalAmount / rankTotalCount);
     }
 }

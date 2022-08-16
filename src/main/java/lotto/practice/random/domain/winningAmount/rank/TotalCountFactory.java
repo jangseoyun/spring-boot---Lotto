@@ -2,7 +2,7 @@ package lotto.practice.random.domain.winningAmount.rank;
 
 public class TotalCountFactory {
 
-    public static TotalCount setRankTotalCount(int fifthTotalCount, int fourthTotalCount, int thirdTotalCount, int secondTotalCount, int firstTotalCount) {
+    public static TotalCount setRankTotalCount(Long fifthTotalCount, Long fourthTotalCount, Long thirdTotalCount, Long secondTotalCount, Long firstTotalCount) {
         return TotalCount.builder()
                 .fifthTotalCount(fifthTotalCount)
                 .fourthTotalCount(fourthTotalCount)

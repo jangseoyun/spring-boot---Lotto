@@ -1,9 +1,6 @@
 package lotto.practice.random.domain.winningInfo;
 
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lotto.practice.random.domain.Winner.RankType;
 
 import javax.persistence.*;
@@ -11,10 +8,11 @@ import javax.validation.constraints.NotNull;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 @Entity
 @NotNull
 @Table(name = "t_winning_info")
-public class WinningInfo {//TODO: WinningInfo 테이블 만들기
+public class WinningInfo {
 
     /**
      * - 회차 번호
@@ -43,6 +41,7 @@ public class WinningInfo {//TODO: WinningInfo 테이블 만들기
     @Column(name = "bonus_ball")
     private int bonusBall;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "winner_rank")
     private RankType winnerRank; //당첨 순위
 
@@ -50,7 +49,7 @@ public class WinningInfo {//TODO: WinningInfo 테이블 만들기
     private Long rankTotalAmount; //등위별 총 당첨금액
 
     @Column(name = "rank_total_count")
-    private int rankTotalCount; //등위별 총 당첨자
+    private Long rankTotalCount; //등위별 총 당첨자
 
     @Column(name = "game_amount")
     private Long gameAmount; //당첨자가 수령할 금액
@@ -59,19 +58,21 @@ public class WinningInfo {//TODO: WinningInfo 테이블 만들기
     private String userId;
 
     @Builder
-    public WinningInfo(Long winningNo, Long lottoCycleNum, String sixBall, int bonusBall, RankType winnerRank,
-                       Long rankTotalAmount, int rankTotalCount, Long gameAmount, String userId) {
-        this.winningNo = winningNo;
+    public WinningInfo(Long lottoCycleNum, String sixBall, int bonusBall, RankType winnerRank,
+                       Long rankTotalAmount, Long rankTotalCount, String userId) {
         this.lottoCycleNum = lottoCycleNum;
         this.sixBall = sixBall;
         this.bonusBall = bonusBall;
         this.winnerRank = winnerRank;
         this.rankTotalAmount = rankTotalAmount;
         this.rankTotalCount = rankTotalCount;
-        this.gameAmount = gameAmount;
+        this.gameAmount = setGameAmount(rankTotalAmount, rankTotalCount);
         this.userId = userId;
     }
 
-    //private 응모타입
+    //사용자가 수령하게될 금액
+    private Long setGameAmount(Long rankTotalAmount, Long rankTotalCount) {
+        return (rankTotalAmount / rankTotalCount);
+    }
 
 }

@@ -18,11 +18,11 @@ public class WinningDbRepository implements RankAmountRepository {
     /**
      * 당회차 등위별 당첨자 수
      */
-    public int getRankTotalCount(RankType rank, Long lottoCycleNum) {
+    public Long getRankTotalCount(RankType rank, Long lottoCycleNum) {
         return em.createQuery(
-                        "select count(winner.winnerRank) from Winner winner" +
-                                " where winner.winnerRank = :rank" +
-                                " and winner.lottoCycleNum = :lottoCycleNum", Integer.class)
+                        "select count(winnerRank) from Winner" +
+                                " where winnerRank = :rank" +
+                                " and lottoCycleNum = :lottoCycleNum", Long.class)
                 .setParameter("rank", rank)
                 .setParameter("lottoCycleNum", lottoCycleNum)
                 .getSingleResult();

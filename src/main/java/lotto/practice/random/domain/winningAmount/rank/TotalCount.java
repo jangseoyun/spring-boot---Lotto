@@ -6,18 +6,18 @@ import lombok.Getter;
 @Getter
 public class TotalCount {
 
-    private int fifthTotalCount;
-    private int fourthTotalCount;
-    private int ThirdTotalCount;
-    private int secondTotalCount;
-    private int firstTotalCount;
+    private Long fifthTotalCount;
+    private Long fourthTotalCount;
+    private Long ThirdTotalCount;
+    private Long secondTotalCount;
+    private Long firstTotalCount;
 
     @Builder
-    public TotalCount(int fifthTotalCount, int fourthTotalCount, int thirdTotalCount,
-                      int secondTotalCount, int firstTotalCount) {
+    public TotalCount(Long fifthTotalCount, Long fourthTotalCount, Long thirdTotalCount,
+                      Long secondTotalCount, Long firstTotalCount) {
         this.fifthTotalCount = fifthTotalCount;
         this.fourthTotalCount = fourthTotalCount;
-        ThirdTotalCount = thirdTotalCount;
+        this.ThirdTotalCount = thirdTotalCount;
         this.secondTotalCount = secondTotalCount;
         this.firstTotalCount = firstTotalCount;
     }
