@@ -1,8 +1,8 @@
 package lotto.practice.random.schedule;
 
 import lombok.RequiredArgsConstructor;
-import lotto.practice.random.domain.Winner.WinnerService;
 import lotto.practice.random.domain.lottoapi.LottoApiService;
+import lotto.practice.random.domain.winner.WinnerService;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 

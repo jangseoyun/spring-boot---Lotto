@@ -2,7 +2,7 @@ package lotto.practice.random.domain.winningAmount;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import lotto.practice.random.domain.Winner.RankType;
+import lotto.practice.random.domain.winner.RankType;
 import lotto.practice.random.domain.winningAmount.rank.TotalCount;
 import lotto.practice.random.domain.winningAmount.rank.TotalCountFactory;
 import lotto.practice.random.infrastructure.WinningDbRepository;

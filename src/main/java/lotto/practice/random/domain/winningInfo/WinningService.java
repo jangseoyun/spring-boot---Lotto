@@ -2,7 +2,7 @@ package lotto.practice.random.domain.winningInfo;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import lotto.practice.random.domain.Winner.entity.Winner;
+import lotto.practice.random.domain.winner.entity.Winner;
 import lotto.practice.random.infrastructure.WinnerDbRepository;
 import lotto.practice.random.infrastructure.repository.WinningInfoJpaRepository;
 import org.springframework.stereotype.Service;

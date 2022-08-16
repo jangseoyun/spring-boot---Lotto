@@ -1,7 +1,7 @@
 package lotto.practice.random.domain.winningInfo;
 
 import lombok.*;
-import lotto.practice.random.domain.Winner.RankType;
+import lotto.practice.random.domain.winner.RankType;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

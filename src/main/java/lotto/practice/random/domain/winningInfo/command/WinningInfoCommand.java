@@ -4,8 +4,8 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lotto.practice.random.domain.Winner.RankType;
 import lotto.practice.random.domain.machine.Ball;
+import lotto.practice.random.domain.winner.RankType;
 
 @Data
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

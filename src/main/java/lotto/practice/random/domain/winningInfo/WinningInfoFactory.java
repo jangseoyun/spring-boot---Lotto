@@ -1,7 +1,7 @@
 package lotto.practice.random.domain.winningInfo;
 
-import lotto.practice.random.domain.Winner.RankType;
-import lotto.practice.random.domain.Winner.entity.Winner;
+import lotto.practice.random.domain.winner.RankType;
+import lotto.practice.random.domain.winner.entity.Winner;
 import lotto.practice.random.domain.winningAmount.RankAmountCommand;
 import lotto.practice.random.domain.winningAmount.rank.TotalCount;
 

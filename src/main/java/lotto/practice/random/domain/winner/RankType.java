@@ -1,4 +1,4 @@
-package lotto.practice.random.domain.Winner;
+package lotto.practice.random.domain.winner;
 
 public enum RankType {
     FIRST,

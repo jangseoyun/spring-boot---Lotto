@@ -1,12 +1,12 @@
-package lotto.practice.random.domain.Winner.command;
+package lotto.practice.random.domain.winner.command;
 
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import lotto.practice.random.domain.Winner.RankType;
 import lotto.practice.random.domain.machine.Ball;
 import lotto.practice.random.domain.user.User;
+import lotto.practice.random.domain.winner.RankType;
 
 import java.time.LocalDateTime;
 

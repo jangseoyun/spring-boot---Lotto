@@ -1,8 +1,8 @@
-package lotto.practice.random.domain.Winner.repository;
+package lotto.practice.random.domain.winner.repository;
 
-import lotto.practice.random.domain.Winner.entity.Winner;
 import lotto.practice.random.domain.lottoapi.LottoApi;
 import lotto.practice.random.domain.machine.MachineCycleStorage;
+import lotto.practice.random.domain.winner.entity.Winner;
 
 import java.util.List;
 

@@ -1,12 +1,12 @@
-package lotto.practice.random.domain.Winner.domain;
+package lotto.practice.random.domain.winner.domain;
 
 import lombok.extern.slf4j.Slf4j;
-import lotto.practice.random.domain.Winner.RankType;
-import lotto.practice.random.domain.Winner.command.WinnerCommand;
-import lotto.practice.random.domain.Winner.ranktype.*;
 import lotto.practice.random.domain.lottoapi.LottoApi;
 import lotto.practice.random.domain.machine.Ball;
 import lotto.practice.random.domain.machine.MachineCycleStorage;
+import lotto.practice.random.domain.winner.RankType;
+import lotto.practice.random.domain.winner.command.WinnerCommand;
+import lotto.practice.random.domain.winner.ranktype.*;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;

@@ -2,8 +2,8 @@ package lotto.practice.random.controller;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import lotto.practice.random.domain.Winner.WinnerService;
 import lotto.practice.random.domain.lottoapi.LottoApiService;
+import lotto.practice.random.domain.winner.WinnerService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;

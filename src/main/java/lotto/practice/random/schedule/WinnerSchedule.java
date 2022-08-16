@@ -2,8 +2,8 @@ package lotto.practice.random.schedule;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import lotto.practice.random.domain.Winner.WinnerService;
-import lotto.practice.random.domain.Winner.command.WinnerCommand;
+import lotto.practice.random.domain.winner.WinnerService;
+import lotto.practice.random.domain.winner.command.WinnerCommand;
 import lotto.practice.random.domain.winningAmount.WinningAmountService;
 import lotto.practice.random.domain.winningInfo.WinningResult;
 import lotto.practice.random.domain.winningInfo.WinningService;

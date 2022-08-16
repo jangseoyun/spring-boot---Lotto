@@ -1,7 +1,7 @@
 package lotto.practice.random.common;
 
 import lombok.RequiredArgsConstructor;
-import lotto.practice.random.domain.Winner.WinnerService;
+import lotto.practice.random.domain.winner.WinnerService;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
