@@ -3,7 +3,7 @@ package lotto.practice.random.domain.Winner.domain;
 import lombok.extern.slf4j.Slf4j;
 import lotto.practice.random.domain.Winner.RankType;
 import lotto.practice.random.domain.Winner.command.WinnerCommand;
-import lotto.practice.random.domain.Winner.rank.*;
+import lotto.practice.random.domain.Winner.ranktype.*;
 import lotto.practice.random.domain.lottoapi.LottoApi;
 import lotto.practice.random.domain.machine.Ball;
 import lotto.practice.random.domain.machine.MachineCycleStorage;

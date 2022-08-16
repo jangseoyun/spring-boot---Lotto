@@ -8,7 +8,7 @@ import lotto.practice.random.domain.winningAmount.rank.TotalCount;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class WinningMap {
+public class WinningMap {//TODO: 네이밍 변경 result
     private RankAmountCommand rankAmountCommand;
     private TotalCount totalCount;
 

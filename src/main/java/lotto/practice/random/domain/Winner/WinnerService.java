@@ -26,6 +26,7 @@ public class WinnerService {
     /**
      * 이번주 회차 번호 가지고 오기
      */
+    //@Async//비동기 호출 -> 사용하려면 컨피크에 등록해줘야한다
     public Long getLastCycleNum() {
         Long getLastCycelNum = winnerDbRepository.getCycleNum();
         log.info("이번주 회차 번호 : " + getLastCycelNum);

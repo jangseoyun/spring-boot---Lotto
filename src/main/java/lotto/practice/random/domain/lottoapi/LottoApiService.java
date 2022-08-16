@@ -25,15 +25,31 @@ public class LottoApiService {
         return lottoApiRepository.lottoNumSave(createLotto);
     }
 
+    /**
+     * 로또 API 전체 가져오기
+     */
     public void insertLotto(Long no) {
         for (int i = 1; i <= no; i++) {
-            String json = restApiService.readUrl(lottoHost + "?method=getLottoNumber&drwNo=" + i);
-            Gson gson = new Gson();
-            LottoApi lotto = gson.fromJson(json, LottoApi.class);
+            insertOne(no);
+        }
+    }
 
-            //디비 등록
-            lottoNumSave(lotto);
-            log.info("lotto controller: " + lotto.toString());
+    /**
+     * 매주 일요일 자동 요청
+     */
+    public void insertOne(Long no) {
+        String json = restApiService.readUrl(lottoHost + "?method=getLottoNumber&drwNo=" + no);
+        Gson gson = new Gson();
+        LottoApi lotto = gson.fromJson(json, LottoApi.class);
+
+        //디비 등록
+        lottoNumSave(lotto);
+        log.info("lotto controller: " + lotto.toString());
+
+        try {//로직의 시간을 지연시키는 것
+            Thread.sleep(100);//0.1초
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
     }
 

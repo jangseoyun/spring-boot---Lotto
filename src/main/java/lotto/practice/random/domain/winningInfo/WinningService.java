@@ -17,6 +17,7 @@ import java.util.List;
 public class WinningService {
 
     private final WinnerDbRepository winnerDbRepository;
+    private final WinningInfoJpaRepository winningInfoJpaRepository;
 
     /**
      * 회차 전체 리스트 가져오기
@@ -40,6 +41,13 @@ public class WinningService {
             resultWinInfo.add(createWinningInfo);
         }
         return resultWinInfo;
+    }
+
+    /**
+     * 회차별 winningInfo 가져오기
+     */
+    public List<WinningInfo> findWinningInfo(Long lottoCycleNum) {
+        return winningInfoJpaRepository.findBylottoCycleNum(lottoCycleNum);
     }
 
 }

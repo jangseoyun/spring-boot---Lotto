@@ -8,5 +8,4 @@ public interface RankAmountRepository {
 
     Long getTotalSellAmount(Long lottoCycleNum);
 
-
 }
