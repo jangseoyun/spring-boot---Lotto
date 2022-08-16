@@ -15,11 +15,9 @@ public class LottoSchedule {//controller로 이해
 
     private final WinnerService winnerService;
     private final LottoApiService lottoApiService;
-    //서비스 만들어서 정해진 패턴에 실행되는 로직 +1
 
-
-    @Scheduled(cron = "0 * * * * *")
-    //@Scheduled(cron = "0 0 0 * * SUN")
+    //@Scheduled(cron = "0 * * * * *")
+    @Scheduled(cron = "0 0 0 * * SUN")
     public void lottoLastCycleFetch() {
         Long lastCycleNum = winnerService.getLastCycleNum();
         memory.put(LAST_CYCLE_NUM, (lastCycleNum += 1));

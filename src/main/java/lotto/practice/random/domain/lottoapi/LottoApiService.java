@@ -26,7 +26,7 @@ public class LottoApiService {
     }
 
     /**
-     * 로또 API 전체 가져오기
+     * 로또 API 전체(1~요청회차) 저장
      */
     public void insertLotto(Long no) {
         for (int i = 1; i <= no; i++) {
@@ -35,7 +35,7 @@ public class LottoApiService {
     }
 
     /**
-     * 매주 일요일 자동 요청
+     * 매주 일요일 자동 요청 후 저장(단일 회차)
      */
     public void insertOne(Long no) {
         String json = restApiService.readUrl(lottoHost + "?method=getLottoNumber&drwNo=" + no);
