@@ -24,8 +24,19 @@ public class LottoApiController {
     private final LottoApiService lottoApiService;
     private final WinnerService winnerService;
 
-    @GetMapping("/lotto/loop")
+    /**
+     * 단일 회차 요청
+     */
+    @GetMapping("/lotto/cycle-num")
     public void getLotto(@RequestParam Long no) {
+        lottoApiService.insertLotto(no);
+    }
+
+    /**
+     * 1~요청회차 api loop
+     */
+    @GetMapping("/lotto/loop")
+    public void lottoLoop(@RequestParam Long no) {
         lottoApiService.insertLotto(no);
     }
 
