@@ -29,7 +29,7 @@ public class LottoApiController {
      */
     @GetMapping("/lotto/cycle-num")
     public void getLotto(@RequestParam Long no) {
-        lottoApiService.insertLotto(no);
+        lottoApiService.insertOne(no);
     }
 
     /**

@@ -29,8 +29,8 @@ public class LottoApiService {
      * 로또 API 전체(1~요청회차) 저장
      */
     public void insertLotto(Long no) {
-        for (int i = 1; i <= no; i++) {
-            insertOne(no);
+        for (Long i = 1L; i <= no; i++) {
+            insertOne(i);
         }
     }
 
