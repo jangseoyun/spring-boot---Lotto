@@ -44,7 +44,7 @@ public class FindWinnerImpl implements FindWinner {
         //1. 해당 유저의 6개의 추출 번호 확인
         List<Ball> sixNum = getSixnum(userOne);
         //2. 맞는 볼이 있는지 검증(return : 맞은 공 갯수)
-        int resultCheckBall = vaildSixBall(sixNum, getThisWeekWinning);
+        int resultCheckBall = validSixBall(sixNum, getThisWeekWinning);
         //3. 당첨 순위 (return : 당첨 등수 Rank)
         if (resultCheckBall >= 3) {
             return calculateCount(resultCheckBall, getThisWeekWinning.getBnusNo(), userOne.getBonusBall());
@@ -54,13 +54,16 @@ public class FindWinnerImpl implements FindWinner {
 
     //6개의 list<ball>만들기
     private List<Ball> getSixnum(MachineCycleStorage userOne) {
-        List<Ball> getSixnum = new ArrayList<>();
+
+        List<Ball> getSixnum = new ArrayList<>(6);
+
         getSixnum.add(userOne.getBall1());
         getSixnum.add(userOne.getBall2());
         getSixnum.add(userOne.getBall3());
         getSixnum.add(userOne.getBall4());
         getSixnum.add(userOne.getBall5());
         getSixnum.add(userOne.getBall6());
+
         return getSixnum;
     }
 
@@ -78,7 +81,7 @@ public class FindWinnerImpl implements FindWinner {
      *
      * @return 맞은 번호 갯수
      */
-    private int vaildSixBall(List<Ball> sixNum, LottoApi getThisWeekWinning) {
+    private int validSixBall(List<Ball> sixNum, LottoApi getThisWeekWinning) {
         List<Ball> result = sixNum.stream()
                 .filter(ball -> ball.getValue() == getThisWeekWinning.getDrwtNo1()
                         || ball.getValue() == getThisWeekWinning.getDrwtNo2()

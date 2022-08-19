@@ -139,7 +139,6 @@ public class LottoRequestDto {
      * 1티켓당 5천원까지 => 최대 30개의 숫자
      */
     private void checkLength(List<Integer> inputNumList) {
-        //TODO: 긍정문으로 변경할 수 있도록 로직을 생각해볼 것
         if ((inputNumList.size() % 6) != 0) {
             throw new ArrayIndexOutOfBoundsException("6개의 숫자를 모두 입력해주세요");
         }

@@ -20,7 +20,7 @@ import java.util.List;
 public class WinnerService {
 
     private final WinnerDbRepository winnerDbRepository;
-    private final FindWinner findWinning;
+    private final FindWinner findWinner;
 
 
     /**
@@ -46,7 +46,7 @@ public class WinnerService {
         log.info("이번회차 사용자 리스트 = " + findAllUser);
 
         //당첨자 찾기
-        List<WinnerCommand> winnerList = findWinning.getWinnerList(getThisWeekWinning, findAllUser);
+        List<WinnerCommand> winnerList = findWinner.getWinnerList(getThisWeekWinning, findAllUser);
         log.info("이번회차 당첨자 정보 리스트 = " + winnerList);
 
         for (WinnerCommand winner : winnerList) {

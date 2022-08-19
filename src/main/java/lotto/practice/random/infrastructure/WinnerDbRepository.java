@@ -35,7 +35,6 @@ public class WinnerDbRepository implements WinnerRepository {
                 .getSingleResult();
     }
 
-    //이번주 회차 데이터 가져오기 "엔티티로 받고! straem() dto로 변환해야함"
     @Override
     public LottoApi getThisWeekWinning(Long drwNo) {
         return em.createQuery(

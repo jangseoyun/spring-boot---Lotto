@@ -1,10 +1,12 @@
 package lotto.practice.random.domain.user;
 
+import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+@RequiredArgsConstructor
 class UserTest {
 
     @DisplayName("회원가입시 아이디 글자수 제한 체크")
@@ -28,14 +30,5 @@ class UserTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasStackTraceContaining("email 형태만 입력 가능합니다.");
     }
-
-    @DisplayName("중복 회원 확인")
-    @Test
-    void 중복회원() {
-        //h2 테이블 만들어야함
-
-
-    }
-
 
 }

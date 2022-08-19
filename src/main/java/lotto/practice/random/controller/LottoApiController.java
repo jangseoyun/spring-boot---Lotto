@@ -20,7 +20,6 @@ import static lotto.practice.random.common.MemoryContext.memory;
 @AllArgsConstructor
 @Slf4j
 public class LottoApiController {
-
     private final LottoApiService lottoApiService;
     private final WinnerService winnerService;
 

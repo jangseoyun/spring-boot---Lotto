@@ -34,6 +34,7 @@ public class MemoryContext {
     @RequiredArgsConstructor
     public enum MemoryKey {
         LAST_CYCLE_NUM("lastCycleNum");
+
         private final String name;
     }
 
