@@ -7,7 +7,6 @@ let selectVal;
 //로딩시 지난주 당첨번호 불러오기(저장 필요 없음)
 $(document).ready(function(){
     console.log('로딩 성공');
-    //TODO: 로딩시 유저번호, 회차번호, 이전회차 당첨번호 가져오기
 });
 
 function showInputBox() {

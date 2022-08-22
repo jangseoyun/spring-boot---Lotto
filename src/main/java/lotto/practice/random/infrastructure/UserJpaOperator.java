@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lotto.practice.random.domain.user.User;
 import lotto.practice.random.domain.user.UserOperator;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -14,7 +13,6 @@ import java.util.Optional;
 @Slf4j
 @Repository
 @RequiredArgsConstructor
-@Qualifier("UserJpaOperator")
 public class UserJpaOperator implements UserOperator {
 
     private final EntityManager em;

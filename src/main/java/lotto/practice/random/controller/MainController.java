@@ -4,8 +4,12 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lotto.practice.random.domain.lottoapi.LottoApiService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import static lotto.practice.random.common.MemoryContext.MemoryKey.LAST_CYCLE_NUM;
+import static lotto.practice.random.common.MemoryContext.memory;
 
 /**
  * Created by IntelliJ IDEA.
@@ -32,16 +36,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequiredArgsConstructor
 @RequestMapping("/lottery")
 public class MainController {
-
     //필드
     private final LottoApiService lottoApiService;
-
 
     //메소드
     //메인화면
     @GetMapping("/index")
-    public String main() {
+    public String main(Model model) {
         log.info("컨트롤러 메인 접속");
+
+        model.addAttribute("lastCycleNum", memory.get(LAST_CYCLE_NUM));
+
         //지난 회차 당첨 번호
         return "index/lotto-index";
     }

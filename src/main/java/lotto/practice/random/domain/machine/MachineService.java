@@ -3,8 +3,8 @@ package lotto.practice.random.domain.machine;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lotto.practice.random.domain.lotto.SixBall;
-import lotto.practice.random.domain.machine.dto.LottoCommand;
-import lotto.practice.random.domain.machine.dto.Lottotype;
+import lotto.practice.random.domain.machine.command.LottoCommand;
+import lotto.practice.random.domain.machine.command.Lottotype;
 import lotto.practice.random.domain.storage.BallStorage;
 import lotto.practice.random.domain.storage.StorageFactory;
 import lotto.practice.random.domain.user.User;
@@ -57,34 +57,28 @@ public class MachineService {
         if (command.getLottotype() == Lottotype.ALLAUTO) {
             log.info("allAuto");
             List<SixBall> sixBallList = machine.allAutoSixBall(command.getCount());// 6개
-
-            //입력 TODO : 중복 코드 분리하기
             //보너스 번호 -> Ball.class에서 호출(new Ball())
-            for (SixBall sixBall : sixBallList) {
-                MachineCycleStorage storageVo = MachineFactory.createStorage(command.getStorageCycle(), sixBall, new Ball(), findUserOne.get());
-                csJpaRepository.save(storageVo);
-                cycleStorageList.add(storageVo);
-                //전체 저장소 저장
-                savaBallStorage(storageVo, findUserOne);
-            }
+            saveStorage(command, findUserOne, cycleStorageList, sixBallList);
         }
 
         //2-2.반자동/전체수동
         if (command.getLottotype() == Lottotype.SELECTNUM || command.getLottotype() == Lottotype.ALLSELECT) {
             log.info("selectNum");
             List<SixBall> sixBallList = machine.selectNumSixBall(command.getCount(), command.getInputNum());//받은 번호, 구입 티켓 수 return : 6개의 볼
-
-            for (SixBall sixBall : sixBallList) {
-                MachineCycleStorage storageVo = MachineFactory.createStorage(command.getStorageCycle(), sixBall, new Ball(), findUserOne.get());
-                csJpaRepository.save(storageVo);
-                cycleStorageList.add(storageVo);
-                //전체 저장소 저장
-                savaBallStorage(storageVo, findUserOne);
-            }
-
+            saveStorage(command, findUserOne, cycleStorageList, sixBallList);
         }
 
         return cycleStorageList;
+    }
+
+    private void saveStorage(LottoCommand command, Optional<User> findUserOne, List<MachineCycleStorage> cycleStorageList, List<SixBall> sixBallList) {
+        for (SixBall sixBall : sixBallList) {
+            MachineCycleStorage storageVo = MachineFactory.createStorage(command.getStorageCycle(), sixBall, new Ball(), findUserOne.get());
+            csJpaRepository.save(storageVo);
+            cycleStorageList.add(storageVo);
+            //전체 저장소 저장
+            savaBallStorage(storageVo, findUserOne);
+        }
     }
 
     /**
