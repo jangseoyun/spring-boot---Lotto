@@ -2,20 +2,18 @@ package lotto.practice.random.domain.user;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
-@ExtendWith(SpringExtension.class)
+
 @DataJpaTest//영속성 관련된 만들bean 로드됨
 @ActiveProfiles("test")
 public class DataJpaBaseTest {
 
-    @Autowired
+    @PersistenceContext
     protected EntityManager entityManager;    //영속성 관련 bean이 때문에 의존성 주입 가능
 
     @BeforeAll
@@ -25,6 +23,6 @@ public class DataJpaBaseTest {
 
     @AfterAll
     static void close() {
-        System.out.println("ㅏ.디ㄴ됩료종가 트스테든 모");
+        System.out.println("모든 테스트가 종료됩니다.");
     }
 }

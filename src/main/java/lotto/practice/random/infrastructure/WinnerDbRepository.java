@@ -41,7 +41,8 @@ public class WinnerDbRepository implements WinnerRepository {
                         "select api from LottoApi api" +
                                 " where api.drwNo = :drwNo", LottoApi.class)
                 .setParameter("drwNo", drwNo)
-                .getSingleResult();//null값이 들어오는 경우 오류가 생길 수 있으나, 본 경우는 null값이 들어오면 안되기 때문에 사용
+                .getSingleResult();
+        //null값이 들어오는 경우 오류가 생길 수 있으나, 본 경우는 null값이 들어오면 안되기 때문에 사용
     }
 
     //cycleStorage에서 sixNum과 일치하는 데이터 가져옴
