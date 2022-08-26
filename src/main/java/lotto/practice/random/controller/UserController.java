@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lotto.practice.random.domain.user.UserService;
 import lotto.practice.random.dto.JoinDto;
+import lotto.practice.random.logging.Logging;
 import lotto.practice.random.security.SecurityService;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -35,10 +36,12 @@ public class UserController {
     }
 
     //회원가입
+    @Logging
     @PostMapping("/join")
     public String join(@Valid JoinDto joinDto
                         , BindingResult result){
-        if(result.hasErrors()){
+
+        if (result.hasErrors()) {
             log.info("회원가입시 null 발생");
             return "user/join-form";
         }
@@ -48,9 +51,19 @@ public class UserController {
         return "redirect:/user/loginForm";
     }
 
+   /* @Logging
+    public void aaaa() {
+        try {
+            System.out.println("aaa");
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }*/
+
     //로그인 폼
     @GetMapping("/loginForm")
-    public String loginForm(){
+    public String loginForm() {
         return "user/login-form";
     }
 
