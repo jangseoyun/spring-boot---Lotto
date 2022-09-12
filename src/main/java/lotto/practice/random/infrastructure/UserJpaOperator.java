@@ -59,4 +59,12 @@ public class UserJpaOperator implements UserOperator {
         return getUser;
     }
 
+    @Override
+    public User getUserOne(Long userNo) {
+        return em.createQuery("select u from User u where u.no = :userNo", User.class)
+                .setParameter("userNo", userNo)
+                .getSingleResult();
+    }
+
+
 }

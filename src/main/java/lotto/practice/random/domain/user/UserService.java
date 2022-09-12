@@ -56,4 +56,9 @@ public class UserService {
         return getUser;
     }
 
+    //getUserOne
+    public User getUserOne(Long userNo) {
+        return userOperator.getUserOne(userNo);
+    }
+
 }

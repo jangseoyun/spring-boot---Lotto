@@ -11,7 +11,9 @@ import lotto.practice.random.infrastructure.repository.WinningInfoJpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Slf4j
@@ -56,8 +58,19 @@ public class WinningService {
     /**
      * 사용자 회차별 당첨 여부 확인
      */
-    public List<WinningInfo> userGameResult(String userId, Long lottoCycleNum) {
-        return winnerDbRepository.userGameResult(userId, lottoCycleNum);
+    public Map<String, Object> userGameResult(Long userNo, Long lottoCycleNum) {
+        Map<String, Object> gameResultMap = new HashMap<>();
+
+        Optional<User> userOne = userJpaRepository.findById(userNo);
+
+        List<WinningInfo> winningInfoList = winnerDbRepository.userGameResult(userOne.get().getUserId(), lottoCycleNum);
+        if (winningInfoList.size() == 0) {
+            gameResultMap.put("gameResult", "resultEmpty");
+            return gameResultMap;
+        }
+
+        gameResultMap.put("gameResult", winningInfoList);
+        return gameResultMap;
     }
 
 

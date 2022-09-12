@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @Controller
@@ -29,7 +30,6 @@ public class WinningController {
     private final WinnerService winnerService;
     private final WinningAmountService winningAmountService;
     private final WinningService winningService;
-
     private final LottoApiService lottoApiService;
 
     /**
@@ -81,8 +81,9 @@ public class WinningController {
         List<Long> cycleNumList = winningService.getCycleNumList();
         model.addAttribute("cycleNumList", cycleNumList);
 
-        //TODO: 당첨 여부 확인
-        winningService.userGameResult();
+        Map<String, Object> userGameResult = winningService.userGameResult(userNo, lottoCycleNum);
+        log.info("userGameResult 당첨 여부 확인 : " + userGameResult);
+        model.addAttribute("userGameResult", userGameResult);
 
         //사용자 이번주 추첨 번호 리스트
         List<MachineCycleStorage> userCycleStorage = winningService.getUserCycleStorage(lottoCycleNum, userNo);

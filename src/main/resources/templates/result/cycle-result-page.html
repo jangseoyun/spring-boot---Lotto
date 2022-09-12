@@ -37,10 +37,13 @@
 <div id="wrap">
     <div id="header-wrap">
         <ul class="nav nav-pills nav-justified">
-            <li role="presentation" class=""><a href="#">이번주 당첨번호</a></li>
+            <li role="presentation" class="">
+                <a th:href="@{/winning/result/game(lottoCycleNum = ${session.lastCycleNum})}">이번주 당첨번호</a>
+            </li>
             <li role="presentation">
-                <a th:href="@{'/winning/result/user/' + ${session.userNo}(lottoCycleNum = ${session.lastCycleNum})}">내번호
-                    당첨확인</a>
+                <a th:href="@{'/winning/result/user/' + ${session.userNo}(lottoCycleNum = ${session.lastCycleNum})}">
+                    내번호 당첨확인
+                </a>
             </li>
             <li role="presentation" class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">

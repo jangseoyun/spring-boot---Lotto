@@ -38,8 +38,13 @@
 <div id="wrap">
     <div id="header-wrap">
         <ul class="nav nav-pills nav-justified">
-            <li role="presentation" class=""><a href="#">이번주 당첨번호</a></li>
-            <li role="presentation"><a href="#">내번호 당첨확인</a></li>
+            <li role="presentation">
+                <a th:href="@{/winning/result/game(lottoCycleNum = ${session.lastCycleNum})}">이번주 당첨번호</a>
+            </li>
+            <li role="presentation">
+                <a th:href="@{'/winning/result/user/' + ${session.userNo}(lottoCycleNum = ${session.lastCycleNum})}">내번호
+                    당첨확인</a>
+            </li>
             <li role="presentation" class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                     회차 바로가기 <span class="caret"></span>
@@ -59,7 +64,7 @@
 
     <div id="jumbo-box">
         <!--        당첨 내역이 없는 경우-->
-        <th:block>
+        <th:block th:if="${#strings.equals(userGameResult.gameResult, 'resultEmpty')}">
             <div id="jumbo-first">
                 <p class="size-28 center">아쉽지만 1등은 다음기회에..🥲</p>
             </div>
@@ -71,16 +76,16 @@
         </th:block>
 
         <!--        당첨 내역이 있는 경우-->
-        <!--<th:block th:if="">
+        <th:block th:if="${#lists.size(userGameResult.gameResult) > 0}">
             <div id="jumbo2-first">
-                <p class="size-28 center">🥳축하합니다🥳</p>
+                <p class="size-28 center">🥳WOW 당첨을 축하합니다🥳</p>
             </div>
             <div id="jumbo2-second">
-                <button type="button" class="btn btn-default btn-lg" onclick="location.href='/lottery/index'">
-                    click 🚀1등 가즈아!🚀 click
-                </button>
+                <th:block th:each="result : ${userGameResult.gameResult}">
+                    <p th:text="${result.userId}" class="center"></p>
+                </th:block>
             </div>
-        </th:block>-->
+        </th:block>
 
     </div>
 
