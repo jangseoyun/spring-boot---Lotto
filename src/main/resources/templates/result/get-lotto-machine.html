@@ -38,7 +38,7 @@
                 <tbody>
                 <!-- for문 돌리기 -->
                 <tr th:each="result : ${NumResultList}">
-                    <th scope="row">1</th>
+                    <th scope="row" th:text="${resultStat.count}"></th>
                     <td th:text="${result.ball1.value}"></td>
                     <td th:text="${result.ball2.value}"></td>
                     <td th:text="${result.ball3.value}"></td>

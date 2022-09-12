@@ -25,10 +25,7 @@
 
         <ul class="float-r">
             <li class="float-r header-link">
-                <a class="color" href="/user/loginForm">로그인</a>
-            </li>
-            <li class="float-r header-link">
-                <a class="color" href="/user/joinForm">회원가입</a>
+                <a class="color" th:text="${session.userId}"></a>
             </li>
         </ul>
     </div>
