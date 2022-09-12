@@ -2,13 +2,17 @@ package lotto.practice.random.domain.winningInfo;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import lotto.practice.random.domain.machine.MachineCycleStorage;
+import lotto.practice.random.domain.user.User;
 import lotto.practice.random.domain.winner.entity.Winner;
 import lotto.practice.random.infrastructure.WinnerDbRepository;
+import lotto.practice.random.infrastructure.repository.UserJpaRepository;
 import lotto.practice.random.infrastructure.repository.WinningInfoJpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -18,6 +22,7 @@ public class WinningService {
 
     private final WinnerDbRepository winnerDbRepository;
     private final WinningInfoJpaRepository winningInfoJpaRepository;
+    private final UserJpaRepository userJpaRepository;
 
     /**
      * 회차 전체 리스트 가져오기
@@ -46,6 +51,28 @@ public class WinningService {
      */
     public List<WinningInfo> findWinningInfo(Long lottoCycleNum) {
         return winningInfoJpaRepository.findByLottoCycleNum(lottoCycleNum);
+    }
+
+    /**
+     * 사용자 회차별 당첨 여부 확인
+     */
+    public List<WinningInfo> userGameResult(String userId, Long lottoCycleNum) {
+        return winnerDbRepository.userGameResult(userId, lottoCycleNum);
+    }
+
+
+    /**
+     * 사용자 회차별 추첨리스트 가져오기
+     */
+    public List<MachineCycleStorage> getUserCycleStorage(Long cycleNum, Long userNo) {
+        Optional<User> getUser = userJpaRepository.findById(userNo);
+        if (getUser == null) {
+            throw new NullPointerException("로그인을 해주세요.");
+        }
+
+        List<MachineCycleStorage> userCycleStorageList = winnerDbRepository.getUserCycleStorage(cycleNum, getUser.get().getNo());
+
+        return userCycleStorageList;
     }
 
 }

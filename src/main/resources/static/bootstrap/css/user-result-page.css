@@ -29,3 +29,9 @@
     padding: 30px 30px 30px 30px;
     text-align: center;
 }
+
+/* 로또 당첨금 테이블 */
+#lotto-table {
+    height: 40px;
+    border: 1px solid #9999;
+}

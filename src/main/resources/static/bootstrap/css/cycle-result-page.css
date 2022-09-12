@@ -94,14 +94,6 @@
     margin-right: 30px;
 }
 
-/* 로또 당첨금 테이블 */
-#lotto-table {
-    height: 40px;
-    text-align: center;
-    border: 1px solid #9999;
-}
-
-
 /* footer */
 #footer {
     text-align: center;

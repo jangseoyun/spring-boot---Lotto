@@ -3,6 +3,7 @@ package lotto.practice.random.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lotto.practice.random.domain.lottoapi.LottoApiService;
+import lotto.practice.random.domain.machine.MachineCycleStorage;
 import lotto.practice.random.domain.winner.WinnerService;
 import lotto.practice.random.domain.winner.command.WinnerCommand;
 import lotto.practice.random.domain.winningAmount.WinningAmountService;
@@ -13,6 +14,7 @@ import lotto.practice.random.dto.LottoApiDto;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -71,10 +73,25 @@ public class WinningController {
         return "result/cycle-result-page";
     }
 
-    @GetMapping("/result/user")
-    public String userLottoResult(Model model) {
+    @GetMapping("/result/user/{userNo}")
+    public String userLottoResult(@PathVariable("userNo") Long userNo
+            , @RequestParam("lottoCycleNum") Long lottoCycleNum
+            , Model model) {
+        //전체 회차 리스트
         List<Long> cycleNumList = winningService.getCycleNumList();
         model.addAttribute("cycleNumList", cycleNumList);
+
+        //TODO: 당첨 여부 확인
+        winningService.userGameResult();
+
+        //사용자 이번주 추첨 번호 리스트
+        List<MachineCycleStorage> userCycleStorage = winningService.getUserCycleStorage(lottoCycleNum, userNo);
+        if (userCycleStorage == null) {
+            model.addAttribute("userStorage", "storageEmpty");
+        }
+
+        model.addAttribute("userStorage", userCycleStorage);
+
         return "result/user-result-page";
     }
 

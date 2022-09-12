@@ -6,6 +6,7 @@ import lotto.practice.random.domain.lottoapi.LottoApi;
 import lotto.practice.random.domain.machine.MachineCycleStorage;
 import lotto.practice.random.domain.winner.entity.Winner;
 import lotto.practice.random.domain.winner.repository.WinnerRepository;
+import lotto.practice.random.domain.winningInfo.WinningInfo;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -62,11 +63,34 @@ public class WinnerDbRepository implements WinnerRepository {
                 .getResultList();
     }
 
+    //사용자 이번회차 추첨 리스트 가져오기
+    @Override
+    public List<MachineCycleStorage> getUserCycleStorage(Long cycleNum, Long userNo) {
+        return em.createQuery("select mcs from MachineCycleStorage mcs" +
+                        " where mcs.storageCycle = :cycleNum" +
+                        " and mcs.user.no = :userNo", MachineCycleStorage.class)
+                .setParameter("cycleNum", cycleNum)
+                .setParameter("userNo", userNo)
+                .getResultList();
+    }
+
+    //사용자 해당회차 당첨 여부 확인
+    public List<WinningInfo> userGameResult(String userId, Long lottoCycleNum) {
+        return em.createQuery("select win from WinningInfo win" +
+                        " where win.userId = : userId" +
+                        " and win.lottoCycleNum = : lottoCycleNum", WinningInfo.class)
+                .setParameter("userId", userId)
+                .setParameter("lottoCycleNum", lottoCycleNum)
+                .getResultList();
+    }
+
     @Override
     public List<Winner> findAllWinner() {
         return em.createQuery("select winner from Winner winner", Winner.class)
                 .getResultList();
     }
+
+
 
 
 }
