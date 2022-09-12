@@ -37,9 +37,14 @@ td, tr, textarea, button, form {
     background-position: bottom;
     border-radius: 0px 0px 35px 35px;
     position: relative;
-}   
+}
 
-#header-content-wrap{
+#header-login {
+    width: 1130px;
+    margin: 15px auto;
+}
+
+#header-content-wrap {
     width: 1130px;
     margin: 0px auto;
 }
@@ -56,29 +61,39 @@ td, tr, textarea, button, form {
 /*---------------------------------------*/
 
 #last-week-num {
-    height: 150px;
+    height: 200px;
     width: 700px;
     background-image: url(../img/lotto.png);
     background-position: top;
     background-size: cover;
     border-radius: 10px;
-    position: relative; left: 200px; top: 130px;
+    position: relative;
+    left: 200px;
+    top: 130px;
+    left: 200px;
+    top: 180px;
     box-shadow: 5px 10px 10px #deddde;
+    padding: 15px 0px 15px 0px;
 }
 
-#last-week-ball{
-    padding: 10px
+#last-week-ball {
+    padding: 10px;
+    text-align: center;
 }
 
-#last-week-ball>div {
-    width: 55px;
-    height: 55px;
+#last-week-ball > div {
+    width: 60px;
+    height: 60px;
     display: inline-block;
     border-radius: 50%;
     background-color: #ffffff;
-    font-size: 40px;
-    text-align: center;
     margin-right: 20px;
+    padding: 5px 0px 5px 0px;
+}
+
+#last-week-ball > div > strong {
+    font-size: 35px;
+    text-align: center;
 }
 
 /* --------------contents---------------- */

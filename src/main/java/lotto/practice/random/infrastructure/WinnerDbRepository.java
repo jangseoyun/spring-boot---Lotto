@@ -26,15 +26,6 @@ public class WinnerDbRepository implements WinnerRepository {
                 .getResultList();
     }
 
-    //이번주 회차 번호 가지고 오기
-    @Override
-    public Long getCycleNum() {
-        return em.createQuery(
-                        "select max(api.drwNo) from LottoApi api"
-                        , Long.class)
-                .getSingleResult();
-    }
-
     @Override
     public LottoApi getThisWeekWinning(Long drwNo) {
         return em.createQuery(

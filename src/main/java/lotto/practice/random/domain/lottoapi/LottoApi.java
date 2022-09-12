@@ -21,11 +21,10 @@ public class LottoApi {
     @Column(name = "lotto_no")
     private Long no;
 
-
     @Column(name = "six_ball")
     private String sixBall;
 
-    /*번호 추출*/
+    /*번호 정보*/
     @Column(name = "ball_01")
     private int drwtNo1;
 
@@ -47,7 +46,7 @@ public class LottoApi {
     @Column(name = "ball_bonus")
     private int bnusNo;
 
-    /*번호 추출*/
+    /*상금 정보*/
     @Column(name = "lotto_date")
     private String drwNoDate; //추첨일
 
@@ -69,8 +68,7 @@ public class LottoApi {
     /**
      * 생성 메서드
      */
-
-    /*    {"totSellamnt":3681782000
+    /*     {"totSellamnt":3681782000
             ,"returnValue":"success"
             ,"drwNoDate":"2002-12-07"
             ,"firstWinamnt":0

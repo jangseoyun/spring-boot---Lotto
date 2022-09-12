@@ -13,8 +13,8 @@ function showInputBox() {
     console.log('typeSelect 성공');
 
     selectVal = $('#selectType').val();
-    if (selectVal == 'selectNum' || selectVal == 'allSelect') {
-        console.log('selectNum, allSelect');
+    if (selectVal == 'SELECTNUM' || selectVal == 'ALLSELECT') {
+        console.log('SELECTNUM, ALLSELECT');
         render(selectVal);
     } else {
         removeRender(selectVal);

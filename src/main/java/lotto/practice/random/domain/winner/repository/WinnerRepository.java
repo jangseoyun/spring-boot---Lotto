@@ -11,9 +11,6 @@ public interface WinnerRepository {
     //회차 리스트
     List<Long> getCycleNumList();
 
-    //이번주 회차 번호 가지고 오기
-    Long getCycleNum();
-
     //이번주 회차 데이터 가져오기
     LottoApi getThisWeekWinning(Long drwNo);
 

@@ -2,6 +2,7 @@ package lotto.practice.random.domain.user;
 
 import lombok.RequiredArgsConstructor;
 import lotto.practice.random.dto.JoinDto;
+import lotto.practice.random.dto.LoginDto;
 import lotto.practice.random.exception.AlreadyExistIdException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -49,11 +50,10 @@ public class UserService {
 
     }
 
-
-
-
     //로그인
-
-    //로그아웃
+    public User login(LoginDto userLogin) {
+        User getUser = userOperator.checkLogin(userLogin);
+        return getUser;
+    }
 
 }

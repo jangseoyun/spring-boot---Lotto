@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로또 회차 결과</title>
+
+    <link href="/bootstrap/css/cycle-result-page.css" rel="stylesheet">
+    <link href="/bootstrap/css/source.css" rel="stylesheet">
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <script src="/bootstrap/js/jquery-1.12.4.js"></script>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+<div id="header" class="clearfix">
+    <div id="header-box">
+        <h1 id="logo" class="float-l">
+            <a href="/lottery/index">LoTTery.</a>
+        </h1>
+
+        <ul class="float-r">
+            <li class="float-r header-link">
+                <a class="color" href="/user/loginForm">로그인</a>
+            </li>
+            <li class="float-r header-link">
+                <a class="color" href="/user/joinForm">회원가입</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div id="wrap">
+    <div id="header-wrap">
+        <ul class="nav nav-pills nav-justified">
+            <li role="presentation" class=""><a href="#">이번주 당첨번호</a></li>
+            <li role="presentation"><a href="/winning/result/user">내번호 당첨확인</a></li>
+            <li role="presentation" class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                    회차 바로가기 <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                    <th:block th:each="cycleNum : ${cycleNumList}">
+                        <li>
+                            <a th:text="${cycleNum} + 회"
+                               th:href="@{/winning/result/game(lottoCycleNum = ${cycleNum})}"></a>
+                        </li>
+                    </th:block>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div id="content-wrap">
+        <div id="cycle-wrap">
+            <div id="cycle-num">
+                <strong th:text="${lottoSingleResult.cycleNum} + 회 ">[ 1026회 ]</strong>
+                <span>당첨결과</span>
+            </div>
+
+            <div id="cycle-lotto-result">
+                <div id="ball">
+                    <span th:text="${lottoSingleResult.ball1}">1</span>
+                    <span th:text="${lottoSingleResult.ball2}">2</span>
+                    <span th:text="${lottoSingleResult.ball3}">3</span>
+                    <span th:text="${lottoSingleResult.ball4}">4</span>
+                    <span th:text="${lottoSingleResult.ball5}">5</span>
+                    <span th:text="${lottoSingleResult.ball6}">6</span>
+                    <span>+ bonus</span>
+                    <span th:text="${lottoSingleResult.bonusBall}">0</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading">Lottery 사이트 기준</div>
+            <!-- Table -->
+            <table class="table">
+                <thead class="thead-light">
+                <tr>
+                    <th scope="col">순위</th>
+                    <th scope="col">등위별 총 당첨금액</th>
+                    <th scope="col">당첨게임 수</th>
+                    <th scope="col">1게임당 당첨금액</th>
+                    <th scope="col">당첨기준</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row">1등</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                    <td>당첨번호 6개 숫자일치</td>
+                </tr>
+                <tr>
+                    <th scope="row">2등</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                    <td>당첨번호 5개 숫자일치
+                        +보너스 숫자일치
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">3등</th>
+                    <td>Larry</td>
+                    <td>the Bird</td>
+                    <td>@twitter</td>
+                    <td>당첨번호 5개 숫자일치</td>
+                </tr>
+                <tr>
+                    <th scope="row">4등</th>
+                    <td>Larry</td>
+                    <td>the Bird</td>
+                    <td>50,000원</td>
+                    <td>당첨번호 4개 숫자일치</td>
+                </tr>
+                <tr>
+                    <th scope="row">5등</th>
+                    <td>Larry</td>
+                    <td>the Bird</td>
+                    <td>5,000원</td>
+                    <td>당첨번호 3개 숫자일치</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <p> - 당첨금 지급기한 : 지급개시일로부터 1년 (휴일인 경우 익영업일)</p>
+    <p> - 총 판매금액: <strong th:text="${lottoSingleResult.totSellamnt}"></strong></p>
+    <p> - 미수령 당첨금: <strong>-</strong></p>
+
+</div>
+
+
+<!--footer-->
+<div th:replace="fragments/footer :: footer"/>
+
+</div>
+
+</body>
+
+</html>

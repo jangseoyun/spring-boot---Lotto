@@ -1,7 +1,7 @@
 package lotto.practice.random.common;
 
 import lombok.RequiredArgsConstructor;
-import lotto.practice.random.domain.winner.WinnerService;
+import lotto.practice.random.domain.lottoapi.LottoApiService;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
@@ -16,18 +16,13 @@ import static lotto.practice.random.common.MemoryContext.MemoryKey.LAST_CYCLE_NU
 public class MemoryContext {
     //TODO
     public static Map<MemoryKey, Long> memory = new HashMap<>();
-    private final WinnerService winnerService;
+    private final LottoApiService lottoApiService;
     private final Environment environment;
-
-    /*public MemoryContext(WinnerService winnerService, Environment environment) {
-        this.winnerService = winnerService;
-        this.environment = environment;
-    }*/
 
     @PostConstruct
     public void init() {
         //마지막 회차 번호 얻기
-        Long lastCycleNum = isTestProperties() ? 1L : winnerService.getLastCycleNum();
+        Long lastCycleNum = isTestProperties() ? 1L : lottoApiService.getLastCycleNum();
         memory.put(LAST_CYCLE_NUM, lastCycleNum);
     }
 
@@ -42,4 +37,5 @@ public class MemoryContext {
         String activeProfile = environment.getActiveProfiles()[0];
         return activeProfile.equals("local") || activeProfile.equals("test");
     }
+
 }

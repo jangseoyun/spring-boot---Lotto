@@ -19,17 +19,23 @@
     <div id="all-wrap">
         <!--header 공통 빼기-->
         <div id="header">
-            <div class="clearfix">
+            <div id="header-login" class="clearfix">
                 <h1 id="logo" class="inline-b">
                     <a href="/lottery/index">LoTTery.</a>
                 </h1>
 
-                <ul class="float-r">
+                <ul th:if="${session.userId == null}" class="float-r">
                     <li class="header-link">
-                        <a class="color" href="/user/loginForm">로그인</a>
+                        <a class="color" href="/user/login-form">로그인</a>
                     </li>
                     <li class="header-link">
-                        <a class="color" href="/user/joinForm">회원가입</a>
+                        <a class="color" href="/user/join-form">회원가입</a>
+                    </li>
+                </ul>
+
+                <ul th:if="${session.userId != null}" class="float-r">
+                    <li class="header-link">
+                        <a class="color" th:text="${session.userId}"></a>
                     </li>
                 </ul>
             </div>
@@ -37,19 +43,16 @@
             <div id="header-content-wrap">
                 <div id="last-week-num">
                     <div class="txt-bold-25-white">지난 주 당첨 번호</div>
-                    <!--for문으로 돌리기-->
                     <div id="last-week-ball">
-                        <div th:value="lastCycleNum"></div>
-                        <div>1</div>
-                        <div>2</div>
-                        <div>3</div>
-                        <div>4</div>
-                        <div>5</div>
-                        <div>6</div>
+                        <div><strong th:text="${lottoResult.ball1}"></strong></div>
+                        <div><strong th:text="${lottoResult.ball2}"></strong></div>
+                        <div><strong th:text="${lottoResult.ball3}"></strong></div>
+                        <div><strong th:text="${lottoResult.ball4}"></strong></div>
+                        <div><strong th:text="${lottoResult.ball5}"></strong></div>
+                        <div><strong th:text="${lottoResult.ball6}"></strong></div>
                         <span class="txt-bold-25-white">+</span>
-                        <div>7</div>
+                        <div><strong th:text="${lottoResult.bonusBall}"></strong></div>
                     </div>
-                    <!--for문으로 돌리기-->
                 </div>
             </div>
 
@@ -58,15 +61,14 @@
 
         <div id="contents" class="clearfix">
             <div id="content-top">
-
-                <form action="/machine/lottoNum" method="get" id="radio-box" class="txt-bold-25-black">
+                <form action="/machine/get-lotto-num" method="get" id="radio-box" class="txt-bold-25-black">
                     <label th:for="selectType" class="st-block">로또번호 생성기 타입을 선택해 주세요 !</label>
-                    <select th:id="selectType" name="type" class="form-select" aria-label=".form-select-lg example"
+                    <select th:id="selectType" name="lottotype" class="form-select" aria-label=".form-select-lg example"
                             onchange="showInputBox()">
                         <option selected>타입 선택</option>
-                        <option value="allAuto">전체자동</option>
-                        <option value="selectNum">반자동</option>
-                        <option value="allSelect">전체수동</option>
+                        <option value="ALLAUTO">전체자동</option>
+                        <option value="SELECTNUM">반자동</option>
+                        <option value="ALLSELECT">전체수동</option>
                     </select>
 
                     <div id="showInputBox">
@@ -78,13 +80,12 @@
                         <input type="number" name="price" value="" placeholder="금액입력 후 Enter !">
                     </div>
 
-                    <!--                    //TODO: 로그인한 유저 번호, 회차 번호 숨겨서 보내기-->
+                    <!-- 로그인한 유저 번호, 회차 번호 숨겨서 보내기-->
+                    <input type="hidden" name="userNo" th:value="${session.userNo}">
+                    <input type="hidden" name="storageCycle" th:value="${session.lastCycleNum}">
                     <button type="submit" class="btn btn-warning btn-lg">GO!</button>
-
                 </form>
-
             </div>
-
         </div>
 
         <!--footer-->

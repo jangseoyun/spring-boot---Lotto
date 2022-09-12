@@ -49,7 +49,7 @@ public class LottoRequestDto {
 
     private Long storageCycle;
 
-    //요청 회차 (기존 회차 + 1)
+    //요청 회차 (DB 마지막 회차 + 1 : 화면에서 받음)
     private LottoRequestDto(Long userNo, Lottotype lottotype, int price, Long storageCycle) {
         this.userNo = userNo;
         this.lottotype = lottotype;

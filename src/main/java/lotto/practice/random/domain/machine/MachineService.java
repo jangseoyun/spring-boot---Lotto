@@ -25,7 +25,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Transactional
 public class MachineService {
-
     //필드
     private final Machine machine;
 
@@ -38,16 +37,15 @@ public class MachineService {
     /**
      * 타입에 따른 6개의 추출 번호
      * * 전체 자동
-     * * 반자동 (수동 + 자동)
+     * * 반자동
      * * 전체 수동
      */
     //메소드
     public List<MachineCycleStorage> operateMachine(LottoCommand command) {
-
         log.info("service operateMachine 접속");
         log.debug("command = " + command);
 
-        //1.로그인한 user가져오기
+        //1.번호 추출 요청한 user 가져오기
         Optional<User> findUserOne = userJpaRepository.findById(command.getUserNo());
 
         //2.번호 추출 및 등록 요청

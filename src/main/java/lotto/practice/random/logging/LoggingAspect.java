@@ -15,10 +15,10 @@ import java.util.concurrent.TimeUnit;
 public class LoggingAspect extends CommonPointCut {
     private final ThreadLocal<Long> startTime = new ThreadLocal<>();
 
-    @Around("logging()")//TODO 버그 찾아보기 , before after등 찾아보기
+    @Around("logging()")//joinPoint TODO 버그 찾아보기 , before after 등 찾아보기
     public Object logging(ProceedingJoinPoint joinPoint) {//실제로 실행되는 타켓
         Object result;
-        try {
+        try {//weaving
             startTime.set(System.nanoTime()); //부가적인 기능
 
             result = joinPoint.proceed(); //타겟 실행  - 관심사

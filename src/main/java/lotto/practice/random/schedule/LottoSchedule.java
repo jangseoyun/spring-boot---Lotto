@@ -2,7 +2,6 @@ package lotto.practice.random.schedule;
 
 import lombok.RequiredArgsConstructor;
 import lotto.practice.random.domain.lottoapi.LottoApiService;
-import lotto.practice.random.domain.winner.WinnerService;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -13,13 +12,12 @@ import static lotto.practice.random.common.MemoryContext.memory;
 @RequiredArgsConstructor
 public class LottoSchedule {//controller로 이해
 
-    private final WinnerService winnerService;
     private final LottoApiService lottoApiService;
 
     //@Scheduled(cron = "0 * * * * *")
     @Scheduled(cron = "0 30 21 * * SAT")//토요일 오후 9시30분
     public void lottoLastCycleFetch() {
-        Long lastCycleNum = winnerService.getLastCycleNum();
+        Long lastCycleNum = lottoApiService.getLastCycleNum();
         memory.put(LAST_CYCLE_NUM, (lastCycleNum += 1));
         lottoApiService.insertOne(lastCycleNum);//가져온 회차 api DB 저장 로직
         System.out.println("lastCycleNum = " + lastCycleNum);

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로또 번호 추출 결과</title>
+
+    <link href="/bootstrap/css/get-lotto-machine.css" rel="stylesheet">
+    <link href="/bootstrap/css/source.css" rel="stylesheet">
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <script src="/bootstrap/js/jquery-1.12.4.js"></script>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+<div id="wrap">
+
+    <h1>자동 로또 번호!!</h1>
+    <div id="jumbo">
+        <div id="table-box">
+            <table id="table-num" class="table">
+                <thead>
+                <tr>
+                    <th scope="col">티켓 수</th>
+                    <th scope="col">첫 번째</th>
+                    <th scope="col">두 번째</th>
+                    <th scope="col">세 번째</th>
+                    <th scope="col">네 번째</th>
+                    <th scope="col">다섯번째</th>
+                    <th scope="col">여섯번째</th>
+                    <th scope="col">보너스 번호</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <!-- for문 돌리기 -->
+                <tr th:each="result : ${NumResultList}">
+                    <th scope="row">1</th>
+                    <td th:text="${result.ball1.value}"></td>
+                    <td th:text="${result.ball2.value}"></td>
+                    <td th:text="${result.ball3.value}"></td>
+                    <td th:text="${result.ball4.value}"></td>
+                    <td th:text="${result.ball5.value}"></td>
+                    <td th:text="${result.ball6.value}"></td>
+                    <td th:text="${result.bonusBall.value}"></td>
+                </tr>
+                <!-- for문 돌리기 -->
+                </tbody>
+            </table>
+        </div>
+
+        <nav>
+            <ul class="pager">
+                <li><a href="#">Previous</a></li>
+                <li><a href="#">Next</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div id="button-wrap">
+        <button id="main-button" type="button" class="btn btn-warning btn-block"
+                onclick="location.href='/lottery/index'">로또 번호 뽑으러가기
+        </button>
+
+        <form action="/winning/result/game" method="get">
+            <input type="hidden" name="lottoCycleNum" th:value="${session.lastCycleNum}">
+            <button type="submit" class="btn btn-warning btn-block">회차별 당첨자 조회</button>
+        </form>
+    </div>
+
+    <!--footer-->
+    <div th:replace="fragments/footer :: footer"/>
+
+</div>
+</body>
+</html>

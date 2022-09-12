@@ -25,15 +25,16 @@ public class MachineController {
     public final MachineService machineService;
 
     //메서드
-    @GetMapping("/lottoNum")
+    @GetMapping("/get-lotto-num")
     public String inputVerify(@ModelAttribute LottoRequestDto lottoRequestDto, Model model) {
         log.info("controller lottoRequestDto = " + lottoRequestDto);
 
         //lottoRequestDto service로 넘길때 command object로 변환해줘야한다.
         List<MachineCycleStorage> numResultList = machineService.operateMachine(lottoRequestDto.toCommand(lottoRequestDto));
+        log.info("랜덤 추출 번호 : " + numResultList);
         model.addAttribute("NumResultList", numResultList);
 
-        return "lotto-result-num";
+        return "result/get-lotto-machine";
     }
 
 

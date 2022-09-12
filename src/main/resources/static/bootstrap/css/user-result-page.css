@@ -1,0 +1,31 @@
+@charset "UTF-8";
+
+/* 로또 당첨금 테이블 */
+#panel-header {
+    background-color: #770f6691 !important;
+    border-color: #770f6691 !important;
+    color: white;
+}
+
+#panel-box {
+    border-color: #770f6691 !important;
+}
+
+#jumbo-box {
+    height: 300px;
+    background-color: #f1f1f1;
+    border-radius: 15px;
+    margin-bottom: 35px;
+    padding: 10px 10px 10px 10px;
+}
+
+#jumbo-first {
+    height: 150px;
+    padding: 70px 10px 10px 10px;
+}
+
+#jumbo-second {
+    height: 100px;
+    padding: 30px 30px 30px 30px;
+    text-align: center;
+}
