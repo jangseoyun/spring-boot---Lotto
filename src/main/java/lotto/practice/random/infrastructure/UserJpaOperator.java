@@ -36,27 +36,20 @@ public class UserJpaOperator implements UserOperator {
     }
 
     @Override
-    //이전 비밀번호 값을 가져오는 메소드
-    public String getOldPassword(String userId) {
-        User findUser = em.createQuery("select u from User u where u.userId = :userId", User.class)
-                .setParameter("userId", userId)
-                .getSingleResult();
-        return findUser.getUserPw();
-    }
-
-    @Override
     public User checkLogin(LoginDto loginUser) {
-        User getUser = em.createQuery("select u from User u" +
+        List<User> getUserLogin = em.createQuery("select u from User u" +
                         " where u.userId = :loginId" +
                         " and u.userPw = :loginPw", User.class)
                 .setParameter("loginId", loginUser.getUserId())
                 .setParameter("loginPw", loginUser.getUserPw())
-                .getSingleResult();
-        if (getUser == null) {
+                .getResultList();
+
+        if (getUserLogin.size() == 0) {
             throw new IllegalArgumentException("아이디 혹은 비밀번호가 일치하지 않습니다.");
         }
 
-        return getUser;
+        return getUserLogin.get(0);
+
     }
 
     @Override
