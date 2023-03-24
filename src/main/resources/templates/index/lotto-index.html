@@ -33,11 +33,25 @@
                     </li>
                 </ul>
 
-                <ul th:if="${session.userId != null}" class="float-r">
-                    <li class="header-link">
-                        <a class="color" th:text="${session.userId}"></a>
-                    </li>
-                </ul>
+                <th:block th:if="${session.userId != null}">
+                    <div class="dropdown float-r">
+                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1"
+                                data-toggle="dropdown" aria-expanded="true" th:text="${session.userId}">
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                            <li role="presentation"><a role="menuitem" tabindex="-1"
+                                                       th:href="@{'/winning/result/user/' + ${session.userNo}(lottoCycleNum = ${session.lastCycleNum})}">내번호
+                                당첨확인</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1"
+                                                       th:href="@{/winning/result/game(lottoCycleNum = ${session.lastCycleNum})}">회차별
+                                추첨결과</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" th:href="@{/user/logout}">로그아웃</a>
+                            </li>
+                        </ul>
+                    </div>
+                </th:block>
+
             </div>
 
             <div id="header-content-wrap">
