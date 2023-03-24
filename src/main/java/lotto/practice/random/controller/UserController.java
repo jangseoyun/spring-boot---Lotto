@@ -64,7 +64,26 @@ public class UserController {
         return "user/login-form";
     }
 
-    //로그인
+    @PostMapping("/login")
+    public String login(LoginDto accessUser, HttpSession session) {
+        log.info("accessUser : " + accessUser);
+        User loginResult = userService.login(accessUser);
+        session.setAttribute("userId", loginResult.getUserId());
+        session.setAttribute("userNo", loginResult.getNo());
+
+        return "redirect:/lottery/index";
+    }
+
+    //로그아웃
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.removeAttribute("userId");
+        session.removeAttribute("userPw");
+        session.invalidate();
+        return "redirect:/lottery/index";
+    }
+
+    //로그인 spring security
     /*@PostMapping("/login")
     public Map<String, Object> login(@RequestParam(value = "subject") String subject) {//실제로는 로그인 정보 받기User
         String token = securityService.createToken(subject, (2 * 1000 * 60));//만료시간은 보통 30분이지만 테스트를 위해서 2분
@@ -72,15 +91,6 @@ public class UserController {
         map.put("result", token);
         return map;
     }*/
-    @PostMapping("/login")
-    public String login(LoginDto accessUser, HttpSession session) {
-        log.info("accessUser : " + accessUser);
-        User getUser = userService.login(accessUser);
-        session.setAttribute("userId", getUser.getUserId());
-        session.setAttribute("userNo", getUser.getNo());
-
-        return "redirect:/lottery/index";
-    }
 
     //값 검증하는것
     /*@GetMapping("/get/subject")
@@ -90,13 +100,5 @@ public class UserController {
         map.put("result", subject);
         return map;
     }*/
-
-    //로그아웃
-    public void logout(HttpSession session) {
-        session.removeAttribute("userId");
-        session.removeAttribute("userPw");
-        session.invalidate();
-    }
-
 
 }

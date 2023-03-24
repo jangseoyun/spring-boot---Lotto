@@ -11,8 +11,6 @@ public interface UserOperator {
 
     Optional<User> findUserNo(String userId);
 
-    String getOldPassword(String userId);
-
     User checkLogin(LoginDto loginUser);
 
     User getUserOne(Long userNo);

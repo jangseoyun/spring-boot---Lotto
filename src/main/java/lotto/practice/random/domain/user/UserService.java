@@ -1,6 +1,7 @@
 package lotto.practice.random.domain.user;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import lotto.practice.random.dto.JoinDto;
 import lotto.practice.random.dto.LoginDto;
 import lotto.practice.random.exception.AlreadyExistIdException;
@@ -9,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -52,8 +54,8 @@ public class UserService {
 
     //로그인
     public User login(LoginDto userLogin) {
-        User getUser = userOperator.checkLogin(userLogin);
-        return getUser;
+        User loginResult = userOperator.checkLogin(userLogin);
+        return loginResult;
     }
 
     //getUserOne
