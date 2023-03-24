@@ -1,15 +1,11 @@
 server:
   port: 8080
-
-spring:
-  profiles:
-    activate: test
+  servlet:
+    encoding:
+      force-response: true
+      charset: UTF-8
 
 api:
   lotto:
     host: https://www.dhlottery.co.kr/common.do
-
-
-
-
 
