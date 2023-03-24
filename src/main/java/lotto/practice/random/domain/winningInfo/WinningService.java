@@ -61,6 +61,7 @@ public class WinningService {
     public Map<String, Object> userGameResult(Long userNo, Long lottoCycleNum) {
         Map<String, Object> gameResultMap = new HashMap<>();
 
+        //해당 유저 확인
         Optional<User> userOne = userJpaRepository.findById(userNo);
 
         List<WinningInfo> winningInfoList = winnerDbRepository.userGameResult(userOne.get().getUserId(), lottoCycleNum);

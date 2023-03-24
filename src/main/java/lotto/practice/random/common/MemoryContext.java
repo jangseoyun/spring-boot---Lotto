@@ -19,7 +19,7 @@ public class MemoryContext {
     private final LottoApiService lottoApiService;
     private final Environment environment;
 
-    @PostConstruct
+    @PostConstruct //생성자 호출 후 자동으로 실행 lottoApiService 생성 -> init 메서드 실행하여 마지막 회차 번호 가져옴
     public void init() {
         //마지막 회차 번호 얻기
         Long lastCycleNum = isTestProperties() ? 1L : lottoApiService.getLastCycleNum();
