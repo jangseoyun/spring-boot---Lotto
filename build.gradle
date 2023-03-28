@@ -33,24 +33,37 @@ dependencies {
     runtimeOnly 'com.h2database:h2'
 
     implementation 'javax.xml.bind:jsxb-api'
-    implementation 'io.jsonwebtoken:jjwt-jackson:0.11.5'
-    implementation 'io.jsonwebtoken:jjwt-impl:0.11.5'
+	implementation 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+	implementation 'io.jsonwebtoken:jjwt-impl:0.11.5'
 
-    // TEST
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.junit.jupiter:junit-jupiter-api'
-    testImplementation 'org.junit.jupiter:junit-jupiter-params'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+	// TEST
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.junit.jupiter:junit-jupiter-api'
+	testImplementation 'org.junit.jupiter:junit-jupiter-params'
+	testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
 
-    testImplementation 'io.rest-assured:rest-assured:3.3.0'
+	testImplementation 'io.rest-assured:rest-assured:3.3.0'
 
-    // 빌드
-    //implementation 'org.glassfish.jaxb:jaxb-runtime'
+	// Lambda
+	implementation 'com.amazonaws:aws-lambda-java-core:1.2.1'
+	implementation 'com.amazonaws:aws-lambda-java-events:3.11.0'
+	runtimeOnly 'com.amazonaws:aws-lambda-java-log4j2:1.5.1'
+
+	// 빌드
+	//implementation 'org.glassfish.jaxb:jaxb-runtime'
 
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+task buildZip(type: Zip) {
+	from compileJava
+	from processResources
+	into('lib') {
+		from configurations.runtimeClasspath
+	}
 }
 
 test {
