@@ -25,17 +25,45 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-devtools'
 	implementation 'mysql:mysql-connector-java'
-	implementation 'org.projectlombok:lombok:1.18.12'
-	implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.5.6'
-	implementation 'com.google.code.gson:gson:2.8.5'
-	compileOnly 'org.projectlombok:lombok'
-	annotationProcessor 'org.projectlombok:lombok'
+	implementation 'org.projectlombok:lombok:1.18.20'
+	//implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.5.6'
+	implementation 'com.google.code.gson:gson:2.8.8'
+	compileOnly 'org.projectlombok:lombok:1.18.20'
+	annotationProcessor 'org.projectlombok:lombok:1.18.22'
 	runtimeOnly 'com.h2database:h2'
+
+	implementation 'javax.xml.bind:jaxb-api:2.3.1'
+	implementation 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+	implementation 'io.jsonwebtoken:jjwt-impl:0.11.2'
+
+	// TEST
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.junit.jupiter:junit-jupiter-api'
+	testImplementation 'org.junit.jupiter:junit-jupiter-params'
+	testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+	testAnnotationProcessor 'org.projectlombok:lombok'
+
+	testImplementation 'io.rest-assured:rest-assured:4.4.0'
+
+	// Lambda
+	implementation 'com.amazonaws:aws-lambda-java-core:1.2.1'
+	implementation 'com.amazonaws:aws-lambda-java-events:3.10.0'
+	runtimeOnly 'com.amazonaws:aws-lambda-java-log4j2:1.2.0'
+
+	// 빌드
+	implementation 'org.glassfish.jaxb:jaxb-runtime'
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+task buildZip(type: Zip) {
+	from compileJava
+	from processResources
+	into('lib') {
+		from configurations.runtimeClasspath
+	}
 }
 
 test {

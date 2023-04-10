@@ -1,13 +1,16 @@
 package lotto.practice.random.dto;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotEmpty;
 
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class JoinDto {
 
     @NotEmpty(message = "아이디를 입력해 주세요")
@@ -20,5 +23,4 @@ public class JoinDto {
     private String userEmail;
 
     private String userTel;
-
 }

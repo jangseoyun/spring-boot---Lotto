@@ -1,0 +1,64 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: 'SBAggroB';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroB.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'LeferiPoint-WhiteObliqueA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-WhiteObliqueA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    background-image: url(../img/main.png) !important;
+    background-position: 50%;
+}
+
+#wrap {
+    padding-top: 8%;
+    width: 1130px;
+    margin: 0px auto;
+    font-family: LeferiPoint-WhiteObliqueA;
+}
+
+#wrap > h1 {
+    text-align: center;
+    color: #ffffff;
+    font-family: SBAggroB;
+    font-size: 60px;
+}
+
+#jumbo {
+    background-color: rgba(235, 235, 235, 0.314);
+    height: 450px;
+    padding: 30px 30px 30px 30px;
+    border-radius: 20px;
+    margin-bottom: 30px;
+}
+
+#table-num {
+    padding: 50px 50px 50px 50px;
+    color: #ffffff;
+}
+
+#table-box {
+    height: 300px;
+}
+
+nav {
+    text-align: center;
+}
+
+#button-wrap {
+    text-align: center;
+}
+
+#main-button {
+    margin-bottom: 15px;
+}
+

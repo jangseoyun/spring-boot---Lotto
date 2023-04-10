@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로또 회차 결과</title>
+
+    <link href="/bootstrap/css/cycle-result-page.css" rel="stylesheet">
+    <link href="/bootstrap/css/user-result-page.css" rel="stylesheet">
+    <link href="/bootstrap/css/source.css" rel="stylesheet">
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <script src="/bootstrap/js/jquery-1.12.4.js"></script>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+<div id="header" class="clearfix">
+    <div id="header-box">
+        <h1 id="logo" class="float-l">
+            <a href="/lottery/index">LoTTery.</a>
+        </h1>
+
+        <ul class="float-r">
+            <li class="float-r header-link">
+                <a class="color" th:text="${session.userId}"></a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div id="wrap">
+    <div id="header-wrap">
+        <ul class="nav nav-pills nav-justified">
+            <li role="presentation">
+                <a th:href="@{/winning/result/game(lottoCycleNum = ${session.lastCycleNum})}">이번주 당첨번호</a>
+            </li>
+            <li role="presentation">
+                <a th:href="@{'/winning/result/user/' + ${session.userNo}(lottoCycleNum = ${session.lastCycleNum})}">내번호
+                    당첨확인</a>
+            </li>
+            <li role="presentation" class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                    회차 바로가기 <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                    <th:block th:each="cycleNum : ${cycleNumList}">
+                        <li>
+                            <a th:text="${cycleNum} + 회"
+                               th:href="@{/winning/result/game(lottoCycleNum = ${cycleNum})}"></a>
+                        </li>
+                    </th:block>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+
+    <div id="jumbo-box">
+        <!-- 당첨 내역이 없는 경우 -->
+        <th:block th:if="${gameResult == resultEmpty}">
+            <div id="jumbo-first">
+                <p class="size-28 center">아쉽지만 1등은 다음기회에..🥲</p>
+            </div>
+            <div id="jumbo-second">
+                <button type="button" class="btn btn-default btn-lg" onclick="location.href='/lottery/index'">
+                    click 🚀1등 가즈아!🚀 click
+                </button>
+            </div>
+        </th:block>
+
+        <!-- 당첨 내역이 있는 경우 -->
+        <th:block th:if="${gameResult != resultEmpty}">
+            <div id="jumbo2-first">
+                <p class="size-28 center">🥳WOW 당첨을 축하합니다🥳</p>
+            </div>
+            <div id="jumbo2-second">
+                <th:block th:each="result : ${userGameResult.gameResult}">
+                    <p th:text="${result.userId}" class="center"></p>
+                </th:block>
+            </div>
+        </th:block>
+
+    </div>
+
+    <div id="panel-box" class="panel panel-warning">
+        <!-- Default panel contents -->
+        <div id="panel-header" class="panel-heading">이번주 추첨 번호</div>
+        <div class="panel-body">
+            <p class="size-28 center">이번주는 1등행 티켓을 <strong th:text="${#lists.size(userStorage)} + 장"></strong> 구입하셨어요 😄
+            </p>
+        </div>
+
+        <!-- Table -->
+        <table id="lotto-table" class="table">
+            <thead>
+            <tr>
+                <th scope="col">티켓 수</th>
+                <th scope="col">로또 회차 번호</th>
+                <th scope="col">로또 번호</th>
+                <th scope="col">보너스 번호</th>
+                <th scope="col">추첨일</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:each="storage : ${userStorage}">
+                <th scope="row" th:text="${storageStat.count}"></th>
+                <td th:text="${storage.storageCycle}"></td>
+                <td th:text="${storage.sixBall}"></td>
+                <td th:text="${storage.bonusBall.value}"></td>
+                <td th:text="${storage.storageDate}"></td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+    <!--footer-->
+    <div th:replace="fragments/footer :: footer"/>
+
+</div>
+
+</body>
+
+</html>

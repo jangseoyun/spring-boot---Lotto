@@ -1,0 +1,105 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: 'SBAggroB';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroB.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'LeferiPoint-WhiteObliqueA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-WhiteObliqueA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* header */
+/*-------------- header-------------- */
+#header {
+    height: 150px;
+    padding: 10px 10px 10px 10px;
+    background-image: url(../img/main.png);
+    background-size: cover;
+    background-position: bottom;
+    position: relative;
+}
+
+#header-box {
+    width: 1130px;
+    margin: 0px auto;
+}
+
+#logo {
+    height: 45px;
+    font-family: 'SBAggroB';
+}
+
+#logo > a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+#header > div > ul {
+    list-style: none;
+}
+
+#header > div > ul > li > a {
+    color: #ffffff;
+    margin-right: 10px;
+}
+
+/*-------------- header-------------- */
+
+#header-wrap {
+    margin-bottom: 35px;
+}
+
+/* content */
+#cycle-wrap {
+    height: 300px;
+    background-color: #f1f1f1;
+    border-radius: 15px;
+    margin-bottom: 35px;
+}
+
+#content-wrap > p {
+    color: #9b9b9b;
+}
+
+#cycle-num {
+    height: 100px;
+    text-align: center;
+    font-size: 40px;
+    padding: 60px 30px 20px 30px;
+}
+
+#cycle-num > strong {
+    font-family: SBAggroB;
+}
+
+#cycle-lotto-result {
+    height: 200px;
+    /* border: 1px solid #660099; */
+}
+
+#ball {
+    text-align: center;
+    margin-top: 40px;
+}
+
+#ball > span {
+    font-size: 60px;
+    text-align: center;
+    margin-right: 30px;
+}
+
+/* footer */
+#footer {
+    text-align: center;
+}
+
+
+
+
+
