@@ -9,3 +9,6 @@ api:
   lotto:
     host: https://www.dhlottery.co.kr/common.do
 
+spring:
+  main:
+    allow-bean-definition-overriding: true
