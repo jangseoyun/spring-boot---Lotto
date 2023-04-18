@@ -1,11 +1,12 @@
 package lotto.practice.random.proxy;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserProxy extends User {
     private User targetUser;
-
-    public UserProxy(User targetUser) {
-        this.targetUser = targetUser;
-    }
 
     @Override
     public void run() {
